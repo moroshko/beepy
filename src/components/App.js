@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Header from "./Header";
 import Logo from "./Logo";
 import Login from "./Login";
 import Home from "./Home";
@@ -8,9 +9,6 @@ import styles from "./App.module.css";
 
 function App() {
   const [user, setUser] = useState();
-  const onLogout = () => {
-    auth.signOut();
-  };
 
   useEffect(() => {
     initFirebase();
@@ -20,17 +18,7 @@ function App() {
 
   return (
     <UserProvider value={user}>
-      {user !== undefined && (
-        <header>
-          <div className={styles.headerInnerContainer}>
-            <Logo size={28} />
-            <span className={styles.headerBeepy}>Beepy</span>
-            <button className={styles.logoutButton} onClick={onLogout}>
-              Logout
-            </button>
-          </div>
-        </header>
-      )}
+      {user !== undefined && <Header />}
       <main className={styles.main}>
         {user === undefined ? (
           <div className={styles.initialScreen}>
