@@ -2,8 +2,12 @@ import firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/firestore";
 
-export function getConfig(env) {
-  if (env === "prod") {
+function getEnv() {
+  return window.location.hostname === "beepy.club" ? "prod" : "test";
+}
+
+export function getConfig() {
+  if (getEnv() === "prod") {
     return {
       apiKey: "AIzaSyDkD0y3RkDI2uKRzkyviy7WM6FZSAA1ABE",
       authDomain: "beepy-prod.firebaseapp.com",
@@ -29,9 +33,9 @@ export function getConfig(env) {
 let auth = null;
 let db = null;
 
-function initFirebase(env) {
+function initFirebase() {
   if (firebase.apps.length === 0) {
-    firebase.initializeApp(getConfig(env));
+    firebase.initializeApp(getConfig());
   }
 
   auth = firebase.auth();

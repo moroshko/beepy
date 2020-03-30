@@ -13,7 +13,7 @@ function App() {
   };
 
   useEffect(() => {
-    initFirebase("test");
+    initFirebase();
 
     return auth.onAuthStateChanged(setUser);
   }, []);
