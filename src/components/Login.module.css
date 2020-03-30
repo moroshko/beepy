@@ -1,0 +1,49 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.header {
+  text-align: center;
+}
+h1 {
+  font-size: 40px;
+  font-weight: 500;
+}
+h2 {
+  font-size: 20px;
+  font-weight: 400;
+  color: #777;
+}
+.label {
+  display: block;
+  margin-bottom: 4px;
+}
+.input {
+  height: 48px;
+  width: 100%;
+  font-size: 20px;
+  padding: 0 12px;
+}
+.emailContainer {
+  margin-top: 32px;
+}
+.passwordContainer {
+  margin-top: 32px;
+}
+.footer {
+  margin-top: 56px;
+  position: relative;
+}
+.button {
+  height: 56px;
+  width: 100%;
+  font-size: 20px;
+  border: 1px solid black;
+}
+.error {
+  position: absolute;
+  left: 0;
+  top: 72px;
+  color: #e84855;
+}

@@ -1,0 +1,87 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  position: relative;
+}
+.recordsHeader {
+  flex-shrink: 0;
+  font-family: "Roboto Mono", monospace;
+  display: flex;
+  height: 36px;
+  border-bottom: 1px solid black;
+}
+.recordsContainer {
+  font-family: "Roboto Mono", monospace;
+  min-height: 72px;
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+}
+.recordCell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+}
+.recordTimeCell {
+  flex: 1.75;
+  justify-content: flex-end;
+  font-size: 14px;
+  padding-right: 16px;
+}
+.recordPulseCell {
+  flex: 1.5;
+}
+.recordsHeader .recordCell {
+  font-size: 16px;
+  justify-content: center;
+}
+.record {
+  display: flex;
+  height: 36px;
+  font-size: 20px;
+  text-align: center;
+  scroll-snap-align: end;
+}
+.newRecord {
+  background-color: #ddd;
+}
+.withCursor::after {
+  content: "|";
+  position: relative;
+  top: -1px;
+}
+.buttonsContainer {
+  flex-shrink: 0;
+  margin-top: auto;
+}
+.numpadContainer {
+  display: grid;
+  grid-template-columns: 105px 105px 106px;
+  margin-top: 16px;
+}
+.numpadButton {
+  height: 64px;
+  border: 1px solid black;
+  border-right: 0;
+  border-bottom: 0;
+  padding: 0;
+  font-size: 32px;
+  display: flex;
+  justify-content: center;
+  user-select: none;
+}
+.borderRight {
+  border-right: 1px solid black;
+}
+.borderBottom {
+  border-bottom: 1px solid black;
+}
+.addRecordButton {
+  margin: 16px 0 40px;
+  width: 100%;
+  border: 1px solid black;
+}
+.addRecordButton:disabled {
+  font-size: 20px;
+}

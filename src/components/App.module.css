@@ -1,0 +1,40 @@
+header {
+  background-color: #fff;
+  border-bottom: 2px solid black;
+  position: fixed;
+  top: 0;
+  height: 56px;
+  width: 100%;
+  z-index: 1;
+}
+.headerInnerContainer {
+  display: flex;
+  align-items: center;
+  width: 316px;
+  height: 100%;
+  font-size: 20px;
+  margin: 0 auto;
+}
+.headerBeepy {
+  margin-left: 16px;
+}
+.logoutButton {
+  margin-left: auto;
+  font-size: 16px;
+  border: 0;
+  padding: 8px 16px;
+  position: relative;
+  top: 2px;
+}
+main {
+  height: calc(100vh - 80px);
+  width: 316px;
+  margin: 80px auto 0;
+}
+.initialScreen {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
