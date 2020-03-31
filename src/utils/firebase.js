@@ -1,10 +1,7 @@
 import firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/firestore";
-
-function getEnv() {
-  return window.location.hostname === "beepy.club" ? "prod" : "test";
-}
+import { getEnv } from "./env";
 
 export function getConfig() {
   if (getEnv() === "prod") {
