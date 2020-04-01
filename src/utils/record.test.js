@@ -9,7 +9,7 @@ describe("parseRecord", () => {
         pulse: null,
         cursor: "sys",
         isZeroAllowed: false,
-        moreDigitsAllowed: true
+        moreDigitsAllowed: true,
       });
     });
   });
@@ -22,7 +22,7 @@ describe("parseRecord", () => {
         pulse: null,
         cursor: "sys",
         isZeroAllowed: true,
-        moreDigitsAllowed: true
+        moreDigitsAllowed: true,
       });
     });
   });
@@ -35,7 +35,7 @@ describe("parseRecord", () => {
         pulse: null,
         cursor: "sys",
         isZeroAllowed: true,
-        moreDigitsAllowed: true
+        moreDigitsAllowed: true,
       });
 
       expect(parseRecord("49")).toStrictEqual({
@@ -44,7 +44,7 @@ describe("parseRecord", () => {
         pulse: null,
         cursor: "dia",
         isZeroAllowed: false,
-        moreDigitsAllowed: true
+        moreDigitsAllowed: true,
       });
     });
   });
@@ -57,7 +57,7 @@ describe("parseRecord", () => {
         pulse: null,
         cursor: "dia",
         isZeroAllowed: false,
-        moreDigitsAllowed: true
+        moreDigitsAllowed: true,
       });
     });
 
@@ -68,7 +68,7 @@ describe("parseRecord", () => {
         pulse: null,
         cursor: "dia",
         isZeroAllowed: true,
-        moreDigitsAllowed: true
+        moreDigitsAllowed: true,
       });
     });
   });
@@ -81,7 +81,7 @@ describe("parseRecord", () => {
         pulse: null,
         cursor: "dia",
         isZeroAllowed: true,
-        moreDigitsAllowed: true
+        moreDigitsAllowed: true,
       });
 
       expect(parseRecord("9599")).toStrictEqual({
@@ -90,7 +90,7 @@ describe("parseRecord", () => {
         pulse: null,
         cursor: "pulse",
         isZeroAllowed: false,
-        moreDigitsAllowed: true
+        moreDigitsAllowed: true,
       });
     });
 
@@ -101,7 +101,7 @@ describe("parseRecord", () => {
         pulse: null,
         cursor: "dia",
         isZeroAllowed: true,
-        moreDigitsAllowed: true
+        moreDigitsAllowed: true,
       });
     });
   });
@@ -114,7 +114,7 @@ describe("parseRecord", () => {
         pulse: "1",
         cursor: "pulse",
         isZeroAllowed: true,
-        moreDigitsAllowed: true
+        moreDigitsAllowed: true,
       });
     });
 
@@ -125,7 +125,7 @@ describe("parseRecord", () => {
         pulse: null,
         cursor: "pulse",
         isZeroAllowed: false,
-        moreDigitsAllowed: true
+        moreDigitsAllowed: true,
       });
     });
 
@@ -136,7 +136,7 @@ describe("parseRecord", () => {
         pulse: null,
         cursor: "dia",
         isZeroAllowed: true,
-        moreDigitsAllowed: true
+        moreDigitsAllowed: true,
       });
 
       expect(parseRecord("12080")).toStrictEqual({
@@ -145,7 +145,7 @@ describe("parseRecord", () => {
         pulse: null,
         cursor: "pulse",
         isZeroAllowed: false,
-        moreDigitsAllowed: true
+        moreDigitsAllowed: true,
       });
     });
   });
@@ -158,7 +158,7 @@ describe("parseRecord", () => {
         pulse: "10",
         cursor: "pulse",
         isZeroAllowed: true,
-        moreDigitsAllowed: true
+        moreDigitsAllowed: true,
       });
 
       expect(parseRecord("975699")).toStrictEqual({
@@ -167,7 +167,7 @@ describe("parseRecord", () => {
         pulse: "99",
         cursor: null,
         isZeroAllowed: false,
-        moreDigitsAllowed: false
+        moreDigitsAllowed: false,
       });
     });
 
@@ -178,7 +178,7 @@ describe("parseRecord", () => {
         pulse: "1",
         cursor: "pulse",
         isZeroAllowed: true,
-        moreDigitsAllowed: true
+        moreDigitsAllowed: true,
       });
     });
 
@@ -189,7 +189,7 @@ describe("parseRecord", () => {
         pulse: "9",
         cursor: "pulse",
         isZeroAllowed: true,
-        moreDigitsAllowed: true
+        moreDigitsAllowed: true,
       });
     });
 
@@ -200,7 +200,7 @@ describe("parseRecord", () => {
         pulse: null,
         cursor: "pulse",
         isZeroAllowed: false,
-        moreDigitsAllowed: true
+        moreDigitsAllowed: true,
       });
     });
   });
@@ -213,7 +213,7 @@ describe("parseRecord", () => {
         pulse: "102",
         cursor: null,
         isZeroAllowed: false,
-        moreDigitsAllowed: false
+        moreDigitsAllowed: false,
       });
     });
 
@@ -224,7 +224,7 @@ describe("parseRecord", () => {
         pulse: "89",
         cursor: null,
         isZeroAllowed: false,
-        moreDigitsAllowed: false
+        moreDigitsAllowed: false,
       });
 
       expect(parseRecord("9710110")).toStrictEqual({
@@ -233,7 +233,7 @@ describe("parseRecord", () => {
         pulse: "10",
         cursor: "pulse",
         isZeroAllowed: true,
-        moreDigitsAllowed: true
+        moreDigitsAllowed: true,
       });
     });
 
@@ -244,7 +244,7 @@ describe("parseRecord", () => {
         pulse: "72",
         cursor: null,
         isZeroAllowed: false,
-        moreDigitsAllowed: false
+        moreDigitsAllowed: false,
       });
 
       expect(parseRecord("1448911")).toStrictEqual({
@@ -253,7 +253,7 @@ describe("parseRecord", () => {
         pulse: "11",
         cursor: "pulse",
         isZeroAllowed: true,
-        moreDigitsAllowed: true
+        moreDigitsAllowed: true,
       });
     });
 
@@ -264,7 +264,7 @@ describe("parseRecord", () => {
         pulse: "7",
         cursor: "pulse",
         isZeroAllowed: true,
-        moreDigitsAllowed: true
+        moreDigitsAllowed: true,
       });
     });
   });
@@ -277,7 +277,7 @@ describe("parseRecord", () => {
         pulse: "132",
         cursor: null,
         isZeroAllowed: false,
-        moreDigitsAllowed: false
+        moreDigitsAllowed: false,
       });
     });
 
@@ -288,7 +288,7 @@ describe("parseRecord", () => {
         pulse: "132",
         cursor: null,
         isZeroAllowed: false,
-        moreDigitsAllowed: false
+        moreDigitsAllowed: false,
       });
     });
 
@@ -299,7 +299,7 @@ describe("parseRecord", () => {
         pulse: "13",
         cursor: "pulse",
         isZeroAllowed: true,
-        moreDigitsAllowed: true
+        moreDigitsAllowed: true,
       });
 
       expect(parseRecord("13610296")).toStrictEqual({
@@ -308,7 +308,7 @@ describe("parseRecord", () => {
         pulse: "96",
         cursor: null,
         isZeroAllowed: false,
-        moreDigitsAllowed: false
+        moreDigitsAllowed: false,
       });
     });
   });
@@ -321,7 +321,7 @@ describe("parseRecord", () => {
         pulse: "134",
         cursor: null,
         isZeroAllowed: false,
-        moreDigitsAllowed: false
+        moreDigitsAllowed: false,
       });
     });
   });

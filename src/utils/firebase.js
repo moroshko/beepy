@@ -12,7 +12,7 @@ export function getConfig() {
       projectId: "beepy-prod",
       storageBucket: "beepy-prod.appspot.com",
       messagingSenderId: "674248560052",
-      appId: "1:674248560052:web:6e3c20ee32376d331ab6e1"
+      appId: "1:674248560052:web:6e3c20ee32376d331ab6e1",
     };
   }
 
@@ -23,7 +23,7 @@ export function getConfig() {
     projectId: "beepy-dev",
     storageBucket: "beepy-dev.appspot.com",
     messagingSenderId: "331669969650",
-    appId: "1:331669969650:web:8f9e5cdea9e46e34180e6b"
+    appId: "1:331669969650:web:8f9e5cdea9e46e34180e6b",
   };
 }
 

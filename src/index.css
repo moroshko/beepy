@@ -46,15 +46,11 @@ button:focus:not(:focus-visible) {
 button:focus-visible {
   outline: 4px solid #1cb265;
 }
-button:active:not(:disabled) {
-  outline: 0;
-  background-color: #1cb265;
-  color: #fff;
-  font-weight: 500;
-}
-button:active:not(:disabled).notAllowed {
-  background-color: #e84855;
-}
 * {
   box-sizing: border-box;
+}
+ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
 }

@@ -11,7 +11,7 @@ import styles from "./Login.module.css";
 const errorCodesMap = {
   "auth/invalid-email": "Invalid email.",
   "auth/wrong-password": "Invalid password.",
-  "auth/user-not-found": "Invalid email or password."
+  "auth/user-not-found": "Invalid email or password.",
 };
 
 function Login() {
@@ -19,7 +19,7 @@ function Login() {
   const [password, setPassword] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState(null);
-  const onSubmit = e => {
+  const onSubmit = (e) => {
     e.preventDefault();
 
     setIsSubmitting(true);
@@ -27,7 +27,7 @@ function Login() {
 
     auth
       .signInWithEmailAndPassword(email.trim(), password.trim())
-      .catch(error => {
+      .catch((error) => {
         setIsSubmitting(false);
         setError(errorCodesMap[error.code] ?? error.message);
       });
@@ -54,7 +54,7 @@ function Login() {
             name="email"
             type="email"
             value={email}
-            onChange={e => setEmail(e.target.value)}
+            onChange={(e) => setEmail(e.target.value)}
           />
         </div>
         <div className={styles.passwordContainer}>
@@ -67,7 +67,7 @@ function Login() {
             name="password"
             type="password"
             value={password}
-            onChange={e => setPassword(e.target.value)}
+            onChange={(e) => setPassword(e.target.value)}
           />
         </div>
         <div className={styles.footer}>

@@ -17,11 +17,11 @@ function Home() {
   const [lastRecordStrAdded, setLastRecordStrAdded] = useState("");
   const newRecord = parseRecord(newRecordStr);
   const readyToAdd = newRecord.cursor === null;
-  const onDigitClick = e => {
+  const onDigitClick = (e) => {
     const { digit } = e.target.dataset;
     const { isZeroAllowed, moreDigitsAllowed } = newRecord;
 
-    setNewRecordStr(newRecordStr => {
+    setNewRecordStr((newRecordStr) => {
       if (!moreDigitsAllowed) {
         return newRecordStr;
       }
@@ -35,7 +35,7 @@ function Home() {
     scrollToBottom();
   };
   const onDeleteDigit = () => {
-    setNewRecordStr(newRecordStr => newRecordStr.slice(0, -1));
+    setNewRecordStr((newRecordStr) => newRecordStr.slice(0, -1));
     scrollToBottom();
   };
   const onClear = () => {
@@ -47,7 +47,7 @@ function Home() {
       timestamp: Math.floor(Date.now() / 1000),
       sys: newRecord.sys,
       dia: newRecord.dia,
-      pulse: newRecord.pulse
+      pulse: newRecord.pulse,
     };
 
     setLastRecordStrAdded(newRecordStr);
@@ -55,7 +55,7 @@ function Home() {
 
     db.collection(`users/${user.email}/records`)
       .add(recordToAdd)
-      .catch(error => {
+      .catch((error) => {
         console.error(
           "Failed to add the following record:",
           JSON.stringify(recordToAdd, null, 2),
@@ -76,13 +76,13 @@ function Home() {
       .collection(`users/${user.email}/records`)
       .orderBy("timestamp")
       .limit(100)
-      .onSnapshot(querySnapshot => {
+      .onSnapshot((querySnapshot) => {
         const records = [];
 
-        querySnapshot.forEach(doc => {
+        querySnapshot.forEach((doc) => {
           records.push({
             id: doc.id,
-            ...doc.data()
+            ...doc.data(),
           });
         });
 
@@ -135,7 +135,7 @@ function Home() {
               <div className={styles.recordCell}>
                 <div
                   className={classNames({
-                    [styles.withCursor]: newRecord.cursor === "sys"
+                    [styles.withCursor]: newRecord.cursor === "sys",
                   })}
                 >
                   {newRecord.sys}
@@ -144,7 +144,7 @@ function Home() {
               <div className={styles.recordCell}>
                 <div
                   className={classNames({
-                    [styles.withCursor]: newRecord.cursor === "dia"
+                    [styles.withCursor]: newRecord.cursor === "dia",
                   })}
                 >
                   {newRecord.dia}
@@ -158,7 +158,7 @@ function Home() {
               >
                 <div
                   className={classNames({
-                    [styles.withCursor]: newRecord.cursor === "pulse"
+                    [styles.withCursor]: newRecord.cursor === "pulse",
                   })}
                 >
                   {newRecord.pulse}
@@ -172,7 +172,7 @@ function Home() {
         <div className={styles.numpadContainer}>
           <button
             className={classNames(styles.numpadButton, {
-              notAllowed: !newRecord.moreDigitsAllowed
+              [styles.notAllowed]: !newRecord.moreDigitsAllowed,
             })}
             data-digit="1"
             onClick={onDigitClick}
@@ -181,7 +181,7 @@ function Home() {
           </button>
           <button
             className={classNames(styles.numpadButton, {
-              notAllowed: !newRecord.moreDigitsAllowed
+              [styles.notAllowed]: !newRecord.moreDigitsAllowed,
             })}
             data-digit="2"
             onClick={onDigitClick}
@@ -190,7 +190,7 @@ function Home() {
           </button>
           <button
             className={classNames(styles.numpadButton, styles.borderRight, {
-              notAllowed: !newRecord.moreDigitsAllowed
+              [styles.notAllowed]: !newRecord.moreDigitsAllowed,
             })}
             data-digit="3"
             onClick={onDigitClick}
@@ -199,7 +199,7 @@ function Home() {
           </button>
           <button
             className={classNames(styles.numpadButton, {
-              notAllowed: !newRecord.moreDigitsAllowed
+              [styles.notAllowed]: !newRecord.moreDigitsAllowed,
             })}
             data-digit="4"
             onClick={onDigitClick}
@@ -208,7 +208,7 @@ function Home() {
           </button>
           <button
             className={classNames(styles.numpadButton, {
-              notAllowed: !newRecord.moreDigitsAllowed
+              [styles.notAllowed]: !newRecord.moreDigitsAllowed,
             })}
             data-digit="5"
             onClick={onDigitClick}
@@ -217,7 +217,7 @@ function Home() {
           </button>
           <button
             className={classNames(styles.numpadButton, styles.borderRight, {
-              notAllowed: !newRecord.moreDigitsAllowed
+              [styles.notAllowed]: !newRecord.moreDigitsAllowed,
             })}
             data-digit="6"
             onClick={onDigitClick}
@@ -226,7 +226,7 @@ function Home() {
           </button>
           <button
             className={classNames(styles.numpadButton, {
-              notAllowed: !newRecord.moreDigitsAllowed
+              [styles.notAllowed]: !newRecord.moreDigitsAllowed,
             })}
             data-digit="7"
             onClick={onDigitClick}
@@ -235,7 +235,7 @@ function Home() {
           </button>
           <button
             className={classNames(styles.numpadButton, {
-              notAllowed: !newRecord.moreDigitsAllowed
+              [styles.notAllowed]: !newRecord.moreDigitsAllowed,
             })}
             data-digit="8"
             onClick={onDigitClick}
@@ -244,7 +244,7 @@ function Home() {
           </button>
           <button
             className={classNames(styles.numpadButton, styles.borderRight, {
-              notAllowed: !newRecord.moreDigitsAllowed
+              [styles.notAllowed]: !newRecord.moreDigitsAllowed,
             })}
             data-digit="9"
             onClick={onDigitClick}
@@ -253,7 +253,7 @@ function Home() {
           </button>
           <button
             className={classNames(styles.numpadButton, styles.borderBottom, {
-              notAllowed: newRecordStr === ""
+              [styles.notAllowed]: newRecordStr === "",
             })}
             onClick={onClear}
           >
@@ -261,7 +261,7 @@ function Home() {
           </button>
           <button
             className={classNames(styles.numpadButton, styles.borderBottom, {
-              notAllowed: !newRecord.isZeroAllowed
+              [styles.notAllowed]: !newRecord.isZeroAllowed,
             })}
             data-digit="0"
             onClick={onDigitClick}
@@ -274,7 +274,7 @@ function Home() {
               styles.borderRight,
               styles.borderBottom,
               {
-                notAllowed: newRecordStr === ""
+                [styles.notAllowed]: newRecordStr === "",
               }
             )}
             onClick={onDeleteDigit}

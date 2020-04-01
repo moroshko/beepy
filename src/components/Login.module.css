@@ -41,6 +41,12 @@ h2 {
   font-size: 20px;
   border: 1px solid black;
 }
+.button:active {
+  outline: 0;
+  background-color: #1cb265;
+  color: #fff;
+  font-weight: 500;
+}
 .error {
   position: absolute;
   left: 0;

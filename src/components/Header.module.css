@@ -14,15 +14,69 @@ header {
   height: 100%;
   font-size: 20px;
   margin: 0 auto;
+  position: relative;
 }
 .headerBeepy {
   margin-left: 16px;
 }
-.logoutButton {
+.menuButton {
   margin-left: auto;
-  font-size: 16px;
   border: 0;
   padding: 8px 16px;
-  position: relative;
-  top: 2px;
+  display: flex;
+}
+.menuButton:active:not(:disabled) {
+  background-color: inherit;
+}
+nav {
+  position: absolute;
+  top: 56px;
+  left: 0;
+  right: 0;
+  height: calc(100vh - 56px);
+}
+ul {
+  padding-top: 16px;
+}
+.menuItem {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 16px 0;
+  border: 0;
+  text-align: left;
+  font-size: inherit;
+  color: #666;
+}
+.menuItem:active:not(:disabled) {
+  background-color: inherit;
+  color: inherit;
+  font-weight: inherit;
+}
+.menuItem > svg {
+  margin-right: 16px;
+  fill: #666;
+}
+.menuItemActive {
+  font-weight: 500;
+  color: #000;
+}
+.menuItemActive > svg {
+  fill: #000;
+}
+.loginInfo {
+  margin-top: 16px;
+  padding-top: 32px;
+}
+.logoutButton {
+  font-size: 16px;
+  padding: 8px 16px;
+  margin-top: 16px;
+  border: 1px solid black;
+}
+.logoutButton:active {
+  outline: 0;
+  background-color: #1cb265;
+  color: #fff;
+  font-weight: 500;
 }

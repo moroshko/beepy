@@ -3,6 +3,9 @@ main {
   width: 316px;
   margin: 80px auto 0;
 }
+.mainHidden {
+  display: none;
+}
 .initialScreen {
   height: 100%;
   display: flex;

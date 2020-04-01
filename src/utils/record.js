@@ -55,6 +55,6 @@ export function parseRecord(str) {
     pulse: pulse || null,
     cursor,
     isZeroAllowed,
-    moreDigitsAllowed
+    moreDigitsAllowed,
   };
 }

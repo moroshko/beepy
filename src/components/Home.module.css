@@ -72,6 +72,15 @@
   justify-content: center;
   user-select: none;
 }
+.numpadButton:active {
+  outline: 0;
+  background-color: #1cb265;
+  color: #fff;
+  font-weight: 500;
+}
+.numpadButton:active.notAllowed {
+  background-color: #e84855;
+}
 .borderRight {
   border-right: 1px solid black;
 }
