@@ -41,7 +41,7 @@ h2 {
   font-size: 20px;
   border: 1px solid black;
 }
-.button:active {
+.button:active:not(:disabled) {
   outline: 0;
   background-color: #1cb265;
   color: #fff;

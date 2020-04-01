@@ -38,7 +38,7 @@ function Header({ page, onPageChange, isMenuOpen, onMenuToggle }) {
               <li>
                 <button
                   className={classNames(styles.menuItem, {
-                    [styles.menuItemActive]: page === "home",
+                    [styles.menuItemCurrent]: page === "home",
                   })}
                   onClick={() => {
                     onPageChange("home");
@@ -51,7 +51,7 @@ function Header({ page, onPageChange, isMenuOpen, onMenuToggle }) {
               <li>
                 <button
                   className={classNames(styles.menuItem, {
-                    [styles.menuItemActive]: page === "history",
+                    [styles.menuItemCurrent]: page === "history",
                   })}
                   onClick={() => {
                     onPageChange("history");

@@ -72,7 +72,7 @@
   justify-content: center;
   user-select: none;
 }
-.numpadButton:active {
+.numpadButton:active:not(:disabled) {
   outline: 0;
   background-color: #1cb265;
   color: #fff;
