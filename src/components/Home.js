@@ -1,14 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
 import classNames from "classnames";
-import { format } from "date-fns";
+import RecordsTable from "./RecordsTable";
 import useUser from "../hooks/useUser";
 import { parseRecord } from "../utils/record";
-import { db } from "../utils/firebase";
+import { db, getItems } from "../utils/firebase";
+import { scrollToBottom } from "../utils/dom";
+import { HOME_RECORDS_COUNT } from "../utils/settings";
 import styles from "./Home.module.css";
-
-function formatTimestamp(timestamp) {
-  return format(new Date(timestamp * 1000), "d/MM HH:mm");
-}
 
 function Home() {
   const user = useUser();
@@ -32,15 +30,15 @@ function Home() {
 
       return `${newRecordStr}${digit}`;
     });
-    scrollToBottom();
+    scrollToBottom(recordsBodyRef);
   };
   const onDeleteDigit = () => {
     setNewRecordStr((newRecordStr) => newRecordStr.slice(0, -1));
-    scrollToBottom();
+    scrollToBottom(recordsBodyRef);
   };
   const onClear = () => {
     setNewRecordStr("");
-    scrollToBottom();
+    scrollToBottom(recordsBodyRef);
   };
   const onAddRecord = () => {
     const recordToAdd = {
@@ -65,115 +63,36 @@ function Home() {
         setNewRecordStr(lastRecordStrAdded);
       });
   };
-  const recordsContainerRef = useRef();
-  const scrollToBottom = () => {
-    recordsContainerRef.current.scrollTop =
-      recordsContainerRef.current.scrollHeight;
-  };
+  const recordsBodyRef = useRef();
 
   useEffect(() => {
     return db
       .collection(`users/${user.email}/records`)
       .orderBy("timestamp")
-      .limit(100)
+      .limit(HOME_RECORDS_COUNT)
       .onSnapshot((querySnapshot) => {
-        const records = [];
-
-        querySnapshot.forEach((doc) => {
-          records.push({
-            id: doc.id,
-            ...doc.data(),
-          });
-        });
-
-        setRecords(records);
-        scrollToBottom();
+        setRecords(getItems(querySnapshot));
+        scrollToBottom(recordsBodyRef);
       });
   }, [user]);
 
   return (
     <div className={styles.container}>
-      <div className={styles.recordsHeader}>
-        <div className={classNames(styles.recordCell, styles.recordTimeCell)}>
-          TIME
-        </div>
-        <div className={styles.recordCell}>SYS</div>
-        <div className={styles.recordCell}>DIA</div>
-        <div className={classNames(styles.recordCell, styles.recordPulseCell)}>
-          PULSE
-        </div>
-      </div>
-      <div className={styles.recordsContainer} ref={recordsContainerRef}>
-        {records && (
-          <>
-            {records.map(({ id, timestamp, sys, dia, pulse }) => (
-              <div className={styles.record} key={id}>
-                <div
-                  className={classNames(
-                    styles.recordCell,
-                    styles.recordTimeCell
-                  )}
-                >
-                  {formatTimestamp(timestamp)}
-                </div>
-                <div className={styles.recordCell}>{sys}</div>
-                <div className={styles.recordCell}>{dia}</div>
-                <div
-                  className={classNames(
-                    styles.recordCell,
-                    styles.recordPulseCell
-                  )}
-                >
-                  {pulse}
-                </div>
-              </div>
-            ))}
-            <div className={classNames(styles.record, styles.newRecord)}>
-              <div
-                className={classNames(styles.recordCell, styles.recordTimeCell)}
-              />
-              <div className={styles.recordCell}>
-                <div
-                  className={classNames({
-                    [styles.withCursor]: newRecord.cursor === "sys",
-                  })}
-                >
-                  {newRecord.sys}
-                </div>
-              </div>
-              <div className={styles.recordCell}>
-                <div
-                  className={classNames({
-                    [styles.withCursor]: newRecord.cursor === "dia",
-                  })}
-                >
-                  {newRecord.dia}
-                </div>
-              </div>
-              <div
-                className={classNames(
-                  styles.recordCell,
-                  styles.recordPulseCell
-                )}
-              >
-                <div
-                  className={classNames({
-                    [styles.withCursor]: newRecord.cursor === "pulse",
-                  })}
-                >
-                  {newRecord.pulse}
-                </div>
-              </div>
-            </div>
-          </>
-        )}
-      </div>
+      <RecordsTable
+        records={records}
+        newRecord={newRecord}
+        bodyRef={recordsBodyRef}
+      />
       <div className={styles.buttonsContainer}>
         <div className={styles.numpadContainer}>
           <button
-            className={classNames(styles.numpadButton, {
-              [styles.notAllowed]: !newRecord.moreDigitsAllowed,
-            })}
+            className={classNames(
+              styles.numpadButton,
+              styles.numpadButtonTopLeft,
+              {
+                [styles.notAllowed]: !newRecord.moreDigitsAllowed,
+              }
+            )}
             data-digit="1"
             onClick={onDigitClick}
           >
@@ -189,9 +108,14 @@ function Home() {
             2
           </button>
           <button
-            className={classNames(styles.numpadButton, styles.borderRight, {
-              [styles.notAllowed]: !newRecord.moreDigitsAllowed,
-            })}
+            className={classNames(
+              styles.numpadButton,
+              styles.numpadButtonTopRight,
+              styles.numpadButtonRight,
+              {
+                [styles.notAllowed]: !newRecord.moreDigitsAllowed,
+              }
+            )}
             data-digit="3"
             onClick={onDigitClick}
           >
@@ -216,9 +140,13 @@ function Home() {
             5
           </button>
           <button
-            className={classNames(styles.numpadButton, styles.borderRight, {
-              [styles.notAllowed]: !newRecord.moreDigitsAllowed,
-            })}
+            className={classNames(
+              styles.numpadButton,
+              styles.numpadButtonRight,
+              {
+                [styles.notAllowed]: !newRecord.moreDigitsAllowed,
+              }
+            )}
             data-digit="6"
             onClick={onDigitClick}
           >
@@ -243,26 +171,39 @@ function Home() {
             8
           </button>
           <button
-            className={classNames(styles.numpadButton, styles.borderRight, {
-              [styles.notAllowed]: !newRecord.moreDigitsAllowed,
-            })}
+            className={classNames(
+              styles.numpadButton,
+              styles.numpadButtonRight,
+              {
+                [styles.notAllowed]: !newRecord.moreDigitsAllowed,
+              }
+            )}
             data-digit="9"
             onClick={onDigitClick}
           >
             9
           </button>
           <button
-            className={classNames(styles.numpadButton, styles.borderBottom, {
-              [styles.notAllowed]: newRecordStr === "",
-            })}
+            className={classNames(
+              styles.numpadButton,
+              styles.numpadButtonBottomLeft,
+              styles.numpadButtonBottom,
+              {
+                [styles.notAllowed]: newRecordStr === "",
+              }
+            )}
             onClick={onClear}
           >
             clear
           </button>
           <button
-            className={classNames(styles.numpadButton, styles.borderBottom, {
-              [styles.notAllowed]: !newRecord.isZeroAllowed,
-            })}
+            className={classNames(
+              styles.numpadButton,
+              styles.numpadButtonBottom,
+              {
+                [styles.notAllowed]: !newRecord.isZeroAllowed,
+              }
+            )}
             data-digit="0"
             onClick={onDigitClick}
           >
@@ -271,8 +212,9 @@ function Home() {
           <button
             className={classNames(
               styles.numpadButton,
-              styles.borderRight,
-              styles.borderBottom,
+              styles.numpadButtonBottomRight,
+              styles.numpadButtonRight,
+              styles.numpadButtonBottom,
               {
                 [styles.notAllowed]: newRecordStr === "",
               }

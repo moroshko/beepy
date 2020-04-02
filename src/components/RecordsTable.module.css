@@ -1,0 +1,51 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  font-family: "Roboto Mono", monospace;
+  min-height: 0;
+}
+.header {
+  flex-shrink: 0;
+  display: flex;
+  height: 36px;
+  border-bottom: 1px solid black;
+}
+.cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+}
+.header .cell {
+  font-size: 16px;
+  justify-content: center;
+}
+.timeCell {
+  flex: 1.75;
+  justify-content: flex-end;
+  font-size: 14px;
+  padding-right: 16px;
+}
+.pulseCell {
+  flex: 1.5;
+}
+.body {
+  min-height: 72px;
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+}
+.row {
+  display: flex;
+  height: 36px;
+  font-size: 20px;
+  text-align: center;
+  scroll-snap-align: end;
+}
+.newRecord {
+  background-color: #ddd;
+}
+.withCursor::after {
+  content: "|";
+  position: relative;
+  top: -1px;
+}

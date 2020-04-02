@@ -40,3 +40,16 @@ function initFirebase() {
 }
 
 export { initFirebase, auth, db };
+
+export function getItems(querySnapshot) {
+  const items = [];
+
+  querySnapshot.forEach((doc) => {
+    items.push({
+      id: doc.id,
+      ...doc.data(),
+    });
+  });
+
+  return items;
+}
