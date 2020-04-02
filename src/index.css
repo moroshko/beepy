@@ -1,3 +1,11 @@
+/* This disables the bounce effect on mobile Safari. */
+html,
+body {
+  position: fixed;
+}
+#root {
+  width: 100vw;
+}
 body {
   margin: 0;
   font-family: "Roboto", sans-serif;
