@@ -53,23 +53,9 @@ function App() {
   useEffect(() => {
     initFirebase();
 
-    function preventDefault(e) {
-      e.preventDefault();
-    }
-
-    /* This disables the bounce effect on mobile Safari. */
-    document.body.addEventListener("touchmove", preventDefault, {
-      passive: false,
-    });
-
-    const unsibscribeFromAuthChanges = auth.onAuthStateChanged((user) => {
+    return auth.onAuthStateChanged((user) => {
       dispatch({ type: "auth-changed", user });
     });
-
-    return () => {
-      document.body.removeEventListener("touchmove", preventDefault);
-      unsibscribeFromAuthChanges();
-    };
   }, []);
 
   return (
