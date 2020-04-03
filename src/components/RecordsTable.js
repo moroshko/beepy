@@ -4,7 +4,7 @@ import { format } from "date-fns";
 import styles from "./RecordsTable.module.css";
 
 function formatTimestamp(timestamp) {
-  return format(new Date(timestamp * 1000), "d/MM HH:mm");
+  return format(new Date(timestamp * 1000), "dd/MM HH:mm");
 }
 
 function RecordsTable({ records, newRecord, bodyRef }) {

@@ -13,21 +13,25 @@
 .cell {
   display: flex;
   align-items: center;
-  justify-content: center;
-  flex: 1;
+  justify-content: flex-end;
+  padding: 0 8px;
+  width: 60px;
 }
 .header .cell {
   font-size: 16px;
-  justify-content: center;
+  justify-content: flex-end;
+}
+.header .cell.timeCell {
+  font-size: 16px;
+  justify-content: flex-start;
 }
 .timeCell {
-  flex: 1.75;
-  justify-content: flex-end;
+  justify-content: flex-start;
   font-size: 14px;
-  padding-right: 16px;
+  width: 116px;
 }
 .pulseCell {
-  flex: 1.5;
+  width: 80px;
 }
 .body {
   min-height: 72px;
