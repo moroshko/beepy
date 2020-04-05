@@ -11,6 +11,7 @@ import styles from "./Home.module.css";
 function Home() {
   const user = useUser();
   const [records, setRecords] = useState(null);
+  const [errorLoadingRecords, setErrorLoadingErrors] = useState(null);
   const [newRecordStr, setNewRecordStr] = useState("");
   const [lastRecordStrAdded, setLastRecordStrAdded] = useState("");
   const newRecord = parseRecord(newRecordStr);
@@ -70,181 +71,196 @@ function Home() {
       .collection(`users/${user.email}/records`)
       .orderBy("timestamp")
       .limit(HOME_RECORDS_COUNT)
-      .onSnapshot((querySnapshot) => {
-        setRecords(getItems(querySnapshot));
-        scrollToBottom(recordsBodyRef);
-      });
+      .onSnapshot(
+        (querySnapshot) => {
+          setRecords(getItems(querySnapshot));
+          scrollToBottom(recordsBodyRef);
+        },
+        (error) => {
+          setErrorLoadingErrors(error.message);
+        }
+      );
   }, [user]);
 
   return (
     <div className={styles.container}>
-      <RecordsTable
-        records={records}
-        newRecord={newRecord}
-        bodyRef={recordsBodyRef}
-      />
-      <div className={styles.buttonsContainer}>
-        <div className={styles.numpadContainer}>
-          <button
-            className={classNames(
-              styles.numpadButton,
-              styles.numpadButtonTopLeft,
-              {
-                [styles.notAllowed]: !newRecord.moreDigitsAllowed,
-              }
-            )}
-            data-digit="1"
-            onClick={onDigitClick}
-          >
-            1
-          </button>
-          <button
-            className={classNames(styles.numpadButton, {
-              [styles.notAllowed]: !newRecord.moreDigitsAllowed,
-            })}
-            data-digit="2"
-            onClick={onDigitClick}
-          >
-            2
-          </button>
-          <button
-            className={classNames(
-              styles.numpadButton,
-              styles.numpadButtonTopRight,
-              styles.numpadButtonRight,
-              {
-                [styles.notAllowed]: !newRecord.moreDigitsAllowed,
-              }
-            )}
-            data-digit="3"
-            onClick={onDigitClick}
-          >
-            3
-          </button>
-          <button
-            className={classNames(styles.numpadButton, {
-              [styles.notAllowed]: !newRecord.moreDigitsAllowed,
-            })}
-            data-digit="4"
-            onClick={onDigitClick}
-          >
-            4
-          </button>
-          <button
-            className={classNames(styles.numpadButton, {
-              [styles.notAllowed]: !newRecord.moreDigitsAllowed,
-            })}
-            data-digit="5"
-            onClick={onDigitClick}
-          >
-            5
-          </button>
-          <button
-            className={classNames(
-              styles.numpadButton,
-              styles.numpadButtonRight,
-              {
-                [styles.notAllowed]: !newRecord.moreDigitsAllowed,
-              }
-            )}
-            data-digit="6"
-            onClick={onDigitClick}
-          >
-            6
-          </button>
-          <button
-            className={classNames(styles.numpadButton, {
-              [styles.notAllowed]: !newRecord.moreDigitsAllowed,
-            })}
-            data-digit="7"
-            onClick={onDigitClick}
-          >
-            7
-          </button>
-          <button
-            className={classNames(styles.numpadButton, {
-              [styles.notAllowed]: !newRecord.moreDigitsAllowed,
-            })}
-            data-digit="8"
-            onClick={onDigitClick}
-          >
-            8
-          </button>
-          <button
-            className={classNames(
-              styles.numpadButton,
-              styles.numpadButtonRight,
-              {
-                [styles.notAllowed]: !newRecord.moreDigitsAllowed,
-              }
-            )}
-            data-digit="9"
-            onClick={onDigitClick}
-          >
-            9
-          </button>
-          <button
-            className={classNames(
-              styles.numpadButton,
-              styles.numpadButtonBottomLeft,
-              styles.numpadButtonBottom,
-              {
-                [styles.notAllowed]: newRecordStr === "",
-              }
-            )}
-            onClick={onClear}
-          >
-            clear
-          </button>
-          <button
-            className={classNames(
-              styles.numpadButton,
-              styles.numpadButtonBottom,
-              {
-                [styles.notAllowed]: !newRecord.isZeroAllowed,
-              }
-            )}
-            data-digit="0"
-            onClick={onDigitClick}
-          >
-            0
-          </button>
-          <button
-            className={classNames(
-              styles.numpadButton,
-              styles.numpadButtonBottomRight,
-              styles.numpadButtonRight,
-              styles.numpadButtonBottom,
-              {
-                [styles.notAllowed]: newRecordStr === "",
-              }
-            )}
-            onClick={onDeleteDigit}
-          >
-            <svg
-              viewBox="0 0 24 24"
-              width={28}
-              height={28}
-              fill="none"
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
+      {errorLoadingRecords && (
+        <div className="errorMessage">Error: {errorLoadingRecords}</div>
+      )}
+      {records && (
+        <>
+          <RecordsTable
+            records={records}
+            newRecord={newRecord}
+            bodyRef={recordsBodyRef}
+          />
+          <div className={styles.buttonsContainer}>
+            <div className={styles.numpadContainer}>
+              <button
+                className={classNames(
+                  styles.numpadButton,
+                  styles.numpadButtonTopLeft,
+                  {
+                    [styles.notAllowed]: !newRecord.moreDigitsAllowed,
+                  }
+                )}
+                data-digit="1"
+                onClick={onDigitClick}
+              >
+                1
+              </button>
+              <button
+                className={classNames(styles.numpadButton, {
+                  [styles.notAllowed]: !newRecord.moreDigitsAllowed,
+                })}
+                data-digit="2"
+                onClick={onDigitClick}
+              >
+                2
+              </button>
+              <button
+                className={classNames(
+                  styles.numpadButton,
+                  styles.numpadButtonTopRight,
+                  styles.numpadButtonRight,
+                  {
+                    [styles.notAllowed]: !newRecord.moreDigitsAllowed,
+                  }
+                )}
+                data-digit="3"
+                onClick={onDigitClick}
+              >
+                3
+              </button>
+              <button
+                className={classNames(styles.numpadButton, {
+                  [styles.notAllowed]: !newRecord.moreDigitsAllowed,
+                })}
+                data-digit="4"
+                onClick={onDigitClick}
+              >
+                4
+              </button>
+              <button
+                className={classNames(styles.numpadButton, {
+                  [styles.notAllowed]: !newRecord.moreDigitsAllowed,
+                })}
+                data-digit="5"
+                onClick={onDigitClick}
+              >
+                5
+              </button>
+              <button
+                className={classNames(
+                  styles.numpadButton,
+                  styles.numpadButtonRight,
+                  {
+                    [styles.notAllowed]: !newRecord.moreDigitsAllowed,
+                  }
+                )}
+                data-digit="6"
+                onClick={onDigitClick}
+              >
+                6
+              </button>
+              <button
+                className={classNames(styles.numpadButton, {
+                  [styles.notAllowed]: !newRecord.moreDigitsAllowed,
+                })}
+                data-digit="7"
+                onClick={onDigitClick}
+              >
+                7
+              </button>
+              <button
+                className={classNames(styles.numpadButton, {
+                  [styles.notAllowed]: !newRecord.moreDigitsAllowed,
+                })}
+                data-digit="8"
+                onClick={onDigitClick}
+              >
+                8
+              </button>
+              <button
+                className={classNames(
+                  styles.numpadButton,
+                  styles.numpadButtonRight,
+                  {
+                    [styles.notAllowed]: !newRecord.moreDigitsAllowed,
+                  }
+                )}
+                data-digit="9"
+                onClick={onDigitClick}
+              >
+                9
+              </button>
+              <button
+                className={classNames(
+                  styles.numpadButton,
+                  styles.numpadButtonBottomLeft,
+                  styles.numpadButtonBottom,
+                  {
+                    [styles.notAllowed]: newRecordStr === "",
+                  }
+                )}
+                onClick={onClear}
+              >
+                clear
+              </button>
+              <button
+                className={classNames(
+                  styles.numpadButton,
+                  styles.numpadButtonBottom,
+                  {
+                    [styles.notAllowed]: !newRecord.isZeroAllowed,
+                  }
+                )}
+                data-digit="0"
+                onClick={onDigitClick}
+              >
+                0
+              </button>
+              <button
+                className={classNames(
+                  styles.numpadButton,
+                  styles.numpadButtonBottomRight,
+                  styles.numpadButtonRight,
+                  styles.numpadButtonBottom,
+                  {
+                    [styles.notAllowed]: newRecordStr === "",
+                  }
+                )}
+                onClick={onDeleteDigit}
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  width={28}
+                  height={28}
+                  fill="none"
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                >
+                  <path d="M21 4H8l-7 8 7 8h13a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2z" />
+                  <line x1="18" x2="12" y1="9" y2="15" />
+                  <line x1="12" x2="18" y1="9" y2="15" />
+                </svg>
+              </button>
+            </div>
+            <button
+              className={classNames(
+                styles.numpadButton,
+                styles.addRecordButton
+              )}
+              disabled={!readyToAdd}
+              onClick={onAddRecord}
             >
-              <path d="M21 4H8l-7 8 7 8h13a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2z" />
-              <line x1="18" x2="12" y1="9" y2="15" />
-              <line x1="12" x2="18" y1="9" y2="15" />
-            </svg>
-          </button>
-        </div>
-        <button
-          className={classNames(styles.numpadButton, styles.addRecordButton)}
-          disabled={!readyToAdd}
-          onClick={onAddRecord}
-        >
-          {readyToAdd ? "Add Record" : "Type your Blood Pressure"}
-        </button>
-      </div>
+              {readyToAdd ? "Add Record" : "Type your Blood Pressure"}
+            </button>
+          </div>
+        </>
+      )}
     </div>
   );
 }

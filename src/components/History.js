@@ -9,6 +9,7 @@ import styles from "./History.module.css";
 function History() {
   const user = useUser();
   const [records, setRecords] = useState(null);
+  const [errorLoadingRecords, setErrorLoadingErrors] = useState(null);
   const recordsBodyRef = useRef();
 
   useEffect(() => {
@@ -16,15 +17,23 @@ function History() {
       .collection(`users/${user.email}/records`)
       .orderBy("timestamp")
       .limit(HISTORY_RECORDS_COUNT)
-      .onSnapshot((querySnapshot) => {
-        setRecords(getItems(querySnapshot));
-        scrollToBottom(recordsBodyRef);
-      });
+      .onSnapshot(
+        (querySnapshot) => {
+          setRecords(getItems(querySnapshot));
+          scrollToBottom(recordsBodyRef);
+        },
+        (error) => {
+          setErrorLoadingErrors(error.message);
+        }
+      );
   }, [user]);
 
   return (
     <div className={styles.container}>
-      <RecordsTable records={records} bodyRef={recordsBodyRef} />
+      {errorLoadingRecords && (
+        <div className="errorMessage">Error: {errorLoadingRecords}</div>
+      )}
+      {records && <RecordsTable records={records} bodyRef={recordsBodyRef} />}
     </div>
   );
 }
