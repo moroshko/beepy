@@ -110,7 +110,7 @@ function Home() {
                   ontouchstart allows Mobile Safari to show the active state on button
                   See: https://stackoverflow.com/a/33681490/247243
                 */
-                ontouchstart
+                ontouchstart=""
               >
                 1
               </button>
