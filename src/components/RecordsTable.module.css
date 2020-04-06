@@ -36,8 +36,7 @@
 }
 .body {
   min-height: 72px;
-  overflow-y: scroll;
-  scroll-snap-type: y mandatory;
+  overflow-y: auto;
 }
 .row {
   display: flex;
@@ -45,6 +44,13 @@
   font-size: 20px;
   text-align: center;
   scroll-snap-align: end;
+  cursor: default;
+}
+.row.rowEditing {
+  background-color: #ddd;
+}
+.row:hover:not(.rowEditing) {
+  background-color: #eee;
 }
 .newRecord {
   background-color: #ddd;
@@ -53,4 +59,7 @@
   content: "|";
   position: relative;
   top: -1px;
+}
+.editContainer {
+  padding: 16px 16px 16px 8px;
 }
