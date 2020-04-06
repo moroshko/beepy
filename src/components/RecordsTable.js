@@ -33,6 +33,11 @@ function RecordRow({ record, isEditing, setEditRecordId }) {
         })}
         onClick={onClick}
       >
+        {/* 
+          The reason we need `.rowInner` is because we can't set `display: flex` 
+          on the button itself because it's not supported in some browsers (e.g. Chrome). 
+          See: https://stackoverflow.com/a/35466231/247243
+        */}
         <span className={styles.rowInner}>
           <span className={classNames(styles.cell, styles.timeCell)}>
             {formatTimestamp(timestamp)}
