@@ -25,6 +25,9 @@ button:disabled {
   border: 0;
   color: #777;
 }
+button:active {
+  color: inherit; /* Otherwise, it's white in Safari. */
+}
 /*
   https://github.com/WICG/focus-visible#backwards-compatibility
   Provide basic, default focus styles.

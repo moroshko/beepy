@@ -50,8 +50,13 @@
 .row.rowEditing {
   background-color: #ddd;
 }
-.row:hover:not(.rowEditing):not(.newRecord) {
-  background-color: #eee;
+/*
+  Without this @media, mobile Safari applies the hover state when the row is tapped twice.
+*/
+@media (hover: hover) {
+  .row:hover:not(.rowEditing):not(.newRecord) {
+    background-color: #eee;
+  }
 }
 .rowInner {
   display: flex;

@@ -11,18 +11,21 @@ function RecordRow({ record, isEditing, setEditRecordId }) {
   const { id, timestamp, sys, dia, pulse } = record;
   const onClick = (e) => {
     const row = e.currentTarget;
+    const newEditRecordId = isEditing ? null : id;
 
-    setEditRecordId(isEditing ? null : id);
+    setEditRecordId(newEditRecordId);
 
-    /*
-      Without the setTimeout, it doesn't always scroll to the right place 
-      since we add a new DOM element and start scrolling at the same time.
-      By adding the setTimeout, we first add the new DOM element, and then 
-      start scrolling on the next tick.
-    */
-    setTimeout(() => {
-      row.scrollIntoView({ behavior: "smooth" });
-    });
+    if (newEditRecordId !== null) {
+      /*
+        Without the setTimeout, it doesn't always scroll to the right place 
+        since we add a new DOM element and start scrolling at the same time.
+        By adding the setTimeout, we first add the new DOM element, and then 
+        start scrolling on the next tick.
+      */
+      setTimeout(() => {
+        row.scrollIntoView({ behavior: "smooth" });
+      });
+    }
   };
 
   return (
