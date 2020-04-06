@@ -8,7 +8,10 @@ import { scrollToBottom } from "../utils/dom";
 import { HOME_RECORDS_COUNT } from "../utils/settings";
 import styles from "./Home.module.css";
 
-const noop = () => {};
+const onTouchStart = (e) => {
+  e.preventDefault();
+  e.stopPropagation();
+};
 
 function Home() {
   const user = useUser();
@@ -112,7 +115,7 @@ function Home() {
                   onTouchStart allows Mobile Safari to show the active state on the button.
                   See: https://stackoverflow.com/a/33681490/247243
                 */
-                onTouchStart={noop}
+                onTouchStart={onTouchStart}
               >
                 1
               </button>
