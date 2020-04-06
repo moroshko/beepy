@@ -8,11 +8,6 @@ import { scrollToBottom } from "../utils/dom";
 import { HOME_RECORDS_COUNT } from "../utils/settings";
 import styles from "./Home.module.css";
 
-const onTouchStart = (e) => {
-  e.preventDefault();
-  e.stopPropagation();
-};
-
 function Home() {
   const user = useUser();
   const [records, setRecords] = useState(null);
@@ -111,11 +106,6 @@ function Home() {
                 )}
                 data-digit="1"
                 onClick={onDigitClick}
-                /* 
-                  onTouchStart allows Mobile Safari to show the active state on the button.
-                  See: https://stackoverflow.com/a/33681490/247243
-                */
-                onTouchStart={onTouchStart}
               >
                 1
               </button>
