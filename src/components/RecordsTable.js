@@ -27,21 +27,23 @@ function RecordRow({ record, isEditing, setEditRecordId }) {
 
   return (
     <>
-      <div
+      <button
         className={classNames(styles.row, {
           [styles.rowEditing]: isEditing,
         })}
-        role="button"
-        tabIndex="0"
         onClick={onClick}
       >
-        <div className={classNames(styles.cell, styles.timeCell)}>
-          {formatTimestamp(timestamp)}
-        </div>
-        <div className={styles.cell}>{sys}</div>
-        <div className={styles.cell}>{dia}</div>
-        <div className={classNames(styles.cell, styles.pulseCell)}>{pulse}</div>
-      </div>
+        <span className={styles.rowInner}>
+          <span className={classNames(styles.cell, styles.timeCell)}>
+            {formatTimestamp(timestamp)}
+          </span>
+          <span className={styles.cell}>{sys}</span>
+          <span className={styles.cell}>{dia}</span>
+          <span className={classNames(styles.cell, styles.pulseCell)}>
+            {pulse}
+          </span>
+        </span>
+      </button>
       {isEditing && <div className={styles.editContainer}>Coming soon!</div>}
     </>
   );
@@ -71,32 +73,34 @@ function RecordsTable({ records, newRecord, bodyRef }) {
             ))}
           {newRecord && (
             <div className={classNames(styles.row, styles.newRecord)}>
-              <div className={classNames(styles.cell, styles.timeCell)} />
-              <div className={styles.cell}>
-                <div
-                  className={classNames({
-                    [styles.withCursor]: newRecord.cursor === "sys",
-                  })}
-                >
-                  {newRecord.sys}
+              <div className={styles.rowInner}>
+                <div className={classNames(styles.cell, styles.timeCell)} />
+                <div className={styles.cell}>
+                  <div
+                    className={classNames({
+                      [styles.withCursor]: newRecord.cursor === "sys",
+                    })}
+                  >
+                    {newRecord.sys}
+                  </div>
                 </div>
-              </div>
-              <div className={styles.cell}>
-                <div
-                  className={classNames({
-                    [styles.withCursor]: newRecord.cursor === "dia",
-                  })}
-                >
-                  {newRecord.dia}
+                <div className={styles.cell}>
+                  <div
+                    className={classNames({
+                      [styles.withCursor]: newRecord.cursor === "dia",
+                    })}
+                  >
+                    {newRecord.dia}
+                  </div>
                 </div>
-              </div>
-              <div className={classNames(styles.cell, styles.pulseCell)}>
-                <div
-                  className={classNames({
-                    [styles.withCursor]: newRecord.cursor === "pulse",
-                  })}
-                >
-                  {newRecord.pulse}
+                <div className={classNames(styles.cell, styles.pulseCell)}>
+                  <div
+                    className={classNames({
+                      [styles.withCursor]: newRecord.cursor === "pulse",
+                    })}
+                  >
+                    {newRecord.pulse}
+                  </div>
                 </div>
               </div>
             </div>

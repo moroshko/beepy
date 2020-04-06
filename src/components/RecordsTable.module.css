@@ -39,18 +39,23 @@
   overflow-y: auto;
 }
 .row {
-  display: flex;
   height: 36px;
   font-size: 20px;
-  text-align: center;
-  scroll-snap-align: end;
-  cursor: default;
+  font-family: inherit;
+  border: 0;
+}
+.row:not(.newRecord) {
+  cursor: pointer;
 }
 .row.rowEditing {
   background-color: #ddd;
 }
-.row:hover:not(.rowEditing) {
+.row:hover:not(.rowEditing):not(.newRecord) {
   background-color: #eee;
+}
+.rowInner {
+  display: flex;
+  height: 100%;
 }
 .newRecord {
   background-color: #ddd;
