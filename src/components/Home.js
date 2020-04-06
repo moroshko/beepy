@@ -8,6 +8,8 @@ import { scrollToBottom } from "../utils/dom";
 import { HOME_RECORDS_COUNT } from "../utils/settings";
 import styles from "./Home.module.css";
 
+const noop = () => {};
+
 function Home() {
   const user = useUser();
   const [records, setRecords] = useState(null);
@@ -107,10 +109,10 @@ function Home() {
                 data-digit="1"
                 onClick={onDigitClick}
                 /* 
-                  onTouchStart allows Mobile Safari to show the active state on button
+                  onTouchStart allows Mobile Safari to show the active state on the button.
                   See: https://stackoverflow.com/a/33681490/247243
                 */
-                onTouchStart
+                onTouchStart={noop}
               >
                 1
               </button>
