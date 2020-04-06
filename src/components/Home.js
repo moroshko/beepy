@@ -107,10 +107,10 @@ function Home() {
                 data-digit="1"
                 onClick={onDigitClick}
                 /* 
-                  ontouchstart allows Mobile Safari to show the active state on button
+                  onTouchStart allows Mobile Safari to show the active state on button
                   See: https://stackoverflow.com/a/33681490/247243
                 */
-                ontouchstart=""
+                onTouchStart
               >
                 1
               </button>
