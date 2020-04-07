@@ -19,7 +19,11 @@
     -->
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
   </head>
-  <body>
+  <!-- 
+      ontouchstart causes the :active state on buttons to work in mobile Safari. 
+      See: https://stackoverflow.com/a/8877902/247243 
+  -->
+  <body ontouchstart="">
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
     <!--

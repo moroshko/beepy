@@ -51,7 +51,8 @@
   background-color: #ddd;
 }
 /*
-  Without this @media, mobile Safari applies the hover state when the row is tapped twice.
+  Without this @media, mobile Safari applies the hover state 
+  when the row is tapped and then tapped again.
 */
 @media (hover: hover) {
   .row:hover:not(.rowEditing):not(.newRecord) {
