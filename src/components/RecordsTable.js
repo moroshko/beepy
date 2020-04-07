@@ -52,7 +52,11 @@ function RecordRow({ record, isEditing, setEditRecordId }) {
           </span>
         </span>
       </button>
-      {isEditing && <div className={styles.editContainer}>Coming soon!</div>}
+      {isEditing && (
+        <div className={styles.editContainer}>
+          <button className={styles.deleteRecordButton}>Delete Record</button>
+        </div>
+      )}
     </>
   );
 }
