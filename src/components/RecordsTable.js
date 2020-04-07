@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useReducer, useEffect } from "react";
 import classNames from "classnames";
 import { format } from "date-fns";
 import styles from "./RecordsTable.module.css";
@@ -7,26 +7,49 @@ function formatTimestamp(timestamp) {
   return format(new Date(timestamp * 1000), "dd/MM HH:mm");
 }
 
-function RecordRow({ record, isEditing, setEditRecordId }) {
-  const { id, timestamp, sys, dia, pulse } = record;
-  const onClick = (e) => {
-    const row = e.currentTarget;
-    const newEditRecordId = isEditing ? null : id;
-
-    setEditRecordId(newEditRecordId);
-
-    if (newEditRecordId !== null) {
-      /*
-        Without the setTimeout, it doesn't always scroll to the right place 
-        since we add a new DOM element and start scrolling at the same time.
-        By adding the setTimeout, we first add the new DOM element, and then 
-        start scrolling on the next tick.
-      */
-      setTimeout(() => {
-        row.scrollIntoView({ behavior: "smooth" });
-      });
+function deleteReducer(state, action) {
+  switch (action.type) {
+    case "RESET": {
+      return {
+        ...state,
+        state: "initial",
+      };
     }
+
+    case "DELETE": {
+      return {
+        ...state,
+        state: "confirm",
+      };
+    }
+
+    default: {
+      throw new Error(`Unknown action type: "${action.type}"`);
+    }
+  }
+}
+
+const RecordRow = React.memo(({ record, isEditing, setEditRecordId }) => {
+  const { id, timestamp, sys, dia, pulse } = record;
+  const [deleteRecord, dispatch] = useReducer(deleteReducer, {
+    state: "initial",
+  });
+  const onRowClick = () => {
+    setEditRecordId(isEditing ? null : id);
   };
+  const onDeleteClick = () => {
+    dispatch({ type: "DELETE" });
+  };
+  const onDeleteConfirmClick = () => {};
+  const onDeleteCancelClick = () => {
+    dispatch({ type: "RESET" });
+  };
+
+  useEffect(() => {
+    if (!isEditing) {
+      dispatch({ type: "RESET" });
+    }
+  }, [isEditing]);
 
   return (
     <>
@@ -34,7 +57,7 @@ function RecordRow({ record, isEditing, setEditRecordId }) {
         className={classNames(styles.row, {
           [styles.rowEditing]: isEditing,
         })}
-        onClick={onClick}
+        onClick={onRowClick}
       >
         {/* 
           The reason we need `.rowInner` is because we can't set `display: flex` 
@@ -54,12 +77,44 @@ function RecordRow({ record, isEditing, setEditRecordId }) {
       </button>
       {isEditing && (
         <div className={styles.editContainer}>
-          <button className={styles.deleteRecordButton}>Delete Record</button>
+          {deleteRecord.state === "initial" && (
+            <button
+              className={classNames(
+                styles.dangerButton,
+                styles.deleteRecordButton
+              )}
+              onClick={onDeleteClick}
+            >
+              Delete Record
+            </button>
+          )}
+          {deleteRecord.state === "confirm" && (
+            <>
+              <button
+                className={classNames(
+                  styles.dangerButton,
+                  styles.deleteConfirmButton
+                )}
+                onClick={onDeleteConfirmClick}
+              >
+                Confirm
+              </button>
+              <button
+                className={classNames(
+                  styles.ghostButton,
+                  styles.deleteCancelButton
+                )}
+                onClick={onDeleteCancelClick}
+              >
+                Cancel
+              </button>
+            </>
+          )}
         </div>
       )}
     </>
   );
-}
+});
 
 function RecordsTable({ records, newRecord, bodyRef }) {
   const [editRecordId, setEditRecordId] = useState(null);

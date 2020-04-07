@@ -72,18 +72,39 @@
   top: -1px;
 }
 .editContainer {
-  text-align: center;
-  padding: 16px 16px 12px 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 64px;
   background-color: #eee;
 }
-.deleteRecordButton {
+.dangerButton {
   border: 1px solid #c11826;
   font-size: 16px;
-  padding: 8px 16px;
+  height: 36px;
   color: #c11826;
 }
-.deleteRecordButton:active {
+.dangerButton:active {
   outline: 0;
   background-color: #e84855;
   color: #fff;
+}
+.ghostButton {
+  border: 0;
+  font-size: 16px;
+  height: 36px;
+}
+.ghostButton:active {
+  outline: 0;
+  background-color: #ccc;
+}
+.deleteRecordButton {
+  width: 164px;
+}
+.deleteConfirmButton {
+  width: 80px;
+}
+.deleteCancelButton {
+  width: 76px;
+  margin-left: 8px;
 }
