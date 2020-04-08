@@ -28,7 +28,6 @@
   outline: 0;
   background-color: #1cb265;
   color: #fff;
-  font-weight: 500;
 }
 .numpadButton:active.notAllowed {
   background-color: #e84855;

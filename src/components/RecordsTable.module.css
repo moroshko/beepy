@@ -36,15 +36,32 @@
 }
 .body {
   min-height: 72px;
-  overflow-y: scroll;
-  scroll-snap-type: y mandatory;
+  overflow-y: auto;
 }
 .row {
-  display: flex;
   height: 36px;
   font-size: 20px;
-  text-align: center;
-  scroll-snap-align: end;
+  font-family: inherit;
+  border: 0;
+}
+.row:not(.newRecord) {
+  cursor: pointer;
+}
+.row.rowEditing {
+  background-color: #ddd;
+}
+/*
+  Without this @media, mobile Safari applies the hover state 
+  when the row is tapped and then tapped again.
+*/
+@media (hover: hover) {
+  .row:hover:not(.rowEditing):not(.newRecord) {
+    background-color: #eee;
+  }
+}
+.rowInner {
+  display: flex;
+  height: 100%;
 }
 .newRecord {
   background-color: #ddd;
@@ -53,4 +70,41 @@
   content: "|";
   position: relative;
   top: -1px;
+}
+.editContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 64px;
+  background-color: #eee;
+}
+.dangerButton {
+  border: 1px solid #c11826;
+  font-size: 16px;
+  height: 36px;
+  color: #c11826;
+}
+.dangerButton:active {
+  outline: 0;
+  background-color: #e84855;
+  color: #fff;
+}
+.ghostButton {
+  border: 0;
+  font-size: 16px;
+  height: 36px;
+}
+.ghostButton:active {
+  outline: 0;
+  background-color: #ccc;
+}
+.deleteRecordButton {
+  width: 164px;
+}
+.deleteConfirmButton {
+  width: 80px;
+}
+.deleteCancelButton {
+  width: 76px;
+  margin-left: 8px;
 }

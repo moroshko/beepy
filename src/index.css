@@ -25,25 +25,28 @@ button:disabled {
   border: 0;
   color: #777;
 }
+button:active {
+  color: inherit; /* Otherwise, it's white in Safari. */
+}
 /*
   https://github.com/WICG/focus-visible#backwards-compatibility
   Provide basic, default focus styles.
 */
-button:focus {
+:focus {
   outline: 4px solid #1cb265;
 }
 /*
   Remove default focus styles for mouse users ONLY if
   :focus-visible is supported on this platform.
 */
-button:focus:not(:focus-visible) {
+:focus:not(:focus-visible) {
   outline: 0;
 }
 /*
   If :focus-visible is supported on this platform, 
   provide enhanced focus styles for keyboard focus.
 */
-button:focus-visible {
+:focus-visible {
   outline: 4px solid #1cb265;
 }
 * {
