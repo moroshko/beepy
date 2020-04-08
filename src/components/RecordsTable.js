@@ -1,6 +1,8 @@
 import React, { useState, useReducer, useEffect } from "react";
 import classNames from "classnames";
 import { format } from "date-fns";
+import useUser from "../hooks/useUser";
+import { db } from "../utils/firebase";
 import styles from "./RecordsTable.module.css";
 
 function formatTimestamp(timestamp) {
@@ -31,6 +33,7 @@ function deleteReducer(state, action) {
 
 const RecordRow = React.memo(({ record, isEditing, setEditRecordId }) => {
   const { id, timestamp, sys, dia, pulse } = record;
+  const user = useUser();
   const [deleteRecord, dispatch] = useReducer(deleteReducer, {
     state: "initial",
   });
@@ -40,7 +43,19 @@ const RecordRow = React.memo(({ record, isEditing, setEditRecordId }) => {
   const onDeleteClick = () => {
     dispatch({ type: "DELETE" });
   };
-  const onDeleteConfirmClick = () => {};
+  const onDeleteConfirmClick = () => {
+    const recordPath = `users/${user.email}/records/${id}`;
+
+    db.doc(recordPath)
+      .delete()
+      .catch((error) => {
+        console.error(
+          "Failed to delete the following record:",
+          recordPath,
+          error
+        );
+      });
+  };
   const onDeleteCancelClick = () => {
     dispatch({ type: "RESET" });
   };
