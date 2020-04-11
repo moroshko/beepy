@@ -1,6 +1,7 @@
-import React, { useState, useReducer, useEffect } from "react";
+import React, { useState, useReducer, useEffect, useRef } from "react";
 import classNames from "classnames";
 import { format } from "date-fns";
+import { disableBodyScroll, clearAllBodyScrollLocks } from "body-scroll-lock";
 import useUser from "../hooks/useUser";
 import { db } from "../utils/firebase";
 import styles from "./RecordsTable.module.css";
@@ -133,6 +134,17 @@ const RecordRow = React.memo(({ record, isEditing, setEditRecordId }) => {
 
 function RecordsTable({ records, newRecord, bodyRef }) {
   const [editRecordId, setEditRecordId] = useState(null);
+  const targetElement = useRef(null);
+
+  useEffect(() => {
+    targetElement.current = bodyRef.current;
+
+    disableBodyScroll(targetElement.current);
+
+    return () => {
+      clearAllBodyScrollLocks();
+    };
+  }, [bodyRef]);
 
   return (
     <div className={styles.container}>
