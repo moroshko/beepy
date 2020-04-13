@@ -23,6 +23,7 @@
   align-items: center; /* Needed for Firefox */
   justify-content: center;
   user-select: none;
+  touch-action: manipulation; /* Disables double-tap zoom on touch devices */
 }
 .numpadButton:active:not(:disabled) {
   outline: 0;
