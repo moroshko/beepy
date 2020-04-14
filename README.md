@@ -1,3 +1,5 @@
+![CI](https://github.com/moroshko/beepy/workflows/CI/badge.svg)
+
 # Beepy
 
 ## Developing locally
