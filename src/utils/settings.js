@@ -1,2 +1,0 @@
-export const HOME_RECORDS_COUNT = 100;
-export const HISTORY_RECORDS_COUNT = 1000;
