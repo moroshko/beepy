@@ -1,14 +1,23 @@
 import "./globals.css";
-
+// This line need to be empty to keep `globals.css` first!
 import { Inter } from "@next/font/google";
+import { ReactNode } from "react";
+import "server-only";
+import { SupabaseListener } from "./components/SupabaseListener";
+import { serverComponentSupabaseClient } from "./utils/supabase/server";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+type Props = {
+  children: ReactNode;
+};
+
+const RootLayout = async ({ children }: Props) => {
+  const supabase = serverComponentSupabaseClient();
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
+
   return (
     <html lang="en">
       {/*
@@ -17,8 +26,13 @@ export default function RootLayout({
       */}
       <head />
       <body className={inter.className}>
+        <SupabaseListener accessToken={session?.access_token} />
         <main>{children}</main>
       </body>
     </html>
   );
-}
+};
+
+export const revalidate = 0;
+
+export default RootLayout;
