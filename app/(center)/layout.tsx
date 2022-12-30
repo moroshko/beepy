@@ -6,8 +6,10 @@ type Props = {
 
 const CenterLayout = async ({ children }: Props) => {
   return (
-    <div className="mx-auto my-10 max-w-sm rounded-lg p-8 text-center shadow-xl">
-      {children}
+    <div className="h-screen w-screen bg-grey-50 py-10">
+      <div className="mx-auto max-w-sm rounded-lg bg-white p-8 text-center shadow-xl">
+        {children}
+      </div>
     </div>
   );
 };

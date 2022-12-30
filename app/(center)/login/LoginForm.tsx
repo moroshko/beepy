@@ -5,7 +5,7 @@ import { Button } from "components/Button";
 import { Form } from "components/Form";
 import { Input } from "components/Input";
 import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useLogin } from "utils/hooks/useLogin";
 
@@ -15,19 +15,11 @@ type FormInputs = {
 };
 
 const LoginFormComponent = () => {
-  const searchParams = useSearchParams();
-  const emailSearchParam = searchParams.get("email");
   const {
     register,
-    watch,
     formState: { errors },
     handleSubmit,
-  } = useForm<FormInputs>({
-    defaultValues: {
-      email: emailSearchParam ?? "",
-    },
-  });
-  const email = watch("email");
+  } = useForm<FormInputs>();
   const router = useRouter();
   const loginMutation = useLogin();
   const onSubmit: SubmitHandler<FormInputs> = async ({ email, password }) => {
@@ -66,10 +58,7 @@ const LoginFormComponent = () => {
           <div className="mt-1 flex justify-end">
             <Link
               className="text-sm text-grey-500 underline hover:no-underline"
-              href={{
-                pathname: "/forgot-password",
-                query: email ? { email } : null,
-              }}
+              href="/forgot-password"
             >
               Forgot password
             </Link>
@@ -91,10 +80,7 @@ const LoginFormComponent = () => {
           {`Don’t have an account yet? `}
           <Link
             className="text-sm text-grey-500 underline hover:no-underline"
-            href={{
-              pathname: "/signup",
-              query: email ? { email } : null,
-            }}
+            href="/signup"
           >
             Create new account
           </Link>

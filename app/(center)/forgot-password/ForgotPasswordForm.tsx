@@ -5,7 +5,7 @@ import { Button } from "components/Button";
 import { Form } from "components/Form";
 import { Input } from "components/Input";
 import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useSendResetPasswordEmail } from "utils/hooks/useSendResetPasswordEmail";
 
@@ -14,19 +14,11 @@ type FormInputs = {
 };
 
 const ForgotPasswordFormComponent = () => {
-  const searchParams = useSearchParams();
-  const emailSearchParam = searchParams.get("email");
   const {
     register,
-    watch,
     formState: { errors },
     handleSubmit,
-  } = useForm<FormInputs>({
-    defaultValues: {
-      email: emailSearchParam ?? "",
-    },
-  });
-  const email = watch("email");
+  } = useForm<FormInputs>();
   const router = useRouter();
   const sendResetPasswordEmailMutation = useSendResetPasswordEmail();
   const onSubmit: SubmitHandler<FormInputs> = async ({ email }) => {
@@ -73,10 +65,7 @@ const ForgotPasswordFormComponent = () => {
       <div className="mt-4">
         <Link
           className="text-sm text-grey-500 underline hover:no-underline"
-          href={{
-            pathname: "/login",
-            query: email ? { email } : null,
-          }}
+          href="/login"
         >
           Back to login
         </Link>
