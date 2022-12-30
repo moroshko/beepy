@@ -79,7 +79,7 @@ const LoginFormComponent = () => {
         <p className="text-sm text-grey-500">
           {`Don’t have an account yet? `}
           <Link
-            className="text-sm text-grey-500 underline hover:no-underline"
+            className="whitespace-nowrap text-sm text-grey-500 underline hover:no-underline"
             href="/signup"
           >
             Create new account
