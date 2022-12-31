@@ -62,14 +62,12 @@ const ForgotPasswordFormComponent = () => {
           </p>
         )}
       </Form>
-      <div className="mt-4">
-        <Link
-          className="text-sm text-grey-500 underline hover:no-underline"
-          href="/login"
-        >
-          Back to login
-        </Link>
-      </div>
+      <Link
+        className="mt-4 inline-block text-sm text-grey-500 underline hover:no-underline"
+        href="/login"
+      >
+        Back to login
+      </Link>
     </div>
   );
 };

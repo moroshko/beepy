@@ -14,9 +14,12 @@ export async function middleware(req: NextRequest) {
   console.log({ pathname, session });
   console.log("");
 
-  if (pathname === "/" && session === null) {
-    return NextResponse.redirect(new URL("/login", req.url));
-  }
+  // This redirect is not possible at the moment because when user confirms their email
+  // and gets redirected here, the `session` will be null during the first middleware hit.
+  // See: https://github.com/supabase/auth-helpers/issues/341#issuecomment-1319502599
+  // if (pathname === "/" && session === null) {
+  //   return NextResponse.redirect(new URL("/login", req.url));
+  // }
 
   return res;
 }

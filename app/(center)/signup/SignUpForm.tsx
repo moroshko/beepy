@@ -4,6 +4,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Button } from "components/Button";
 import { Form } from "components/Form";
 import { Input } from "components/Input";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useSignUp } from "utils/hooks/useSignUp";
@@ -16,7 +17,6 @@ type FormInputs = {
 const SignUpFormComponent = () => {
   const {
     register,
-    watch,
     formState: { errors },
     handleSubmit,
   } = useForm<FormInputs>();
@@ -66,6 +66,15 @@ const SignUpFormComponent = () => {
             {signUpMutation.error.message}
           </p>
         )}
+        <p className="text-sm text-grey-500">
+          {`Already have an account? `}
+          <Link
+            className="whitespace-nowrap text-sm text-grey-500 underline hover:no-underline"
+            href="/login"
+          >
+            Login
+          </Link>
+        </p>
       </Form>
     </div>
   );

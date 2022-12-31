@@ -12,7 +12,7 @@ export const useSendResetPasswordEmail = () => {
   return useMutation<ResponseData, AuthError, Params>(async ({ email }) => {
     const { data, error } =
       await browserSupabaseClient.auth.resetPasswordForEmail(email, {
-        redirectTo: `${window.location.origin}/choose-password`,
+        redirectTo: `${window.location.origin}/authenticated`,
       });
 
     if (error !== null) {

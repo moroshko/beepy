@@ -14,7 +14,9 @@ const SupabaseListener = ({ accessToken }: Props) => {
     browserSupabaseClient.auth.onAuthStateChange((event, session) => {
       console.log({ event, session });
 
-      if (session?.access_token !== accessToken) {
+      if (event === "PASSWORD_RECOVERY") {
+        router.push("/choose-password");
+      } else if (session?.access_token !== accessToken) {
         router.refresh();
       }
     });
