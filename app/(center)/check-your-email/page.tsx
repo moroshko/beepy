@@ -9,8 +9,9 @@ const CheckYourEmailPage = ({
     <>
       <h1 className="text-2xl font-semibold">Check your email</h1>
       <p className="mt-6">
-        {`We emailed you reset instructions to `}
-        <span className="whitespace-nowrap font-semibold">{email}</span>
+        We emailed you reset instructions to
+        <br />
+        <span className="font-semibold">{email}</span>
       </p>
     </>
   );

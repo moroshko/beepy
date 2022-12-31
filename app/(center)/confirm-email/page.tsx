@@ -9,8 +9,9 @@ const ConfirmEmailPage = ({
     <>
       <h1 className="text-2xl font-semibold">Confirm email address</h1>
       <p className="mt-6">
-        {`We emailed you confirmation instructions to `}
-        <span className="whitespace-nowrap font-semibold">{email}</span>
+        We emailed you instructions to
+        <br />
+        <span className="font-semibold">{email}</span>
       </p>
     </>
   );

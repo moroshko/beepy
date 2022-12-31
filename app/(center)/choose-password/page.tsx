@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { serverComponentSupabaseClient } from "utils/supabase/server";
 import { ChoosePasswordForm } from "./ChoosePasswordForm";
+import { LogoutButton } from "./LogoutButton";
 
 const ChoosePasswordPage = async () => {
   const supabase = serverComponentSupabaseClient();
@@ -21,9 +22,7 @@ const ChoosePasswordPage = async () => {
         <Link className="underline hover:no-underline" href="/">
           Back to homepage
         </Link>
-        <Link className="underline hover:no-underline" href="/">
-          Logout (TODO)
-        </Link>
+        <LogoutButton />
       </p>
     </>
   );

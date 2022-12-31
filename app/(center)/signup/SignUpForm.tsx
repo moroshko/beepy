@@ -1,6 +1,5 @@
 "use client";
 
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Button } from "components/Button";
 import { Form } from "components/Form";
 import { Input } from "components/Input";
@@ -14,7 +13,7 @@ type FormInputs = {
   password: string;
 };
 
-const SignUpFormComponent = () => {
+const SignUpForm = () => {
   const {
     register,
     formState: { errors },
@@ -77,16 +76,6 @@ const SignUpFormComponent = () => {
         </p>
       </Form>
     </div>
-  );
-};
-
-const SignUpForm = () => {
-  const queryClient = new QueryClient();
-
-  return (
-    <QueryClientProvider client={queryClient}>
-      <SignUpFormComponent />
-    </QueryClientProvider>
   );
 };
 

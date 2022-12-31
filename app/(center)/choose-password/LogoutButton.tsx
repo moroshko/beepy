@@ -17,7 +17,11 @@ const LogoutButton = () => {
     });
   };
 
-  return <button onClick={onLogout}>Logout</button>;
+  return (
+    <button className="underline hover:no-underline" onClick={onLogout}>
+      Logout
+    </button>
+  );
 };
 
 export { LogoutButton };

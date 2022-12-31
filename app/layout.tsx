@@ -1,6 +1,7 @@
 import "./globals.css";
-// This line need to be empty to keep `globals.css` first!
+// This line needs to be empty to keep `globals.css` first!
 import { Inter } from "@next/font/google";
+import { Providers } from "components/Providers";
 import { ReactNode } from "react";
 import "server-only";
 import { SupabaseListener } from "./components/SupabaseListener";
@@ -21,13 +22,15 @@ const RootLayout = async ({ children }: Props) => {
   return (
     <html lang="en">
       {/*
-        <head /> will contain the components returned by the nearest parent
-        head.tsx. Find out more at https://beta.nextjs.org/docs/api-reference/file-conventions/head
+        <head /> will contain the components returned by the nearest parent head.tsx. 
+        Find out more at https://beta.nextjs.org/docs/api-reference/file-conventions/head
       */}
       <head />
       <body className={inter.className}>
         <SupabaseListener accessToken={session?.access_token} />
-        <main>{children}</main>
+        <Providers>
+          <main>{children}</main>
+        </Providers>
       </body>
     </html>
   );
