@@ -1,9 +1,9 @@
 const ConfirmEmailPage = ({
   searchParams,
 }: {
-  searchParams: Record<string, string>; // Meh. See also: https://beta.nextjs.org/docs/api-reference/use-search-params#searchparams-in-pages
+  searchParams?: { [key: string]: string | string[] | undefined }; // Meh. See also: https://beta.nextjs.org/docs/api-reference/use-search-params#searchparams-in-pages
 }) => {
-  const { email } = searchParams;
+  const { email } = searchParams ?? {};
 
   return (
     <>
