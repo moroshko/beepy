@@ -12,7 +12,11 @@ module.exports = {
       primary: colors.indigo,
       error: colors.red[500],
     },
-    extend: {},
+    extend: {
+      screens: {
+        xs: "384px",
+      },
+    },
   },
   plugins: [],
 };
