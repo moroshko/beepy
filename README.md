@@ -9,6 +9,6 @@
 
 ## TODO
 
-- Add Beepy header/logo to pages
+- When logged out and visiting the home page, redirect to login
 - Write helper function to ensure that the email is a string:
   const { email } = searchParams ?? {};
