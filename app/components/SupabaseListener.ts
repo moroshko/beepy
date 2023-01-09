@@ -1,14 +1,17 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useEffect } from "react";
+import { isPublicPage } from "utils/page_";
 import { browserSupabaseClient } from "utils/supabase/browser";
 
 type Props = {
   accessToken?: string;
 };
+
 const SupabaseListener = ({ accessToken }: Props) => {
   const router = useRouter();
+  const pathname = usePathname();
 
   useEffect(() => {
     browserSupabaseClient.auth.onAuthStateChange((event, session) => {
@@ -21,6 +24,20 @@ const SupabaseListener = ({ accessToken }: Props) => {
       }
     });
   }, [router, accessToken]);
+
+  useEffect(() => {
+    const redirectToLoginIfLoggedOut = async () => {
+      const {
+        data: { user },
+      } = await browserSupabaseClient.auth.getUser();
+
+      if (user === null && isPublicPage(pathname) === false) {
+        router.push("/login");
+      }
+    };
+
+    redirectToLoginIfLoggedOut();
+  }, [pathname, router]);
 
   return null;
 };

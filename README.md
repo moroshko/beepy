@@ -9,6 +9,10 @@
 
 ## TODO
 
-- When logged out and visiting the home page, redirect to login
 - Write helper function to ensure that the email is a string:
   const { email } = searchParams ?? {};
+
+## Troubleshooting
+
+- Problem: Not getting emails in Inbucket when using local Supabase.
+  - Solution: Open `supabase/config.toml` and make sure that `enable_confirmations` under `[auth.email]` is `true`.

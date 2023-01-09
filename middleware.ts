@@ -4,20 +4,15 @@ import { NextResponse } from "next/server";
 
 export async function middleware(req: NextRequest) {
   const res = NextResponse.next();
-  const { pathname } = req.nextUrl;
   const supabase = createMiddlewareSupabaseClient({ req, res });
-  const {
+  /*const {
     data: { session },
-  } = await supabase.auth.getSession();
+  } =*/ await supabase.auth.getSession();
 
-  console.log("\n--- middleware ---", new Date());
-  console.log({ pathname, session });
-  console.log("");
-
-  // This redirect is not possible at the moment because when user confirms their email
+  // This redirect is not possible here because when the user confirms their email
   // and gets redirected here, the `session` will be null during the first middleware hit.
   // See: https://github.com/supabase/auth-helpers/issues/341#issuecomment-1319502599
-  // if (pathname === "/" && session === null) {
+  // if (req.nextUrl.pathname === "/" && session === null) {
   //   return NextResponse.redirect(new URL("/login", req.url));
   // }
 

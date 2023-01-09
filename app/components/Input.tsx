@@ -4,6 +4,7 @@ import { ChangeEvent, FocusEvent, forwardRef, Ref, useId } from "react";
 type Props = {
   type?: "text" | "email" | "password";
   label: string;
+  placeholder?: string;
   error?: string;
   name?: string;
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
@@ -11,7 +12,7 @@ type Props = {
 };
 
 const InputComponent = (props: Props, ref: Ref<HTMLInputElement>) => {
-  const { type, label, error, name, onChange, onBlur } = props;
+  const { type, label, placeholder, error, name, onChange, onBlur } = props;
   const inputId = useId();
   const errorId = useId();
 
@@ -30,6 +31,7 @@ const InputComponent = (props: Props, ref: Ref<HTMLInputElement>) => {
         )}
         name={name}
         type={type}
+        placeholder={placeholder}
         {...(error && { "aria-describedby": errorId })}
         onChange={onChange}
         onBlur={onBlur}

@@ -50,6 +50,7 @@ const SignUpForm = () => {
         <Input
           label="Password"
           type="password"
+          placeholder="at least 6 characters"
           {...register("password", { required: "Required" })}
           error={errors.password?.message}
         />
