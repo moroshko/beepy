@@ -4,6 +4,9 @@ import { NextResponse } from "next/server";
 
 export async function middleware(req: NextRequest) {
   const res = NextResponse.next();
+
+  console.log("MIDDLEWARE ----->", req.nextUrl.pathname);
+
   const supabase = createMiddlewareSupabaseClient({ req, res });
   /*const {
     data: { session },
@@ -23,5 +26,5 @@ export async function middleware(req: NextRequest) {
 // Without this, the Server Component may try to make a request to Supabase with an expired access_token.
 // See: https://supabase.com/docs/guides/auth/auth-helpers/nextjs-server-components#middleware
 export const config = {
-  matcher: ["/", "/choose-password"],
+  matcher: ["/", "/history", "/profile", "/choose-password"],
 };

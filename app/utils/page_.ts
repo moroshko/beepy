@@ -1,5 +1,5 @@
+const authenticatedPages = ["/", "/history", "/profile", "/authenticated"];
+
 export const isPublicPage = (pathname: string | null): boolean => {
-  return (
-    pathname === null || ["/", "/authenticated"].includes(pathname) === false
-  );
+  return pathname === null || authenticatedPages.includes(pathname) === false;
 };

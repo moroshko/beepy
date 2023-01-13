@@ -6,9 +6,17 @@
 - When user clicks on an expired link in their email, how could we detect that in our app and redirect them to the login page? See [this discussion](https://github.com/supabase/supabase/discussions/11364).
 - Module not found: Can't resolve 'encoding' - See [this issue](https://github.com/supabase/supabase-js/issues/612)
 - During build on Vercel: A Node.js API is used (Buffer at line: 90) which is not supported in the Edge Runtime.
+- Triggers - it's not possible to trigger a function when a certain column changes (e.g. when user confirms their email).
 
 ## TODO
 
+- Convert header to light theme
+- Change users table to profiles table
+- Add user row when email is confirmed
+- Delete user row when auth user is deleted
+- /profile page when user can remove their profile
+  - delete user row first
+  - create trigger to remove auth.users row
 - Write helper function to ensure that the email is a string:
   const { email } = searchParams ?? {};
 
@@ -16,3 +24,5 @@
 
 - Problem: Not getting emails in Inbucket when using local Supabase.
   - Solution: Open `supabase/config.toml` and make sure that `enable_confirmations` under `[auth.email]` is `true`.
+- Problem: `AuthRetryableFetchError: Failed to fetch` when using local Supabase.
+  - Solution: Make sure that Docker is running
