@@ -10,7 +10,7 @@ const CenterLayout = async ({ children }: Props) => {
     <div className="min-h-screen w-screen xs:bg-grey-50 xs:py-10">
       <div className="mx-auto max-w-sm rounded-lg bg-white p-8 text-center xs:shadow-xl">
         <div className="mb-6 flex justify-center">
-          <Logo size="lg" />
+          <Logo size={40} />
         </div>
         {children}
       </div>

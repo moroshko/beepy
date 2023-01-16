@@ -1,24 +1,17 @@
-type Size = "md" | "lg";
+type Size = 28 | 40;
 
 type Props = {
   size: Size;
 };
 
-const sizeMap: Record<Size, number> = {
-  md: 28,
-  lg: 40,
+const sizeMap: Record<Size, string> = {
+  28: "w-7 h-7",
+  40: "w-10 h-10",
 };
 
 const Logo = ({ size }: Props) => {
-  const sizePx = sizeMap[size];
-
   return (
-    <svg
-      viewBox="0 0 80 80"
-      width={sizePx}
-      height={sizePx}
-      aria-label="Beepy logo"
-    >
+    <svg className={sizeMap[size]} viewBox="0 0 80 80" aria-label="Beepy logo">
       <path
         stroke="currentColor"
         fill="none"

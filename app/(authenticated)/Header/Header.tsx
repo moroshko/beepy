@@ -1,13 +1,13 @@
 "use client";
 
-import { Disclosure, Menu } from "@headlessui/react";
-import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import { Disclosure } from "@headlessui/react";
 import cx from "clsx";
-import { Avatar } from "components/Avatar";
+import { IconButton } from "components/IconButton";
 import { Logo } from "components/Logo";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
-import { useLogout } from "utils/hooks/useLogout";
+import { usePathname } from "next/navigation";
+import { Fragment } from "react";
+import { ProfileMenu } from "./ProfileMenu";
 
 const nav = [
   {
@@ -22,133 +22,68 @@ const nav = [
 
 const Header = () => {
   const pathname = usePathname();
-  const router = useRouter();
-  const logoutMutation = useLogout();
-  const onLogout = async () => {
-    logoutMutation.mutate(undefined, {
-      onSuccess: () => {
-        router.push("/login");
-      },
-      onError: (error) => {
-        console.log(error);
-      },
-    });
-  };
 
   return (
-    <header>
-      <Disclosure as="nav" className="bg-grey-800">
-        {({ open }) => (
-          <>
-            <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
-              <div className="relative flex h-16 items-center justify-between">
-                <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
-                  {/* Mobile menu button*/}
-                  <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2 text-grey-400 hover:bg-grey-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
-                    <span className="sr-only">Open main menu</span>
-                    {open ? (
-                      <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
-                    ) : (
-                      <Bars3Icon className="block h-6 w-6" aria-hidden="true" />
-                    )}
-                  </Disclosure.Button>
-                </div>
-                <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-                  <div className="shrink-0 self-center text-grey-400">
-                    <Logo size="md" />
-                  </div>
-                  <div className="hidden sm:ml-6 sm:block">
-                    <div className="flex space-x-4">
-                      {nav.map(({ name, href }) => {
-                        const isCurrent = href === pathname;
-
-                        return (
-                          <Link
-                            href={href}
-                            className={cx(
-                              "rounded-md px-3 py-2 text-sm font-medium",
-                              isCurrent
-                                ? "bg-grey-900 text-white"
-                                : "text-grey-300 hover:bg-grey-700 hover:text-white"
-                            )}
-                            aria-current={isCurrent ? "page" : undefined}
-                            key={name}
-                          >
-                            {name}
-                          </Link>
-                        );
-                      })}
-                    </div>
-                  </div>
-                </div>
-                <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                  {/* Profile dropdown */}
-                  <Menu as="div" className="relative ml-3">
-                    <div>
-                      <Menu.Button className="flex rounded-full bg-grey-800 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-grey-800">
-                        <span className="sr-only">Open user menu</span>
-                        <Avatar />
-                      </Menu.Button>
-                    </div>
-
-                    <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                      <Menu.Item>
-                        {({ active }) => (
-                          <Link
-                            href="/profile"
-                            className={cx(
-                              "block px-4 py-2 text-sm text-grey-700",
-                              active && "bg-grey-100"
-                            )}
-                          >
-                            Your profile
-                          </Link>
-                        )}
-                      </Menu.Item>
-                      <Menu.Item>
-                        {({ active }) => (
-                          <button
-                            className={cx(
-                              "block w-full px-4 py-2 text-left text-sm text-grey-700",
-                              active && "bg-grey-100"
-                            )}
-                            onClick={onLogout}
-                          >
-                            Log out
-                          </button>
-                        )}
-                      </Menu.Item>
-                    </Menu.Items>
-                  </Menu>
-                </div>
-              </div>
+    <header className="border-b border-b-grey-400 bg-white">
+      <Disclosure as="nav">
+        <div className="mx-auto max-w-5xl px-2">
+          <div className="flex h-16 items-center justify-between">
+            <div className="sm:hidden">
+              <Disclosure.Button as={Fragment}>
+                {({ open }) => (
+                  <IconButton
+                    icon={open ? "XIcon" : "Menu2Icon"}
+                    aria-label={open ? "Close main menu" : "Open main menu"}
+                  />
+                )}
+              </Disclosure.Button>
             </div>
-            <Disclosure.Panel className="sm:hidden">
-              <div className="space-y-1 px-2 pt-2 pb-3">
-                {nav.map(({ name, href }) => {
-                  const isCurrent = href === pathname;
+            <div className="grid h-10 w-10 place-items-center">
+              <Logo size={28} />
+            </div>
+            <div className="ml-10 hidden gap-6 font-medium text-grey-600 sm:flex sm:flex-grow">
+              {nav.map(({ name, href }) => {
+                const isCurrent = href === pathname;
 
-                  return (
-                    <Disclosure.Button
-                      as={Link}
-                      href={href}
-                      className={cx(
-                        "block rounded-md px-3 py-2 text-base font-medium",
-                        isCurrent
-                          ? "bg-grey-900 text-white"
-                          : "text-grey-300 hover:bg-grey-700 hover:text-white"
-                      )}
-                      aria-current={isCurrent ? "page" : undefined}
-                      key={name}
-                    >
-                      {name}
-                    </Disclosure.Button>
-                  );
-                })}
-              </div>
-            </Disclosure.Panel>
-          </>
-        )}
+                return (
+                  <Link
+                    href={href}
+                    className={cx(
+                      "grid h-10 place-items-center rounded px-2 hover:text-primary-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2",
+                      isCurrent && "text-primary-600"
+                    )}
+                    aria-current={isCurrent ? "page" : undefined}
+                    key={name}
+                  >
+                    {name}
+                  </Link>
+                );
+              })}
+            </div>
+            <ProfileMenu />
+          </div>
+        </div>
+        <Disclosure.Panel className="mx-2 mb-2 flex flex-col gap-2 rounded-md bg-grey-100 px-3 py-3 sm:hidden">
+          {nav.map(({ name, href }) => {
+            const isCurrent = href === pathname;
+
+            return (
+              <Disclosure.Button
+                as={Link}
+                href={href}
+                className={cx(
+                  "rounded py-2 px-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2",
+                  isCurrent && "bg-primary-500 text-white",
+                  !isCurrent && "hover:bg-grey-200"
+                )}
+                aria-current={isCurrent ? "page" : undefined}
+                key={name}
+              >
+                {name}
+              </Disclosure.Button>
+            );
+          })}
+        </Disclosure.Panel>
       </Disclosure>
     </header>
   );
