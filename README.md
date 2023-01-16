@@ -19,6 +19,11 @@
 - Write helper function to ensure that the email is a string:
   const { email } = searchParams ?? {};
 
+## Supabase CLI
+
+- `supabase db diff -f create_profiles` - Create migration file (migrations will run on `supabase start`)
+- `supabase db reset` - Reset local db
+
 ## Troubleshooting
 
 - Problem: Not getting emails in Inbucket when using local Supabase.
