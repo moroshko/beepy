@@ -10,8 +10,6 @@
 
 ## TODO
 
-- Change users table to profiles table
-- Add user row when email is confirmed
 - Delete user row when auth user is deleted
 - /profile page when user can remove their profile
   - delete user row first
