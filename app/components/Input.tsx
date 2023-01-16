@@ -24,7 +24,8 @@ const InputComponent = (props: Props, ref: Ref<HTMLInputElement>) => {
       <input
         id={inputId}
         className={cx(
-          "mt-1 w-full rounded border px-3 py-2 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-primary-500",
+          // appearance-none is needed for iOS. See: https://stackoverflow.com/a/15440636/247243
+          "mt-1 w-full appearance-none rounded border px-3 py-2 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-primary-500",
           error
             ? "border-red-600 focus:ring-red-600"
             : "border-grey-600 focus:ring-primary-500"

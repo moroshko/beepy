@@ -10,6 +10,8 @@
 
 ## TODO
 
+- Generate types from supabase
+  - make sure types are generated in github action: https://github.com/supabase/supabase-action-example/blob/main/.github/workflows/ci.yaml
 - Delete user row when auth user is deleted
 - /profile page when user can remove their profile
   - delete user row first

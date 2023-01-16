@@ -1,8 +1,11 @@
 name: ci
+
 on:
   push:
     branches:
       - main
+  workflow_dispatch: # Allow to manually trigger the workflow through the GitHub UI
+
 jobs:
   release:
     runs-on: ubuntu-latest
