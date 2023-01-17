@@ -18,7 +18,6 @@ type Props = {
 };
 
 const IconButtonComponent = (props: Props, ref: Ref<HTMLButtonElement>) => {
-  console.log(props);
   const {
     icon,
     "aria-label": ariaLabel,

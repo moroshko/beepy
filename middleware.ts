@@ -1,13 +1,11 @@
 import { createMiddlewareSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
+import { Database } from "./supabase/types";
 
 export async function middleware(req: NextRequest) {
   const res = NextResponse.next();
-
-  console.log("MIDDLEWARE ----->", req.nextUrl.pathname);
-
-  const supabase = createMiddlewareSupabaseClient({ req, res });
+  const supabase = createMiddlewareSupabaseClient<Database>({ req, res });
   /*const {
     data: { session },
   } =*/ await supabase.auth.getSession();
