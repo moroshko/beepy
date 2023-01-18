@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
 import { serverComponentSupabaseClient } from "utils/supabase/server";
 import { Header } from "./Header/Header";
+import { UserProvider } from "./UserProvider";
 
 type Props = {
   children: ReactNode;
@@ -24,10 +25,10 @@ const AuthenticatedLayout = async ({ children }: Props) => {
   }
 
   return (
-    <>
+    <UserProvider user={user}>
       <Header />
-      {children}
-    </>
+      <div className="mx-auto max-w-5xl px-4 py-8">{children}</div>
+    </UserProvider>
   );
 };
 

@@ -26,7 +26,7 @@ const Header = () => {
   return (
     <header className="border-b border-b-grey-400 bg-white">
       <Disclosure as="nav">
-        <div className="mx-auto max-w-5xl px-2">
+        <div className="mx-auto max-w-5xl px-4">
           <div className="flex h-16 items-center justify-between">
             <div className="sm:hidden">
               <Disclosure.Button as={Fragment}>

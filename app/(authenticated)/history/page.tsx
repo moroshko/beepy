@@ -1,4 +1,4 @@
-const HistoryPage = async () => {
+const HistoryPage = () => {
   return <div>History is coming soon...</div>;
 };
 

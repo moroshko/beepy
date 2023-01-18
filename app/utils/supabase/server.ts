@@ -6,4 +6,8 @@ const serverComponentSupabaseClient = () => {
   return createServerComponentSupabaseClient<Database>({ headers, cookies });
 };
 
+export type ServerComponentSupabaseClient = ReturnType<
+  typeof serverComponentSupabaseClient
+>;
+
 export { serverComponentSupabaseClient };
