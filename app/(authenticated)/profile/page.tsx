@@ -2,6 +2,8 @@ import { transformSupabaseError } from "utils/supabase/error";
 import { serverComponentSupabaseClient } from "utils/supabase/server";
 import { ProfileSections } from "./ProfileSections";
 
+export const dynamic = "force-dynamic";
+
 const ProfilePage = async () => {
   const supabase = serverComponentSupabaseClient();
   const {
@@ -16,8 +18,6 @@ const ProfilePage = async () => {
   if (error !== null) {
     throw transformSupabaseError(error);
   }
-
-  console.log({ data, error });
 
   return (
     <>
