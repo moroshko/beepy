@@ -2,7 +2,8 @@ import { transformSupabaseError } from "utils/supabase/error";
 import { serverComponentSupabaseClient } from "utils/supabase/server";
 import { ProfileSections } from "./ProfileSections";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 0; // I tried setting `export const dynamic = "force-dynamic";` instead, but it worked locally only (didn't work in production).
+// See: https://github.com/vercel/next.js/issues/42991#issuecomment-1367466954
 
 const ProfilePage = async () => {
   const supabase = serverComponentSupabaseClient();

@@ -3,7 +3,7 @@
 import { Menu } from "@headlessui/react";
 import cx from "clsx";
 import { Avatar } from "components/Avatar";
-import Link from "next/link";
+import { DynamicLink } from "components/DynamicLink";
 import { useRouter } from "next/navigation";
 import { useLogout } from "utils/hooks/useLogout";
 
@@ -47,16 +47,19 @@ const ProfileMenu = () => {
           </Menu.Button>
           <Menu.Items className="absolute right-0 z-10 mt-1 min-w-[160px] rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
             <Menu.Item>
-              {({ active }) => (
-                <Link
+              {({ active, close }) => (
+                <DynamicLink
                   href="/profile"
                   className={getMenuItemClasses({
                     itemType: "link",
                     isActive: active,
                   })}
+                  onClick={() => {
+                    close();
+                  }}
                 >
                   Your profile
-                </Link>
+                </DynamicLink>
               )}
             </Menu.Item>
             <Menu.Item>

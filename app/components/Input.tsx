@@ -36,6 +36,7 @@ const InputComponent = (props: Props, ref: Ref<HTMLInputElement>) => {
         {...(error && { "aria-describedby": errorId })}
         onChange={onChange}
         onBlur={onBlur}
+        spellCheck="false"
         ref={ref}
       />
       {error && (
