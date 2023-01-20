@@ -5,7 +5,16 @@ const nextConfig = {
     appDir: true,
   },
   images: {
-    domains: ["localhost", "supabase.co"],
+    remotePatterns: [
+      {
+        hostname: "localhost",
+      },
+      {
+        protocol: "https",
+        hostname: "**.supabase.so",
+        pathname: "/storage/v1/object/public/profiles/**",
+      },
+    ],
   },
 };
 
