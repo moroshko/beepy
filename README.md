@@ -11,7 +11,7 @@
 
 ## TODO
 
-- edit avatar
+- update avatar in the Header when new avatar is saved
 - remove profile
   - delete user row first
   - create trigger to remove auth.users row
@@ -20,6 +20,7 @@
 
 ## Supabase CLI
 
+- `supabase db diff` - Dry run, output migration diff to the console
 - `supabase db diff -f create_profiles` - Create migration file (migrations will run on `supabase start`)
 - `supabase db reset` - Reset local db
 

@@ -1,10 +1,10 @@
 import "./globals.css";
 // This line needs to be empty to keep `globals.css` first!
 import { Inter } from "@next/font/google";
-import { Providers } from "components/Providers";
 import { ReactNode } from "react";
 import "server-only";
 import { SupabaseListener } from "./components/SupabaseListener";
+import { Providers } from "./Providers";
 import { serverComponentSupabaseClient } from "./utils/supabase/server";
 
 const inter = Inter({ subsets: ["latin"] });

@@ -11,6 +11,8 @@ module.exports = {
       grey: colors.gray,
       red: colors.red,
       primary: colors.indigo,
+      success: colors.emerald[600],
+      warning: colors.orange[600],
       error: colors.red[500],
     },
     extend: {

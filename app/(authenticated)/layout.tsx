@@ -1,6 +1,8 @@
 import { ReactNode } from "react";
+import { transformSupabaseError } from "utils/supabase/error";
 import { serverComponentSupabaseClient } from "utils/supabase/server";
 import { Header } from "./Header/Header";
+import { ProfileProvider } from "./ProfileProvider";
 import { UserProvider } from "./UserProvider";
 
 type Props = {
@@ -14,8 +16,7 @@ const AuthenticatedLayout = async ({ children }: Props) => {
   } = await supabase.auth.getUser();
 
   // If the user is logged out, we render null here to avoid having the page below flashing
-  // before the user sees the Login page.
-  // SupabaseListener is responsible for the redirect.
+  // before the user sees the Login page (SupabaseListener is responsible for the redirect).
   // Using server-side redirect (using https://beta.nextjs.org/docs/api-reference/redirect)
   // doesn't work because when the user clicks the confirm email link, the `user` will be null
   // here on the server.
@@ -24,10 +25,32 @@ const AuthenticatedLayout = async ({ children }: Props) => {
     return null;
   }
 
+  const { data: profile, error: profileError } = await supabase
+    .from("profiles")
+    .select("name, avatar")
+    .eq("id", user.id)
+    .single();
+
+  if (profile === null) {
+    throw transformSupabaseError(profileError);
+  }
+
+  let avatarUrl = null;
+
+  if (profile.avatar !== null) {
+    const {
+      data: { publicUrl },
+    } = await supabase.storage.from("profiles").getPublicUrl(profile.avatar);
+
+    avatarUrl = publicUrl;
+  }
+
   return (
     <UserProvider user={user}>
-      <Header />
-      <div className="mx-auto max-w-5xl px-4 py-8">{children}</div>
+      <ProfileProvider profile={{ ...profile, avatarUrl }}>
+        <Header />
+        <div className="mx-auto max-w-5xl px-4 py-8">{children}</div>
+      </ProfileProvider>
     </UserProvider>
   );
 };

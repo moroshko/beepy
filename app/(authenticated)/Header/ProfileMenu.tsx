@@ -1,5 +1,6 @@
 "use client";
 
+import { useProfile } from "(authenticated)/ProfileProvider";
 import { Menu } from "@headlessui/react";
 import cx from "clsx";
 import { Avatar } from "components/Avatar";
@@ -22,6 +23,7 @@ const getMenuItemClasses = ({
 };
 
 const ProfileMenu = () => {
+  const profile = useProfile();
   const router = useRouter();
   const logoutMutation = useLogout();
   const onLogout = async () => {
@@ -43,7 +45,7 @@ const ProfileMenu = () => {
             className="grid h-10 w-10 place-items-center rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2"
             aria-label={open ? "Close profile menu" : "Open profile menu"}
           >
-            <Avatar />
+            <Avatar name={profile.name} url={profile.avatarUrl} />
           </Menu.Button>
           <Menu.Items className="absolute right-0 z-10 mt-1 min-w-[160px] rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
             <Menu.Item>
