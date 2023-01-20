@@ -1,7 +1,7 @@
 "use client";
 
 import { createContext, ReactNode, useContext } from "react";
-import { Database } from "../../supabase/types";
+import { Database } from "utils/supabase/types";
 
 type Profile = Pick<
   Database["public"]["Tables"]["profiles"]["Row"],

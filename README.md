@@ -11,7 +11,8 @@
 
 ## TODO
 
-- Add records
+- Sort records by time created
+- Subscribe to realtime record changes when record is added
 - update avatar in the Header when new avatar is saved
 - remove profile
   - delete user row first

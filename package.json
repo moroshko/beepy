@@ -8,7 +8,7 @@
     "lint": "next lint",
     "tsc": "tsc",
     "prettier": "prettier --write './**/*.{ts,tsx,json,css,md}'",
-    "gen:supabase:types": "supabase gen types typescript --local > ./supabase/types.ts && prettier --write ./supabase/types.ts"
+    "gen:supabase:types": "supabase gen types typescript --local > ./app/utils/supabase/types.ts && prettier --write ./app/utils/supabase/types.ts"
   },
   "dependencies": {
     "@headlessui/react": "1.7.7",

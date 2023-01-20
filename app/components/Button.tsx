@@ -7,6 +7,7 @@ type Props = {
   fullWidth?: boolean;
   disabled?: boolean;
   loading?: boolean;
+  onClick?: () => void;
   children: ReactNode;
 };
 
@@ -16,6 +17,7 @@ const Button = ({
   fullWidth = false,
   disabled = false,
   loading = false,
+  onClick,
   children,
 }: Props) => {
   return (
@@ -34,6 +36,7 @@ const Button = ({
       )}
       disabled={disabled || loading}
       type={type}
+      onClick={onClick}
     >
       {loading && (
         <span className="absolute inset-0 grid place-items-center">

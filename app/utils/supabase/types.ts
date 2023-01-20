@@ -29,6 +29,32 @@ export interface Database {
           name?: string | null;
         };
       };
+      records: {
+        Row: {
+          created_at: string;
+          dia: number;
+          id: string;
+          pulse: number;
+          sys: number;
+          user_id: string;
+        };
+        Insert: {
+          created_at?: string;
+          dia: number;
+          id?: string;
+          pulse: number;
+          sys: number;
+          user_id?: string;
+        };
+        Update: {
+          created_at?: string;
+          dia?: number;
+          id?: string;
+          pulse?: number;
+          sys?: number;
+          user_id?: string;
+        };
+      };
     };
     Views: {
       [_ in never]: never;
