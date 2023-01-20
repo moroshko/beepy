@@ -6,8 +6,6 @@ type Props = {
 };
 
 const Avatar = ({ name, url }: Props) => {
-  console.log({ url });
-
   return (
     <div className="h-7 w-7 overflow-hidden rounded-full border border-grey-200">
       {url === null ? (
