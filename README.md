@@ -11,6 +11,7 @@
 
 ## TODO
 
+- Add records
 - update avatar in the Header when new avatar is saved
 - remove profile
   - delete user row first

@@ -147,14 +147,11 @@ const ProfileSections = () => {
           </div>
         </Form>
       </div>
-      <div className="pt-8">
+      {/* <div className="pt-8">
         <Button variant="danger">Delete my profile</Button>
-      </div>
+      </div> */}
     </div>
   );
 };
-
-// data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=
-// data:[<mediatype>][;base64],<data>
 
 export { ProfileSections };
