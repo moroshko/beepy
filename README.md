@@ -11,8 +11,8 @@
 
 ## TODO
 
-- Sort records by time created
-- Subscribe to realtime record changes when record is added
+- Check that when changing a user, the query cache is emptied
+- Update records table when new record is added
 - update avatar in the Header when new avatar is saved
 - remove profile
   - delete user row first

@@ -8,7 +8,7 @@ const DashboardPage = async () => {
   const {
     data: { user },
   } = await supabase.auth.getUser();
-  const { data: records, error: recordsError } = await supabase
+  const { data: records, error } = await supabase
     .from("records")
     .select("id, sys, dia, pulse, created_at")
     .order("created_at", { ascending: false })
@@ -16,14 +16,12 @@ const DashboardPage = async () => {
     .eq("user_id", user?.id);
 
   if (records === null) {
-    throw transformSupabaseError(recordsError);
+    throw transformSupabaseError(error);
   }
-
-  console.log(records);
 
   return (
     <div className="sm:flex sm:flex-row sm:justify-between">
-      <Records records={records} />
+      <Records initialRecords={records} />
       <div>
         <AddRecordButton />
       </div>

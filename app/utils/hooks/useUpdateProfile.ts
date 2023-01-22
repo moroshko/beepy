@@ -1,3 +1,5 @@
+"use client";
+
 import { useUser } from "(authenticated)/UserProvider";
 import { StorageError } from "@supabase/storage-js";
 import { PostgrestError } from "@supabase/supabase-js";
