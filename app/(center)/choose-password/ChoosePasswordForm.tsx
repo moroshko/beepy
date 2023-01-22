@@ -37,7 +37,7 @@ const ChoosePasswordForm = () => {
 
   return (
     <div className="mt-6">
-      <Form onSubmit={handleSubmit(onSubmit)}>
+      <Form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
         <Input
           label="Password"
           type="password"

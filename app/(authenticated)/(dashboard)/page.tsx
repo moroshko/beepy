@@ -1,6 +1,5 @@
 import { transformSupabaseError } from "utils/supabase/error";
 import { serverComponentSupabaseClient } from "utils/supabase/server";
-import { AddRecordButton } from "./AddRecordButton";
 import { Records } from "./Records";
 
 const DashboardPage = async () => {
@@ -20,11 +19,8 @@ const DashboardPage = async () => {
   }
 
   return (
-    <div className="sm:flex sm:flex-row sm:justify-between">
+    <div className="flex justify-center">
       <Records initialRecords={records} />
-      <div>
-        <AddRecordButton />
-      </div>
     </div>
   );
 };

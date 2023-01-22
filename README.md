@@ -11,6 +11,9 @@
 
 ## TODO
 
+- Restrict typing non-digits
+- Edit record
+- Delete record
 - Try adding fading opacity on the record to highlight time direction
 - Check that when changing a user, the query cache is emptied
 - Update records table when new record is added

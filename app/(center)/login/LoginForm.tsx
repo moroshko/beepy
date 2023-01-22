@@ -40,7 +40,7 @@ const LoginForm = () => {
 
   return (
     <div className="mt-6">
-      <Form onSubmit={handleSubmit(onSubmit)}>
+      <Form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
         <Input
           label="Email"
           type="email"

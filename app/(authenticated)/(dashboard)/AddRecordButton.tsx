@@ -11,7 +11,7 @@ const AddRecordButton = () => {
   const addRecord = async () => {
     const { data, error } = await browserSupabaseClient
       .from("records")
-      .insert([{ sys: 85, dia: 132, pulse: 81 }]);
+      .insert([{ sys: 92, dia: 145, pulse: 124 }]);
 
     console.log({ data, error });
 
