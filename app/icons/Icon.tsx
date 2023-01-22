@@ -1,8 +1,9 @@
 import { ReactNode } from "react";
 
-export type IconSize = 24;
+export type IconSize = 20 | 24;
 
 const sizeMap: Record<IconSize, string> = {
+  20: "w-5 h-5",
   24: "w-6 h-6",
 };
 

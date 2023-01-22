@@ -11,6 +11,7 @@
 
 ## TODO
 
+- Try adding fading opacity on the record to highlight time direction
 - Check that when changing a user, the query cache is emptied
 - Update records table when new record is added
 - update avatar in the Header when new avatar is saved
