@@ -1,6 +1,8 @@
+import { PostgrestError } from "@supabase/supabase-js";
 import { Button } from "components/Button";
 import { Form } from "components/Form";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { useAddRecord } from "utils/hooks/useAddRecord";
 
 type FormInputs = {
   sys: string;
@@ -10,16 +12,29 @@ type FormInputs = {
 
 type Props = {
   onCancel: () => void;
+  onSuccess: () => void;
+  onError: (error: PostgrestError) => void;
 };
 
-const NewRecordForm = ({ onCancel }: Props) => {
+const NewRecordForm = ({ onCancel, onSuccess, onError }: Props) => {
   const {
     register,
     formState: { errors },
     handleSubmit,
   } = useForm<FormInputs>();
+  const addRecordMutation = useAddRecord();
   const onSubmit: SubmitHandler<FormInputs> = ({ sys, dia, pulse }) => {
-    console.log({ sys, dia, pulse });
+    addRecordMutation.mutate(
+      {
+        sys: Number(sys),
+        dia: Number(dia),
+        pulse: Number(pulse),
+      },
+      {
+        onSuccess,
+        onError,
+      }
+    );
   };
 
   return (

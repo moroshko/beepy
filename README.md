@@ -11,6 +11,7 @@
 
 ## TODO
 
+- Record validation
 - Restrict typing non-digits
 - Edit record
 - Delete record
@@ -21,6 +22,7 @@
 - remove profile
   - delete user row first
   - create trigger to remove auth.users row
+- Import existing data
 - Write helper function to ensure that the email is a string:
   const { email } = searchParams ?? {};
 
