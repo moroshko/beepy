@@ -11,8 +11,8 @@
 
 ## TODO
 
-- Restrict typing non-digits
 - Auto move cursor to next input
+- More mobile friendly
 - Edit record
 - Delete record
 - Try adding fading opacity on the record to highlight time direction
