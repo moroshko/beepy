@@ -1,8 +1,10 @@
 import { PostgrestError } from "@supabase/supabase-js";
+import cx from "clsx";
 import { Button } from "components/Button";
 import { Form } from "components/Form";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useAddRecord } from "utils/hooks/useAddRecord";
+import { isDiaValid, isPulseValid, isSysValid } from "./utils";
 
 type FormInputs = {
   sys: string;
@@ -45,11 +47,21 @@ const NewRecordForm = ({ onCancel, onSuccess, onError }: Props) => {
         </label>
         <input
           id="new-record-sys"
-          className="ml-2 w-[72px] rounded bg-grey-100 py-2 pl-2 pr-4 text-right tabular-nums focus:border-transparent focus:bg-white focus:outline-none focus:ring-2 focus:ring-primary-500"
+          // appearance-none is needed for iOS. See: https://stackoverflow.com/a/15440636/247243
+          className={cx(
+            "ml-2 h-10 w-[72px] appearance-none rounded border py-2 pl-2 pr-4 text-right tabular-nums focus:border-transparent focus:outline-none focus:ring-2",
+            errors.sys
+              ? "border-red-600 focus:ring-red-600"
+              : "border-grey-600 focus:ring-primary-500"
+          )}
           type="text"
           maxLength={3}
           autoFocus
-          {...register("sys")}
+          {...register("sys", {
+            validate: (sys) => {
+              return isSysValid(sys) ? undefined : "Invalid";
+            },
+          })}
         />
       </div>
       <div>
@@ -58,10 +70,20 @@ const NewRecordForm = ({ onCancel, onSuccess, onError }: Props) => {
         </label>
         <input
           id="new-record-dia"
-          className="ml-2 w-[72px] rounded bg-grey-100 py-2 pl-2 pr-4 text-right tabular-nums focus:border-transparent focus:bg-white focus:outline-none focus:ring-2 focus:ring-primary-500"
+          // appearance-none is needed for iOS. See: https://stackoverflow.com/a/15440636/247243
+          className={cx(
+            "ml-2 h-10 w-[72px] appearance-none rounded border py-2 pl-2 pr-4 text-right tabular-nums focus:border-transparent focus:outline-none focus:ring-2",
+            errors.dia
+              ? "border-red-600 focus:ring-red-600"
+              : "border-grey-600 focus:ring-primary-500"
+          )}
           type="text"
           maxLength={3}
-          {...register("dia")}
+          {...register("dia", {
+            validate: (dia) => {
+              return isDiaValid(dia) ? undefined : "Invalid";
+            },
+          })}
         />
       </div>
       <div>
@@ -70,10 +92,20 @@ const NewRecordForm = ({ onCancel, onSuccess, onError }: Props) => {
         </label>
         <input
           id="new-record-pulse"
-          className="ml-2 w-[72px] rounded bg-grey-100 py-2 pl-2 pr-4 text-right tabular-nums focus:border-transparent focus:bg-white focus:outline-none focus:ring-2 focus:ring-primary-500"
+          // appearance-none is needed for iOS. See: https://stackoverflow.com/a/15440636/247243
+          className={cx(
+            "ml-2 h-10 w-[72px] appearance-none rounded border py-2 pl-2 pr-4 text-right tabular-nums focus:border-transparent focus:outline-none focus:ring-2",
+            errors.pulse
+              ? "border-red-600 focus:ring-red-600"
+              : "border-grey-600 focus:ring-primary-500"
+          )}
           type="text"
           maxLength={3}
-          {...register("pulse")}
+          {...register("pulse", {
+            validate: (pulse) => {
+              return isPulseValid(pulse) ? undefined : "Invalid";
+            },
+          })}
         />
       </div>
       <div className="ml-4 flex w-[168px] items-center">
