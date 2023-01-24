@@ -4,7 +4,7 @@ import { Button } from "components/Button";
 import { Form } from "components/Form";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useAddRecord } from "utils/hooks/useAddRecord";
-import { isDiaValid, isPulseValid, isSysValid } from "./utils";
+import { isCodeAllowed, isDiaValid, isPulseValid, isSysValid } from "./utils";
 
 type FormInputs = {
   sys: string;
@@ -56,7 +56,13 @@ const NewRecordForm = ({ onCancel, onSuccess, onError }: Props) => {
           )}
           type="text"
           maxLength={3}
+          inputMode="numeric"
           autoFocus
+          onKeyDown={(e) => {
+            if (!isCodeAllowed(e.code)) {
+              e.preventDefault();
+            }
+          }}
           {...register("sys", {
             validate: (sys) => {
               return isSysValid(sys) ? undefined : "Invalid";
@@ -79,6 +85,12 @@ const NewRecordForm = ({ onCancel, onSuccess, onError }: Props) => {
           )}
           type="text"
           maxLength={3}
+          inputMode="numeric"
+          onKeyDown={(e) => {
+            if (!isCodeAllowed(e.code)) {
+              e.preventDefault();
+            }
+          }}
           {...register("dia", {
             validate: (dia) => {
               return isDiaValid(dia) ? undefined : "Invalid";
@@ -101,6 +113,12 @@ const NewRecordForm = ({ onCancel, onSuccess, onError }: Props) => {
           )}
           type="text"
           maxLength={3}
+          inputMode="numeric"
+          onKeyDown={(e) => {
+            if (!isCodeAllowed(e.code)) {
+              e.preventDefault();
+            }
+          }}
           {...register("pulse", {
             validate: (pulse) => {
               return isPulseValid(pulse) ? undefined : "Invalid";
