@@ -23,12 +23,14 @@ const Records = ({ initialRecords }: Props) => {
   });
 
   return (
-    <div className="divide-y divide-grey-200 rounded border border-grey-200">
+    <div className="divide-y divide-grey-200 rounded border-grey-200 xs:border">
       <div className="flex text-sm font-medium uppercase text-grey-500">
-        <div className="w-20 px-4 py-3 text-right">Sys</div>
-        <div className="w-20 px-4 py-3 text-right">Dia</div>
-        <div className="w-20 px-4 py-3 text-right">Pulse</div>
-        <div className="w-[184px] px-4 py-3 text-left">Time</div>
+        <div className="w-14 px-2 py-3 text-right xs:w-20 xs:px-4">Sys</div>
+        <div className="w-14 px-2 py-3 text-right xs:w-20 xs:px-4">Dia</div>
+        <div className="w-14 px-2 py-3 text-right xs:w-20 xs:px-4">Pulse</div>
+        <div className="w-[160px] px-2 py-3 text-left xs:w-[184px] xs:px-4">
+          Time
+        </div>
       </div>
       {(addRecordState.type === "adding" ||
         addRecordState.type === "error") && (
@@ -80,13 +82,19 @@ const Records = ({ initialRecords }: Props) => {
       {(records ?? []).map(({ id, sys, dia, pulse, created_at }) => {
         return (
           <div
-            className="flex cursor-pointer tabular-nums hover:bg-grey-50"
+            className="flex cursor-pointer items-baseline tabular-nums hover:bg-grey-50"
             key={id}
           >
-            <div className="w-20 px-4 py-3 text-right">{sys}</div>
-            <div className="w-20 px-4 py-3 text-right">{dia}</div>
-            <div className="w-20 px-4 py-3 text-right">{pulse}</div>
-            <div className="w-[184px] px-4 py-3 font-light text-grey-600">
+            <div className="w-14 px-2 py-3 text-right xs:w-20 xs:px-4">
+              {sys}
+            </div>
+            <div className="w-14 px-2 py-3 text-right xs:w-20 xs:px-4">
+              {dia}
+            </div>
+            <div className="w-14 px-2 py-3 text-right xs:w-20 xs:px-4">
+              {pulse}
+            </div>
+            <div className="w-[160px] px-2 py-3 text-sm font-light text-grey-600 xs:w-[184px] xs:px-4">
               {formatDate(created_at)}
             </div>
           </div>

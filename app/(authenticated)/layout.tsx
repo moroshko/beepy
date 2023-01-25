@@ -49,7 +49,7 @@ const AuthenticatedLayout = async ({ children }: Props) => {
     <UserProvider user={user}>
       <ProfileProvider profile={{ ...profile, avatarUrl }}>
         <Header />
-        <div className="mx-auto max-w-5xl px-4 py-8">{children}</div>
+        <div className="mx-auto max-w-5xl px-4 py-4 xs:py-8">{children}</div>
       </ProfileProvider>
     </UserProvider>
   );

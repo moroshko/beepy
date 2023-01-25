@@ -9,10 +9,10 @@ import {
 type Props = {
   icon: IconName;
   "aria-label": string;
+  onClick?: MouseEventHandler<HTMLButtonElement>;
   // The props below are provided by `Disclosure.Button`
   "aria-expanded"?: boolean;
   id?: string;
-  onClick?: MouseEventHandler<HTMLButtonElement>;
   onKeyDown?: KeyboardEventHandler<HTMLButtonElement>;
   onKeyUp?: KeyboardEventHandler<HTMLButtonElement>;
 };
