@@ -1,5 +1,5 @@
 import cx from "clsx";
-import { ReactNode } from "react";
+import { forwardRef, ReactNode, Ref } from "react";
 
 type Props = {
   variant?: "primary" | "danger";
@@ -11,15 +11,17 @@ type Props = {
   children: ReactNode;
 };
 
-const Button = ({
-  variant = "primary",
-  type = "button",
-  fullWidth = false,
-  disabled = false,
-  loading = false,
-  onClick,
-  children,
-}: Props) => {
+const ButtonComponent = (props: Props, ref: Ref<HTMLButtonElement>) => {
+  const {
+    variant = "primary",
+    type = "button",
+    fullWidth = false,
+    disabled = false,
+    loading = false,
+    onClick,
+    children,
+  } = props;
+
   return (
     <button
       className={cx(
@@ -37,6 +39,7 @@ const Button = ({
       disabled={disabled || loading}
       type={type}
       onClick={onClick}
+      ref={ref}
     >
       {loading && (
         <span className="absolute inset-0 grid place-items-center">
@@ -50,5 +53,7 @@ const Button = ({
     </button>
   );
 };
+
+const Button = forwardRef(ButtonComponent);
 
 export { Button };

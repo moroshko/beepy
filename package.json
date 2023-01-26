@@ -12,7 +12,6 @@
   },
   "dependencies": {
     "@headlessui/react": "1.7.7",
-    "@heroicons/react": "2.0.13",
     "@next/font": "13.1.5",
     "@supabase/auth-helpers-nextjs": "0.5.4",
     "@supabase/supabase-js": "2.4.1",

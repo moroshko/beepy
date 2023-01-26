@@ -11,7 +11,6 @@
 
 ## TODO
 
-- Auto move cursor to next input
 - Edit record
 - Delete record
 - Try adding fading opacity on the record to highlight time direction

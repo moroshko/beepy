@@ -3,6 +3,7 @@ import cx from "clsx";
 import { Button } from "components/Button";
 import { Form } from "components/Form";
 import { IconButton } from "components/IconButton";
+import { SyntheticEvent, useRef } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useAddRecord } from "utils/hooks/useAddRecord";
 import { isCodeAllowed, isDiaValid, isPulseValid, isSysValid } from "./utils";
@@ -22,9 +23,11 @@ type Props = {
 const NewRecordForm = ({ onCancel, onSuccess, onError }: Props) => {
   const {
     register,
+    setFocus,
     formState: { errors },
     handleSubmit,
   } = useForm<FormInputs>();
+  const addButtonRef = useRef<HTMLButtonElement | null>(null);
   const addRecordMutation = useAddRecord();
   const onSubmit: SubmitHandler<FormInputs> = ({ sys, dia, pulse }) => {
     addRecordMutation.mutate(
@@ -68,6 +71,13 @@ const NewRecordForm = ({ onCancel, onSuccess, onError }: Props) => {
             validate: (sys) => {
               return isSysValid(sys) ? undefined : "Invalid";
             },
+            onChange: (e: SyntheticEvent<HTMLInputElement>) => {
+              const newSys = e.currentTarget.value;
+
+              if (isSysValid(newSys)) {
+                setFocus("dia", { shouldSelect: true });
+              }
+            },
           })}
         />
       </div>
@@ -95,6 +105,13 @@ const NewRecordForm = ({ onCancel, onSuccess, onError }: Props) => {
           {...register("dia", {
             validate: (dia) => {
               return isDiaValid(dia) ? undefined : "Invalid";
+            },
+            onChange: (e: SyntheticEvent<HTMLInputElement>) => {
+              const newDia = e.currentTarget.value;
+
+              if (isDiaValid(newDia)) {
+                setFocus("pulse", { shouldSelect: true });
+              }
             },
           })}
         />
@@ -124,12 +141,19 @@ const NewRecordForm = ({ onCancel, onSuccess, onError }: Props) => {
             validate: (pulse) => {
               return isPulseValid(pulse) ? undefined : "Invalid";
             },
+            onChange: (e: SyntheticEvent<HTMLInputElement>) => {
+              const newPulse = e.currentTarget.value;
+
+              if (isPulseValid(newPulse)) {
+                addButtonRef.current?.focus();
+              }
+            },
           })}
         />
       </div>
       <div className="ml-2 flex items-center gap-2 xs:ml-4">
         <div className="w-20">
-          <Button type="submit" fullWidth>
+          <Button type="submit" fullWidth ref={addButtonRef}>
             Add
           </Button>
         </div>
