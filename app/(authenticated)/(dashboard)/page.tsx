@@ -1,4 +1,4 @@
-import { transformSupabaseError } from "utils/supabase/error";
+import { transformSupabaseError } from "utils/supabase/error_";
 import { serverComponentSupabaseClient } from "utils/supabase/server";
 import { Records } from "./Records";
 
@@ -19,7 +19,7 @@ const DashboardPage = async () => {
   }
 
   return (
-    <div className="flex justify-center">
+    <div className="-mx-4 -mt-4 flex justify-center xs:mx-0 xs:mt-0">
       <Records initialRecords={initialRecords} />
     </div>
   );

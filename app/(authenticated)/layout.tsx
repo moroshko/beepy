@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { transformSupabaseError } from "utils/supabase/error";
+import { transformSupabaseError } from "utils/supabase/error_";
 import { serverComponentSupabaseClient } from "utils/supabase/server";
 import { Header } from "./Header/Header";
 import { ProfileProvider } from "./ProfileProvider";

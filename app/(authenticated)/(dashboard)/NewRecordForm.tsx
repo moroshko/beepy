@@ -16,7 +16,7 @@ type FormInputs = {
 
 type Props = {
   onCancel: () => void;
-  onSuccess: () => void;
+  onSuccess: (id: string) => void;
   onError: (error: PostgrestError) => void;
 };
 
@@ -37,15 +37,17 @@ const NewRecordForm = ({ onCancel, onSuccess, onError }: Props) => {
         pulse: Number(pulse),
       },
       {
-        onSuccess,
+        onSuccess: ({ id }) => {
+          onSuccess(id);
+        },
         onError,
       }
     );
   };
 
   return (
-    <Form className="flex py-2" onSubmit={handleSubmit(onSubmit)}>
-      <div>
+    <Form className="flex bg-primary-50 py-2" onSubmit={handleSubmit(onSubmit)}>
+      <div className="w-1/6 pl-2">
         <label className="sr-only" htmlFor="new-record-sys">
           Sys
         </label>
@@ -53,7 +55,7 @@ const NewRecordForm = ({ onCancel, onSuccess, onError }: Props) => {
           id="new-record-sys"
           // appearance-none is needed for iOS. See: https://stackoverflow.com/a/15440636/247243
           className={cx(
-            "ml-2 h-10 w-12 appearance-none rounded border py-2 pr-2 text-right tabular-nums focus:border-transparent focus:outline-none focus:ring-2 xs:w-[72px] xs:pr-4",
+            "h-10 w-full appearance-none rounded border py-2 pr-2 text-right tabular-nums focus:border-transparent focus:outline-none focus:ring-2 xs:pr-4",
             errors.sys
               ? "border-red-600 focus:ring-red-600"
               : "border-grey-600 focus:ring-primary-500"
@@ -81,7 +83,7 @@ const NewRecordForm = ({ onCancel, onSuccess, onError }: Props) => {
           })}
         />
       </div>
-      <div>
+      <div className="w-1/6 pl-2">
         <label className="sr-only" htmlFor="new-record-dia">
           Dia
         </label>
@@ -89,7 +91,7 @@ const NewRecordForm = ({ onCancel, onSuccess, onError }: Props) => {
           id="new-record-dia"
           // appearance-none is needed for iOS. See: https://stackoverflow.com/a/15440636/247243
           className={cx(
-            "ml-2 h-10 w-12 appearance-none rounded border py-2 pr-2 text-right tabular-nums focus:border-transparent focus:outline-none focus:ring-2 xs:w-[72px] xs:pr-4",
+            "h-10 w-full appearance-none rounded border py-2 pr-2 text-right tabular-nums focus:border-transparent focus:outline-none focus:ring-2 xs:pr-4",
             errors.dia
               ? "border-red-600 focus:ring-red-600"
               : "border-grey-600 focus:ring-primary-500"
@@ -116,7 +118,7 @@ const NewRecordForm = ({ onCancel, onSuccess, onError }: Props) => {
           })}
         />
       </div>
-      <div>
+      <div className="w-1/6 pl-2">
         <label className="sr-only" htmlFor="new-record-pulse">
           Pulse
         </label>
@@ -124,7 +126,7 @@ const NewRecordForm = ({ onCancel, onSuccess, onError }: Props) => {
           id="new-record-pulse"
           // appearance-none is needed for iOS. See: https://stackoverflow.com/a/15440636/247243
           className={cx(
-            "ml-2 h-10 w-12 appearance-none rounded border py-2 pr-2 text-right tabular-nums focus:border-transparent focus:outline-none focus:ring-2 xs:w-[72px] xs:pr-4",
+            "h-10 w-full appearance-none rounded border py-2 pr-2 text-right tabular-nums focus:border-transparent focus:outline-none focus:ring-2 xs:pr-4",
             errors.pulse
               ? "border-red-600 focus:ring-red-600"
               : "border-grey-600 focus:ring-primary-500"
@@ -151,7 +153,7 @@ const NewRecordForm = ({ onCancel, onSuccess, onError }: Props) => {
           })}
         />
       </div>
-      <div className="ml-2 flex items-center gap-2 xs:ml-4">
+      <div className="flex w-3/6 items-center gap-2 pl-6 xs:pl-4">
         <div className="w-20">
           <Button type="submit" fullWidth ref={addButtonRef}>
             Add

@@ -11,18 +11,18 @@
     "gen:supabase:types": "supabase gen types typescript --local > ./app/utils/supabase/types.ts && prettier --write ./app/utils/supabase/types.ts"
   },
   "dependencies": {
-    "@headlessui/react": "1.7.7",
-    "@next/font": "13.1.5",
+    "@headlessui/react": "1.7.8",
+    "@next/font": "13.1.6",
     "@supabase/auth-helpers-nextjs": "0.5.4",
-    "@supabase/supabase-js": "2.4.1",
+    "@supabase/supabase-js": "2.5.0",
     "@tanstack/react-query": "4.23.0",
     "@types/node": "18.11.18",
     "@types/react": "18.0.27",
     "@types/react-dom": "18.0.10",
     "clsx": "1.2.1",
-    "eslint": "8.32.0",
-    "eslint-config-next": "13.1.5",
-    "next": "13.1.5",
+    "eslint": "8.33.0",
+    "eslint-config-next": "13.1.6",
+    "next": "13.1.6",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-dropzone": "14.2.3",
@@ -31,7 +31,7 @@
     "typescript": "4.9.4"
   },
   "devDependencies": {
-    "@tanstack/eslint-plugin-query": "4.21.0",
+    "@tanstack/eslint-plugin-query": "4.24.0",
     "autoprefixer": "10.4.13",
     "postcss": "8.4.21",
     "prettier": "2.8.3",

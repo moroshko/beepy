@@ -8,18 +8,26 @@ type Params = {
   pulse: number;
 };
 
+type SuccessResponse = {
+  id: string;
+};
+
 export const useAddRecord = () => {
-  return useMutation<undefined, PostgrestError, Params>(
+  return useMutation<SuccessResponse, PostgrestError, Params>(
     async ({ sys, dia, pulse }) => {
-      const { error } = await browserSupabaseClient
+      const { data, error } = await browserSupabaseClient
         .from("records")
-        .insert([{ sys, dia, pulse }]);
+        .insert([{ sys, dia, pulse }])
+        .select()
+        .single();
 
       if (error !== null) {
         throw error;
       }
 
-      return undefined;
+      return {
+        id: data.id,
+      };
     }
   );
 };

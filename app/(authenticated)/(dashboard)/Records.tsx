@@ -1,12 +1,13 @@
 "use client";
 
 import { useUser } from "(authenticated)/UserProvider";
+import cx from "clsx";
 import { PlusIcon } from "icons";
 import { useReducer } from "react";
 import { BloodPressureRecord } from "types";
 import { formatDate } from "utils/date";
 import { useRecords, useRefetchRecords } from "utils/hooks/useRecords";
-import { transformSupabaseError } from "utils/supabase/error";
+import { transformSupabaseError } from "utils/supabase/error_";
 import { NewRecordForm } from "./NewRecordForm";
 import { addRecordReducer } from "./utils";
 
@@ -20,32 +21,25 @@ const Records = ({ initialRecords }: Props) => {
   const { data: records } = useRecords(user.id, { initialRecords });
   const [addRecordState, dispatch] = useReducer(addRecordReducer, {
     type: "initial",
+    highlightedIds: [],
   });
 
   return (
-    <div className="divide-y divide-grey-200 rounded border-grey-200 xs:border">
-      <div className="flex text-sm font-medium uppercase text-grey-500">
-        <div className="w-14 px-2 py-3 text-right xs:w-20 xs:px-4">Sys</div>
-        <div className="w-14 px-2 py-3 text-right xs:w-20 xs:px-4">Dia</div>
-        <div className="w-14 px-2 py-3 text-right xs:w-20 xs:px-4">Pulse</div>
-        <div className="w-[160px] px-2 py-3 text-left xs:w-[184px] xs:px-4">
-          Time
-        </div>
-      </div>
+    <div className="w-full divide-y divide-grey-200 rounded border-grey-200 xs:w-[420px] xs:border">
       {(addRecordState.type === "adding" ||
         addRecordState.type === "error") && (
-        <div>
+        <>
           <NewRecordForm
             onCancel={() => {
               dispatch({ type: "cancel" });
             }}
-            onSuccess={() => {
+            onSuccess={(id) => {
               refetchRecords();
 
-              dispatch({ type: "success" });
+              dispatch({ type: "success", id });
 
               setTimeout(() => {
-                dispatch({ type: "success-timeout" });
+                dispatch({ type: "success-timeout", id });
               }, 3000);
             }}
             onError={(error) => {
@@ -60,7 +54,7 @@ const Records = ({ initialRecords }: Props) => {
               {addRecordState.error}
             </div>
           )}
-        </div>
+        </>
       )}
       {addRecordState.type === "initial" && (
         <button
@@ -79,22 +73,25 @@ const Records = ({ initialRecords }: Props) => {
       {addRecordState.type === "added" && (
         <div className="py-4 text-center text-success">Added!</div>
       )}
+      <div className="flex text-sm font-medium uppercase text-grey-500">
+        <div className="w-1/6 py-3 pr-2 text-right xs:pr-4">Sys</div>
+        <div className="w-1/6 py-3 pr-2 text-right xs:pr-4">Dia</div>
+        <div className="w-1/6 py-3 pr-2 text-right xs:pr-4">Pulse</div>
+        <div className="w-3/6 py-3 pl-6 xs:pl-4">Time</div>
+      </div>
       {(records ?? []).map(({ id, sys, dia, pulse, created_at }) => {
         return (
           <div
-            className="flex cursor-pointer items-baseline tabular-nums hover:bg-grey-50"
+            className={cx(
+              "flex cursor-pointer items-baseline tabular-nums hover:bg-grey-50",
+              addRecordState.highlightedIds.includes(id) && "bg-primary-50"
+            )}
             key={id}
           >
-            <div className="w-14 px-2 py-3 text-right xs:w-20 xs:px-4">
-              {sys}
-            </div>
-            <div className="w-14 px-2 py-3 text-right xs:w-20 xs:px-4">
-              {dia}
-            </div>
-            <div className="w-14 px-2 py-3 text-right xs:w-20 xs:px-4">
-              {pulse}
-            </div>
-            <div className="w-[160px] px-2 py-3 text-sm font-light text-grey-600 xs:w-[184px] xs:px-4">
+            <div className="w-1/6 py-3 pr-2 text-right xs:pr-4">{sys}</div>
+            <div className="w-1/6 py-3 pr-2 text-right xs:pr-4">{dia}</div>
+            <div className="w-1/6 py-3 pr-2 text-right xs:pr-4">{pulse}</div>
+            <div className="w-3/6 py-3 pl-6 text-sm font-light text-grey-600 xs:pl-4">
               {formatDate(created_at)}
             </div>
           </div>

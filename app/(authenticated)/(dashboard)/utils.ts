@@ -50,7 +50,7 @@ export const isRecordValid = ({
   return isSysValid(sys) && isDiaValid(dia) && isPulseValid(pulse);
 };
 
-type AddRecordState =
+type AddRecordState = (
   | {
       type: "initial";
     }
@@ -63,13 +63,16 @@ type AddRecordState =
   | {
       type: "error";
       error: string;
-    };
+    }
+) & {
+  highlightedIds: string[];
+};
 
 type AddRecordAction =
   | { type: "add" }
   | { type: "cancel" }
-  | { type: "success" }
-  | { type: "success-timeout" }
+  | { type: "success"; id: string }
+  | { type: "success-timeout"; id: string }
   | { type: "error"; error: string };
 
 export const addRecordReducer = (
@@ -79,26 +82,31 @@ export const addRecordReducer = (
   switch (action.type) {
     case "add": {
       return {
+        ...state,
         type: "adding",
       };
     }
     case "cancel": {
       return {
+        ...state,
         type: "initial",
       };
     }
     case "success": {
       return {
+        ...state,
         type: "added",
+        highlightedIds: state.highlightedIds.concat(action.id),
       };
     }
     case "success-timeout": {
       return {
         type: "initial",
+        highlightedIds: state.highlightedIds.filter((id) => id !== action.id),
       };
     }
     case "error": {
-      return action;
+      return state;
     }
   }
 };
