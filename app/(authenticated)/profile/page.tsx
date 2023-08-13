@@ -1,19 +1,23 @@
-import { serverComponentSupabaseClient } from "utils/supabase/server";
-import { ProfileSections } from "./ProfileSections";
+import { currentUser } from "@clerk/nextjs";
+import { redirect } from "next/navigation";
+import { ProfileSections } from "./components/ProfileSections";
 
 // export const revalidate = 0; // I tried setting `export const dynamic = "force-dynamic";` instead, but it worked locally only (didn't work in production).
 // See: https://github.com/vercel/next.js/issues/42991#issuecomment-1367466954
 
 const ProfilePage = async () => {
-  const supabase = serverComponentSupabaseClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const user = await currentUser();
+
+  if (user === null) {
+    redirect("/login");
+  }
+
+  const userEmail = user.emailAddresses[0].emailAddress;
 
   return (
     <>
       <h1 className="text-xl font-medium">Profile</h1>
-      <p className="mt-2 mb-6 text-grey-500">{`You are logged in as ${user?.email}`}</p>
+      <p className="mb-6 mt-2 text-grey-500">{`You are logged in as ${userEmail}`}</p>
       <ProfileSections />
     </>
   );

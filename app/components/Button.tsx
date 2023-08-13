@@ -1,5 +1,5 @@
 import cx from "clsx";
-import { forwardRef, ReactNode, Ref } from "react";
+import { ElementRef, forwardRef, ReactNode, Ref } from "react";
 
 type Props = {
   variant?: "primary" | "danger";
@@ -11,7 +11,7 @@ type Props = {
   children: ReactNode;
 };
 
-const ButtonComponent = (props: Props, ref: Ref<HTMLButtonElement>) => {
+const ButtonComponent = (props: Props, ref: Ref<ElementRef<"button">>) => {
   const {
     variant = "primary",
     type = "button",
@@ -25,7 +25,7 @@ const ButtonComponent = (props: Props, ref: Ref<HTMLButtonElement>) => {
   return (
     <button
       className={cx(
-        "relative rounded py-2 px-3 text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2",
+        "relative rounded px-3 py-2 text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2",
         variant === "primary" && "bg-primary-500",
         variant === "primary" &&
           !disabled &&

@@ -8,35 +8,37 @@
     "lint": "next lint",
     "tsc": "tsc",
     "prettier": "prettier --write './**/*.{ts,tsx,json,css,md}'",
-    "gen:supabase:types": "supabase gen types typescript --local > ./app/utils/supabase/types.ts && prettier --write ./app/utils/supabase/types.ts"
+    "env": "vercel env pull .env.local",
+    "introspect": "drizzle-kit introspect:pg",
+    "generate": "drizzle-kit generate:pg"
   },
   "dependencies": {
+    "@clerk/nextjs": "4.23.2",
     "@headlessui/react": "1.7.16",
-    "@next/font": "13.4.12",
-    "@supabase/auth-helpers-nextjs": "0.7.4",
-    "@supabase/supabase-js": "2.31.0",
-    "@tanstack/react-query": "4.32.1",
-    "@types/node": "20.4.6",
-    "@types/react": "18.2.18",
-    "@types/react-dom": "18.2.7",
+    "@neondatabase/serverless": "0.5.7",
+    "@tanstack/react-query": "5.0.0-beta.15",
     "clsx": "2.0.0",
-    "eslint": "8.46.0",
-    "eslint-config-next": "13.4.12",
-    "next": "13.4.12",
+    "drizzle-orm": "0.28.2",
+    "next": "13.4.14-canary.2",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-dropzone": "14.2.3",
-    "react-hook-form": "7.45.2",
-    "server-only": "0.0.1",
-    "typescript": "5.1.6"
+    "react-hook-form": "7.45.4"
   },
   "devDependencies": {
-    "@tanstack/eslint-plugin-query": "4.32.1",
+    "@types/node": "20.4.10",
+    "@types/react": "18.2.20",
+    "@types/react-dom": "18.2.7",
     "autoprefixer": "10.4.14",
+    "dotenv": "16.3.1",
+    "drizzle-kit": "0.19.12",
+    "eslint": "8.47.0",
+    "eslint-config-next": "13.4.14-canary.2",
     "postcss": "8.4.27",
-    "prettier": "3.0.0",
-    "prettier-plugin-tailwindcss": "0.4.1",
-    "tailwindcss": "3.3.3"
+    "prettier": "3.0.1",
+    "prettier-plugin-tailwindcss": "0.5.2",
+    "tailwindcss": "3.3.3",
+    "typescript": "5.1.6"
   },
   "license": "MIT"
 }

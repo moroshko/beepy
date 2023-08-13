@@ -1,20 +1,38 @@
 import cx from "clsx";
-import { ChangeEvent, FocusEvent, forwardRef, Ref, useId } from "react";
+import {
+  ChangeEvent,
+  ElementRef,
+  FocusEvent,
+  Ref,
+  forwardRef,
+  useId,
+} from "react";
 
 type Props = {
-  type?: "text" | "email" | "password";
+  type?: "text" | "email";
   label: string;
   placeholder?: string;
+  inputMode?: "numeric";
   error?: string;
-  name?: string;
+  name: string;
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
   onBlur?: (e: FocusEvent<HTMLInputElement, Element>) => void;
 };
 
-const InputComponent = (props: Props, ref: Ref<HTMLInputElement>) => {
-  const { type, label, placeholder, error, name, onChange, onBlur } = props;
-  const inputId = useId();
-  const errorId = useId();
+const InputComponent = (props: Props, ref: Ref<ElementRef<"input">>) => {
+  const {
+    type = "text",
+    label,
+    placeholder,
+    inputMode,
+    error,
+    name,
+    onChange,
+    onBlur,
+  } = props;
+  const id = useId();
+  const inputId = `${id}-input`;
+  const errorId = `${id}-error`;
 
   return (
     <div className="w-full text-left">
@@ -30,9 +48,10 @@ const InputComponent = (props: Props, ref: Ref<HTMLInputElement>) => {
             ? "border-red-600 focus:ring-red-600"
             : "border-grey-600 focus:ring-primary-500"
         )}
-        name={name}
         type={type}
+        name={name}
         placeholder={placeholder}
+        inputMode={inputMode}
         {...(error && { "aria-describedby": errorId })}
         onChange={onChange}
         onBlur={onBlur}

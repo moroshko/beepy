@@ -10,15 +10,17 @@ jobs:
   release:
     runs-on: ubuntu-latest
 
-    env:
-      PROJECT_ID: wawyqknllvxhusqpvcgr
-      SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
-      SUPABASE_DB_PASSWORD: ${{ secrets.PRODUCTION_DB_PASSWORD }}
-
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v3
 
-      - uses: supabase/setup-cli@v1
+      - name: Set up node
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18.x"
 
-      - run: supabase link --project-ref $PROJECT_ID
-      - run: supabase db push
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Check types
+        run: yarn tsc
