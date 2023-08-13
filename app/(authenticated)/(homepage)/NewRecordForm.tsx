@@ -1,12 +1,12 @@
-import { PostgrestError } from "@supabase/supabase-js";
-import { useAddRecord } from "_utils/hooks/useAddRecord";
-import cx from "clsx";
-import { Button } from "components/Button";
-import { Form } from "components/Form";
-import { IconButton } from "components/IconButton";
-import { SyntheticEvent, useRef } from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
-import { isCodeAllowed, isDiaValid, isPulseValid, isSysValid } from "./utils";
+// import { PostgrestError } from "@supabase/supabase-js";
+// import { useAddRecord } from "_utils/hooks/useAddRecord";
+// import cx from "clsx";
+// import { Button } from "components/Button";
+// import { Form } from "components/Form";
+// import { IconButton } from "components/IconButton";
+// import { SyntheticEvent, useRef } from "react";
+// import { SubmitHandler, useForm } from "react-hook-form";
+// import { isCodeAllowed, isDiaValid, isPulseValid, isSysValid } from "./utils";
 
 type FormInputs = {
   sys: string;
@@ -17,10 +17,11 @@ type FormInputs = {
 type Props = {
   onCancel: () => void;
   onSuccess: (id: string) => void;
-  onError: (error: PostgrestError) => void;
+  // onError: (error: PostgrestError) => void;
 };
 
-const NewRecordForm = ({ onCancel, onSuccess, onError }: Props) => {
+const NewRecordForm = ({ onCancel, onSuccess /*, onError*/ }: Props) => {
+  /*
   const {
     register,
     setFocus,
@@ -163,6 +164,9 @@ const NewRecordForm = ({ onCancel, onSuccess, onError }: Props) => {
       </div>
     </Form>
   );
+  */
+
+  return <div>New Record</div>;
 };
 
 export { NewRecordForm };

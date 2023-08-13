@@ -1,21 +1,22 @@
-"use client";
+// "use client";
 
-import { useUser } from "(authenticated)/UserProvider";
-import { formatDate } from "_utils/date";
-import { useRecords, useRefetchRecords } from "_utils/hooks/useRecords";
-import cx from "clsx";
-import { PlusIcon } from "icons";
-import { useReducer } from "react";
-import { BloodPressureRecord } from "types";
-import { transformSupabaseError } from "utils/supabase/error_";
-import { NewRecordForm } from "./NewRecordForm";
-import { addRecordReducer } from "./utils";
+// import { useUser } from "(authenticated)/UserProvider";
+// import { formatDate } from "_utils/date";
+// import { useRecords, useRefetchRecords } from "_utils/hooks/useRecords";
+// import cx from "clsx";
+// import { PlusIcon } from "icons";
+// import { useReducer } from "react";
+// import { BloodPressureRecord } from "types";
+// import { transformSupabaseError } from "utils/supabase/error_";
+// import { NewRecordForm } from "./NewRecordForm";
+// import { addRecordReducer } from "./utils";
 
-type Props = {
-  initialRecords: BloodPressureRecord[];
-};
+// type Props = {
+//   initialRecords: BloodPressureRecord[];
+// };
 
-const Records = ({ initialRecords }: Props) => {
+const Records = (/*{ initialRecords }: Props*/) => {
+  /*
   const user = useUser();
   const refetchRecords = useRefetchRecords(user.id);
   const { data: records } = useRecords(user.id, { initialRecords });
@@ -99,6 +100,8 @@ const Records = ({ initialRecords }: Props) => {
       })}
     </div>
   );
+  */
+  return <div>Records</div>;
 };
 
 export { Records };
