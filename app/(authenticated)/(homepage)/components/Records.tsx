@@ -1,33 +1,57 @@
-// "use client";
+"use client";
+
+import { useRecords } from "@/hooks/useRecords";
+import { RecordItem } from "@/lib/types";
+import { formatDate } from "@/lib/utils/date";
+import cx from "clsx";
 
 // import { useUser } from "(authenticated)/UserProvider";
-// import { formatDate } from "_utils/date";
-// import { useRecords, useRefetchRecords } from "_utils/hooks/useRecords";
-// import cx from "clsx";
-// import { PlusIcon } from "icons";
+// import { formatDate } from "@/_utils/date";
+// import { useRecords, useRefetchRecords } from "@/_utils/hooks/useRecords";
+// import { PlusIcon } from "@/icons";
 // import { useReducer } from "react";
 // import { BloodPressureRecord } from "types";
 // import { transformSupabaseError } from "utils/supabase/error_";
 // import { NewRecordForm } from "./NewRecordForm";
 // import { addRecordReducer } from "./utils";
 
-// type Props = {
-//   initialRecords: BloodPressureRecord[];
-// };
+const fakeRecords: RecordItem[] = [
+  {
+    id: "1",
+    sys: 80,
+    dia: 120,
+    pulse: 100,
+    createdAt: "2023-09-18T12:13:53.782Z",
+  },
+  {
+    id: "2",
+    sys: 74,
+    dia: 145,
+    pulse: 98,
+    createdAt: "2023-09-17T14:10:53.782Z",
+  },
+  {
+    id: "3",
+    sys: 109,
+    dia: 156,
+    pulse: 124,
+    createdAt: "2023-09-16T20:23:53.782Z",
+  },
+];
 
-const Records = (/*{ initialRecords }: Props*/) => {
-  /*
-  const user = useUser();
-  const refetchRecords = useRefetchRecords(user.id);
-  const { data: records } = useRecords(user.id, { initialRecords });
-  const [addRecordState, dispatch] = useReducer(addRecordReducer, {
-    type: "initial",
-    highlightedIds: [],
-  });
+type Props = {
+  initialRecords: RecordItem[];
+};
+
+const Records = ({ initialRecords }: Props) => {
+  const recordsInfo = useRecords(initialRecords);
+  const { records } = recordsInfo.data;
+
+  console.log({ records });
 
   return (
     <div className="w-full divide-y divide-grey-200 rounded border-grey-200 xs:w-[420px] xs:border">
-      {(addRecordState.type === "adding" ||
+      {/* {(addRecordState.type === "adding" ||
         addRecordState.type === "error") && (
         <>
           <NewRecordForm
@@ -73,19 +97,19 @@ const Records = (/*{ initialRecords }: Props*/) => {
       )}
       {addRecordState.type === "added" && (
         <div className="py-4 text-center text-success">Added!</div>
-      )}
+      )}*/}
       <div className="flex text-sm font-medium uppercase text-grey-500">
         <div className="w-1/6 py-3 pr-2 text-right xs:pr-4">Sys</div>
         <div className="w-1/6 py-3 pr-2 text-right xs:pr-4">Dia</div>
         <div className="w-1/6 py-3 pr-2 text-right xs:pr-4">Pulse</div>
         <div className="w-3/6 py-3 pl-6 xs:pl-4">Time</div>
       </div>
-      {(records ?? []).map(({ id, sys, dia, pulse, created_at }) => {
+      {fakeRecords.map(({ id, sys, dia, pulse, createdAt }) => {
         return (
           <div
             className={cx(
-              "flex cursor-pointer items-baseline tabular-nums hover:bg-grey-50",
-              addRecordState.highlightedIds.includes(id) && "bg-primary-50"
+              "flex cursor-pointer items-baseline tabular-nums hover:bg-grey-50"
+              // addRecordState.highlightedIds.includes(id) && "bg-primary-50"
             )}
             key={id}
           >
@@ -93,15 +117,13 @@ const Records = (/*{ initialRecords }: Props*/) => {
             <div className="w-1/6 py-3 pr-2 text-right xs:pr-4">{dia}</div>
             <div className="w-1/6 py-3 pr-2 text-right xs:pr-4">{pulse}</div>
             <div className="w-3/6 py-3 pl-6 text-sm font-light text-grey-600 xs:pl-4">
-              {formatDate(created_at)}
+              {formatDate(createdAt)}
             </div>
           </div>
         );
       })}
     </div>
   );
-  */
-  return <div>Records</div>;
 };
 
 export { Records };

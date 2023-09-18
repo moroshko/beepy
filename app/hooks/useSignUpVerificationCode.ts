@@ -1,9 +1,9 @@
+import { ApiError } from "@/lib/utils/errors";
 import {
   isClerkAPIResponseError,
   useSignUp as useClerkSignUp,
 } from "@clerk/nextjs";
 import { useMutation } from "@tanstack/react-query";
-import { ApiError } from "_utils/errors";
 
 type Params = {
   verificationCode: string;
@@ -21,18 +21,24 @@ export const useSignUpVerificationCode = () => {
       }
 
       try {
-        const { status, createdSessionId } =
+        const { status, createdUserId, createdSessionId } =
           await signUp.attemptEmailAddressVerification({
             code: verificationCode,
           });
 
-        if (status !== "complete" || createdSessionId === null) {
+        if (
+          status !== "complete" ||
+          createdUserId === null ||
+          createdSessionId === null
+        ) {
           throw new ApiError({
             message: "Failed to verify email address",
           });
         }
 
         await setActive({ session: createdSessionId });
+
+        await fetch("/api/users", { method: "POST" });
 
         return null;
       } catch (error) {
@@ -51,7 +57,7 @@ export const useSignUpVerificationCode = () => {
         }
 
         throw new ApiError({
-          message: "Failed to verify email address",
+          message: "Failed to sign up",
         });
       }
     },

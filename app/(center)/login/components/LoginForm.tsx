@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { EmailForm } from "./EmailForm";
-import { VerificationCodeForm } from "./VerificationCodeForm";
+import { LoginVerificationCodeForm } from "./LoginVerificationCodeForm";
 
 const LoginForm = () => {
   const [email, setEmail] = useState<string | null>(null);
@@ -10,7 +10,7 @@ const LoginForm = () => {
   return email === null ? (
     <EmailForm onSuccess={setEmail} />
   ) : (
-    <VerificationCodeForm email={email} />
+    <LoginVerificationCodeForm email={email} />
   );
 };
 

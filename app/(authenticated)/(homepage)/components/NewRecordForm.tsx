@@ -1,9 +1,9 @@
 // import { PostgrestError } from "@supabase/supabase-js";
-// import { useAddRecord } from "_utils/hooks/useAddRecord";
+// import { useAddRecord } from "@/_utils/hooks/useAddRecord";
 // import cx from "clsx";
-// import { Button } from "components/Button";
-// import { Form } from "components/Form";
-// import { IconButton } from "components/IconButton";
+// import { Button } from "@/components/Button";
+// import { Form } from "@/components/Form";
+// import { IconButton } from "@/components/IconButton";
 // import { SyntheticEvent, useRef } from "react";
 // import { SubmitHandler, useForm } from "react-hook-form";
 // import { isCodeAllowed, isDiaValid, isPulseValid, isSysValid } from "./utils";

@@ -1,9 +1,9 @@
-import { IconName, renderIcon } from "icons/utils";
+import { IconName, renderIcon } from "@/icons/utils";
 import {
-  forwardRef,
   KeyboardEventHandler,
   MouseEventHandler,
   Ref,
+  forwardRef,
 } from "react";
 
 type Props = {

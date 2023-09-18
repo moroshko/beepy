@@ -1,8 +1,8 @@
 {
   "version": "5",
   "dialect": "pg",
-  "id": "3524a140-424b-4cc7-ad96-be55695e513c",
-  "prevId": "00000000-0000-0000-0000-000000000000",
+  "id": "13514b01-993c-49dd-a1a6-a8b899e879d9",
+  "prevId": "3524a140-424b-4cc7-ad96-be55695e513c",
   "tables": {
     "records": {
       "name": "records",
@@ -43,7 +43,7 @@
           "name": "created_at",
           "type": "timestamp(0) with time zone",
           "primaryKey": false,
-          "notNull": false,
+          "notNull": true,
           "default": "now()"
         }
       },
@@ -99,7 +99,7 @@
           "name": "created_at",
           "type": "timestamp(0) with time zone",
           "primaryKey": false,
-          "notNull": false,
+          "notNull": true,
           "default": "now()"
         }
       },

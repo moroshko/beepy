@@ -9,36 +9,39 @@
     "tsc": "tsc",
     "prettier": "prettier --write './**/*.{ts,tsx,json,css,md}'",
     "env": "vercel env pull .env.local",
-    "introspect": "drizzle-kit introspect:pg",
-    "generate": "drizzle-kit generate:pg"
+    "db:introspect": "drizzle-kit introspect:pg",
+    "db:generate": "drizzle-kit generate:pg",
+    "db:push": "drizzle-kit push:pg"
   },
   "dependencies": {
-    "@clerk/nextjs": "4.23.2",
-    "@headlessui/react": "1.7.16",
-    "@neondatabase/serverless": "0.5.7",
-    "@tanstack/react-query": "5.0.0-beta.15",
+    "@clerk/clerk-sdk-node": "4.12.5",
+    "@clerk/nextjs": "4.23.5",
+    "@headlessui/react": "1.7.17",
+    "@neondatabase/serverless": "0.6.0",
+    "@tanstack/react-query": "5.0.0-beta.29",
     "clsx": "2.0.0",
-    "drizzle-orm": "0.28.2",
-    "next": "13.4.14-canary.2",
+    "drizzle-orm": "0.28.6",
+    "next": "13.4.19",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-dropzone": "14.2.3",
-    "react-hook-form": "7.45.4"
+    "react-hook-form": "7.46.1"
   },
   "devDependencies": {
-    "@types/node": "20.5.0",
-    "@types/react": "18.2.20",
+    "@types/node": "20.6.2",
+    "@types/react": "18.2.21",
     "@types/react-dom": "18.2.7",
     "autoprefixer": "10.4.15",
     "dotenv": "16.3.1",
-    "drizzle-kit": "0.19.12",
-    "eslint": "8.47.0",
-    "eslint-config-next": "13.4.14-canary.2",
-    "postcss": "8.4.27",
-    "prettier": "3.0.1",
-    "prettier-plugin-tailwindcss": "0.5.2",
+    "drizzle-kit": "0.19.13",
+    "eslint": "8.49.0",
+    "eslint-config-next": "13.4.19",
+    "pg": "^8.11.3",
+    "postcss": "8.4.29",
+    "prettier": "3.0.3",
+    "prettier-plugin-tailwindcss": "0.5.4",
     "tailwindcss": "3.3.3",
-    "typescript": "5.1.6"
+    "typescript": "5.2.2"
   },
   "license": "MIT"
 }

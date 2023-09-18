@@ -19,7 +19,7 @@ type ApiErrorObject<FieldName extends string> = {
     }
 );
 
-export class ApiError<FieldName extends string> extends Error {
+export class ApiError<FieldName extends string = never> extends Error {
   type: string | undefined;
   formErrors: FormErrors<FieldName> | undefined;
 

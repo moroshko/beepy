@@ -1,7 +1,7 @@
-import { Button } from "components/Button";
-import { Form } from "components/Form";
-import { Input } from "components/Input";
-import { useLoginVerificationCode } from "hooks/useLoginVerificationCode";
+import { Button } from "@/components/Button";
+import { Form } from "@/components/Form";
+import { Input } from "@/components/Input";
+import { useLoginVerificationCode } from "@/hooks/useLoginVerificationCode";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -14,7 +14,7 @@ type Props = {
   email: string;
 };
 
-const VerificationCodeForm = ({ email }: Props) => {
+const LoginVerificationCodeForm = ({ email }: Props) => {
   const {
     register,
     setError,
@@ -75,4 +75,4 @@ const VerificationCodeForm = ({ email }: Props) => {
   );
 };
 
-export { VerificationCodeForm };
+export { LoginVerificationCodeForm };

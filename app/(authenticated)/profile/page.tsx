@@ -1,24 +1,27 @@
+import { getUser } from "@/api/current-user/route";
 import { currentUser } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
-import { ProfileSections } from "./components/ProfileSections";
-
-// export const revalidate = 0; // I tried setting `export const dynamic = "force-dynamic";` instead, but it worked locally only (didn't work in production).
-// See: https://github.com/vercel/next.js/issues/42991#issuecomment-1367466954
+import { ProfileForm } from "./components/ProfileForm";
 
 const ProfilePage = async () => {
-  const user = await currentUser();
+  const clerkUser = await currentUser();
 
-  if (user === null) {
+  if (clerkUser === null) {
     redirect("/login");
   }
 
-  const userEmail = user.emailAddresses[0].emailAddress;
+  const userEmail = clerkUser.emailAddresses[0].emailAddress;
+  const user = await getUser(clerkUser.id);
 
   return (
     <>
       <h1 className="text-xl font-medium">Profile</h1>
       <p className="mb-6 mt-2 text-grey-500">{`You are logged in as ${userEmail}`}</p>
-      <ProfileSections />
+      {user === null ? (
+        <p className="text-error">Failed to fetch user profile.</p>
+      ) : (
+        <ProfileForm user={user} />
+      )}
     </>
   );
 };

@@ -12,3 +12,7 @@
 - Import existing data
 - Write helper function to ensure that the email is a string:
   const { email } = searchParams ?? {};
+
+## Known Issues
+
+- To run drizzle studio, `pg` must be installed as dev dependency. See [this issue](https://github.com/drizzle-team/drizzle-orm/issues/842#issuecomment-1646073742).

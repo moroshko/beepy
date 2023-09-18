@@ -1,7 +1,7 @@
-import { Button } from "components/Button";
-import { Form } from "components/Form";
-import { Input } from "components/Input";
-import { useLoginEmail } from "hooks/useLoginEmail";
+import { Button } from "@/components/Button";
+import { Form } from "@/components/Form";
+import { Input } from "@/components/Input";
+import { useLoginEmail } from "@/hooks/useLoginEmail";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 

@@ -1,23 +1,14 @@
-const HomePage = async () => {
-  // const supabase = serverComponentSupabaseClient();
-  // const {
-  //   data: { user },
-  // } = await supabase.auth.getUser();
-  // const { data: initialRecords, error } = await supabase
-  //   .from("records")
-  //   .select("id, sys, dia, pulse, created_at")
-  //   .order("created_at", { ascending: false })
-  //   .limit(10)
-  //   .eq("user_id", user?.id);
+import { getRecords } from "@/api/records/route";
+import { getUserIdOrRedirectToLogin } from "@/lib/utils/pages";
+import { Records } from "./components/Records";
 
-  // if (initialRecords === null) {
-  //   throw transformSupabaseError(error);
-  // }
+const HomePage = async () => {
+  const userId = await getUserIdOrRedirectToLogin();
+  const records = await getRecords(userId);
 
   return (
     <div className="-mx-4 -mt-4 flex justify-center xs:mx-0 xs:mt-0">
-      Homepage
-      {/* <Records initialRecords={initialRecords} /> */}
+      <Records initialRecords={records} />
     </div>
   );
 };
