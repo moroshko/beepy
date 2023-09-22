@@ -1,6 +1,6 @@
 import { RecordItem } from "@/lib/types";
 import { ApiError } from "@/lib/utils/errors";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 
 type SuccessResponse = {
   records: RecordItem[];
@@ -18,4 +18,16 @@ export const useRecords = (initialRecords: RecordItem[]) => {
       records: initialRecords,
     },
   });
+};
+
+export const useInvalidateRecords = () => {
+  const queryClient = useQueryClient();
+  const invalidateRecords = () => {
+    queryClient.invalidateQueries({
+      queryKey: ["records"],
+      exact: true,
+    });
+  };
+
+  return invalidateRecords;
 };

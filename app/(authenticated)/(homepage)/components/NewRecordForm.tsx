@@ -1,12 +1,12 @@
-// import { PostgrestError } from "@supabase/supabase-js";
-// import { useAddRecord } from "@/_utils/hooks/useAddRecord";
-// import cx from "clsx";
-// import { Button } from "@/components/Button";
-// import { Form } from "@/components/Form";
-// import { IconButton } from "@/components/IconButton";
-// import { SyntheticEvent, useRef } from "react";
-// import { SubmitHandler, useForm } from "react-hook-form";
-// import { isCodeAllowed, isDiaValid, isPulseValid, isSysValid } from "./utils";
+import { Button } from "@/components/Button";
+import { Form } from "@/components/Form";
+import { IconButton } from "@/components/IconButton";
+import { useAddRecord } from "@/hooks/useAddRecord";
+import { ApiError } from "@/lib/utils/errors";
+import cx from "clsx";
+import { SyntheticEvent, useRef } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { isCodeAllowed, isDiaValid, isPulseValid, isSysValid } from "./utils";
 
 type FormInputs = {
   sys: string;
@@ -17,11 +17,10 @@ type FormInputs = {
 type Props = {
   onCancel: () => void;
   onSuccess: (id: string) => void;
-  // onError: (error: PostgrestError) => void;
+  onError: (error: ApiError<"sys" | "dia" | "pulse">) => void;
 };
 
-const NewRecordForm = ({ onCancel, onSuccess /*, onError*/ }: Props) => {
-  /*
+const NewRecordForm = ({ onCancel, onSuccess, onError }: Props) => {
   const {
     register,
     setFocus,
@@ -54,8 +53,8 @@ const NewRecordForm = ({ onCancel, onSuccess /*, onError*/ }: Props) => {
         </label>
         <input
           id="new-record-sys"
-          // appearance-none is needed for iOS. See: https://stackoverflow.com/a/15440636/247243
           className={cx(
+            // appearance-none is needed for iOS. See: https://stackoverflow.com/a/15440636/247243
             "h-10 w-full appearance-none rounded border py-2 pr-2 text-right tabular-nums focus:border-transparent focus:outline-none focus:ring-2 xs:pr-4",
             errors.sys
               ? "border-red-600 focus:ring-red-600"
@@ -154,19 +153,23 @@ const NewRecordForm = ({ onCancel, onSuccess /*, onError*/ }: Props) => {
           })}
         />
       </div>
-      <div className="flex w-3/6 items-center gap-2 pl-6 xs:pl-4">
+      <div className="flex w-3/6 items-center justify-between gap-2 pl-6 xs:pl-4">
         <div className="w-20">
-          <Button type="submit" fullWidth ref={addButtonRef}>
+          <Button
+            type="submit"
+            fullWidth
+            ref={addButtonRef}
+            loading={addRecordMutation.isPending}
+          >
             Add
           </Button>
         </div>
-        <IconButton icon="XIcon" aria-label="Cancel" onClick={onCancel} />
+        <div className="mr-1">
+          <IconButton icon="XIcon" aria-label="Cancel" onClick={onCancel} />
+        </div>
       </div>
     </Form>
   );
-  */
-
-  return <div>New Record</div>;
 };
 
 export { NewRecordForm };

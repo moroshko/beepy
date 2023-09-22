@@ -1,43 +1,14 @@
 "use client";
 
-import { useRecords } from "@/hooks/useRecords";
+import { useInvalidateRecords, useRecords } from "@/hooks/useRecords";
+import { PlusIcon } from "@/icons/PlusIcon";
 import { RecordItem } from "@/lib/types";
 import { formatDate } from "@/lib/utils/date";
 import cx from "clsx";
-
-// import { useUser } from "(authenticated)/UserProvider";
-// import { formatDate } from "@/_utils/date";
-// import { useRecords, useRefetchRecords } from "@/_utils/hooks/useRecords";
-// import { PlusIcon } from "@/icons";
-// import { useReducer } from "react";
-// import { BloodPressureRecord } from "types";
-// import { transformSupabaseError } from "utils/supabase/error_";
-// import { NewRecordForm } from "./NewRecordForm";
-// import { addRecordReducer } from "./utils";
-
-const fakeRecords: RecordItem[] = [
-  {
-    id: "1",
-    sys: 80,
-    dia: 120,
-    pulse: 100,
-    createdAt: "2023-09-18T12:13:53.782Z",
-  },
-  {
-    id: "2",
-    sys: 74,
-    dia: 145,
-    pulse: 98,
-    createdAt: "2023-09-17T14:10:53.782Z",
-  },
-  {
-    id: "3",
-    sys: 109,
-    dia: 156,
-    pulse: 124,
-    createdAt: "2023-09-16T20:23:53.782Z",
-  },
-];
+import { CheckCircle2 } from "lucide-react";
+import { useReducer } from "react";
+import { NewRecordForm } from "./NewRecordForm";
+import { addRecordReducer } from "./utils";
 
 type Props = {
   initialRecords: RecordItem[];
@@ -45,13 +16,16 @@ type Props = {
 
 const Records = ({ initialRecords }: Props) => {
   const recordsInfo = useRecords(initialRecords);
+  const invalidateRecords = useInvalidateRecords();
   const { records } = recordsInfo.data;
-
-  console.log({ records });
+  const [addRecordState, dispatch] = useReducer(addRecordReducer, {
+    type: "initial",
+    highlightedIds: [],
+  });
 
   return (
-    <div className="w-full divide-y divide-grey-200 rounded border-grey-200 xs:w-[420px] xs:border">
-      {/* {(addRecordState.type === "adding" ||
+    <div className="w-full divide-y divide-grey-200 overflow-hidden rounded border-grey-200 xs:w-[420px] xs:border">
+      {(addRecordState.type === "adding" ||
         addRecordState.type === "error") && (
         <>
           <NewRecordForm
@@ -59,18 +33,18 @@ const Records = ({ initialRecords }: Props) => {
               dispatch({ type: "cancel" });
             }}
             onSuccess={(id) => {
-              refetchRecords();
+              invalidateRecords();
 
               dispatch({ type: "success", id });
 
               setTimeout(() => {
                 dispatch({ type: "success-timeout", id });
-              }, 3000);
+              }, 5000);
             }}
             onError={(error) => {
               dispatch({
                 type: "error",
-                error: transformSupabaseError(error).message,
+                error: error.message,
               });
             }}
           />
@@ -96,20 +70,22 @@ const Records = ({ initialRecords }: Props) => {
         </button>
       )}
       {addRecordState.type === "added" && (
-        <div className="py-4 text-center text-success">Added!</div>
-      )}*/}
+        <div className="bg-green-100 flex items-center justify-center gap-2 py-4">
+          <CheckCircle2 /> Added
+        </div>
+      )}
       <div className="flex text-sm font-medium uppercase text-grey-500">
         <div className="w-1/6 py-3 pr-2 text-right xs:pr-4">Sys</div>
         <div className="w-1/6 py-3 pr-2 text-right xs:pr-4">Dia</div>
         <div className="w-1/6 py-3 pr-2 text-right xs:pr-4">Pulse</div>
         <div className="w-3/6 py-3 pl-6 xs:pl-4">Time</div>
       </div>
-      {fakeRecords.map(({ id, sys, dia, pulse, createdAt }) => {
+      {records.map(({ id, sys, dia, pulse, createdAt }) => {
         return (
           <div
             className={cx(
-              "flex cursor-pointer items-baseline tabular-nums hover:bg-grey-50"
-              // addRecordState.highlightedIds.includes(id) && "bg-primary-50"
+              "flex cursor-pointer items-baseline tabular-nums hover:bg-grey-50",
+              addRecordState.highlightedIds.includes(id) && "bg-green-100"
             )}
             key={id}
           >
