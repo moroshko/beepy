@@ -14,7 +14,7 @@ const ProfilePage = async () => {
   const user = await getUser(clerkUser.id);
 
   return (
-    <>
+    <div className="mx-auto max-w-md">
       <h1 className="text-xl font-medium">Profile</h1>
       <p className="mb-6 mt-2 text-grey-500">{`You are logged in as ${userEmail}`}</p>
       {user === null ? (
@@ -22,7 +22,7 @@ const ProfilePage = async () => {
       ) : (
         <ProfileForm user={user} />
       )}
-    </>
+    </div>
   );
 };
 

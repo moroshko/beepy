@@ -11,7 +11,7 @@ type Props = {
   children: ReactNode;
 };
 
-const ButtonComponent = (props: Props, ref: Ref<ElementRef<"button">>) => {
+const Button = forwardRef((props: Props, ref: Ref<ElementRef<"button">>) => {
   const {
     variant = "primary",
     type = "button",
@@ -25,7 +25,7 @@ const ButtonComponent = (props: Props, ref: Ref<ElementRef<"button">>) => {
   return (
     <button
       className={cx(
-        "relative rounded px-3 py-2 text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2",
+        "relative min-w-[80px] rounded px-3 py-2 text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2",
         variant === "primary" && "bg-primary-500",
         variant === "primary" &&
           !disabled &&
@@ -52,8 +52,8 @@ const ButtonComponent = (props: Props, ref: Ref<ElementRef<"button">>) => {
       <span className={cx(loading && "opacity-0")}>{children}</span>
     </button>
   );
-};
+});
 
-const Button = forwardRef(ButtonComponent);
+Button.displayName = "Button";
 
 export { Button };

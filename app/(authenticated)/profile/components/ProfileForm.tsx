@@ -33,9 +33,11 @@ const ProfileForm = ({ user }: Props) => {
       },
       {
         onSuccess: () => {
+          // TODO: Show success toast
           console.log("success");
         },
         onError: (error) => {
+          // TODO: Show error toast
           console.log(error);
         },
       }
