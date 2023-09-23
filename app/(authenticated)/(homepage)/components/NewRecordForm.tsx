@@ -58,7 +58,7 @@ const NewRecordForm = ({ onCancel, onSuccess, onError }: Props) => {
             "h-10 w-full appearance-none rounded border py-2 pr-2 text-right tabular-nums focus:border-transparent focus:outline-none focus:ring-2 xs:pr-4",
             errors.sys
               ? "border-red-600 focus:ring-red-600"
-              : "border-grey-600 focus:ring-primary-500"
+              : "border-gray-600 focus:ring-primary-500"
           )}
           type="text"
           maxLength={3}
@@ -94,7 +94,7 @@ const NewRecordForm = ({ onCancel, onSuccess, onError }: Props) => {
             "h-10 w-full appearance-none rounded border py-2 pr-2 text-right tabular-nums focus:border-transparent focus:outline-none focus:ring-2 xs:pr-4",
             errors.dia
               ? "border-red-600 focus:ring-red-600"
-              : "border-grey-600 focus:ring-primary-500"
+              : "border-gray-600 focus:ring-primary-500"
           )}
           type="text"
           maxLength={3}
@@ -129,7 +129,7 @@ const NewRecordForm = ({ onCancel, onSuccess, onError }: Props) => {
             "h-10 w-full appearance-none rounded border py-2 pr-2 text-right tabular-nums focus:border-transparent focus:outline-none focus:ring-2 xs:pr-4",
             errors.pulse
               ? "border-red-600 focus:ring-red-600"
-              : "border-grey-600 focus:ring-primary-500"
+              : "border-gray-600 focus:ring-primary-500"
           )}
           type="text"
           maxLength={3}

@@ -24,7 +24,7 @@ const Records = ({ initialRecords }: Props) => {
   });
 
   return (
-    <div className="w-full divide-y divide-grey-200 overflow-hidden rounded border-grey-200 xs:w-[420px] xs:border">
+    <div className="divide-gray-200 border-gray-200 w-full divide-y overflow-hidden rounded xs:w-[420px] xs:border">
       {(addRecordState.type === "adding" ||
         addRecordState.type === "error") && (
         <>
@@ -74,17 +74,19 @@ const Records = ({ initialRecords }: Props) => {
           <CheckCircle2 /> Added
         </div>
       )}
-      <div className="flex text-sm font-medium uppercase text-grey-500">
-        <div className="w-1/6 py-3 pr-2 text-right xs:pr-4">Sys</div>
-        <div className="w-1/6 py-3 pr-2 text-right xs:pr-4">Dia</div>
-        <div className="w-1/6 py-3 pr-2 text-right xs:pr-4">Pulse</div>
-        <div className="w-3/6 py-3 pl-6 xs:pl-4">Time</div>
-      </div>
+      {records.length > 0 && (
+        <div className="text-gray-500 flex text-sm font-medium uppercase">
+          <div className="w-1/6 py-3 pr-2 text-right xs:pr-4">Sys</div>
+          <div className="w-1/6 py-3 pr-2 text-right xs:pr-4">Dia</div>
+          <div className="w-1/6 py-3 pr-2 text-right xs:pr-4">Pulse</div>
+          <div className="w-3/6 py-3 pl-6 xs:pl-4">Time</div>
+        </div>
+      )}
       {records.map(({ id, sys, dia, pulse, createdAt }) => {
         return (
           <div
             className={cx(
-              "flex cursor-pointer items-baseline tabular-nums hover:bg-grey-50",
+              "hover:bg-gray-50 flex cursor-pointer items-baseline tabular-nums",
               addRecordState.highlightedIds.includes(id) && "bg-green-100"
             )}
             key={id}
@@ -92,7 +94,7 @@ const Records = ({ initialRecords }: Props) => {
             <div className="w-1/6 py-3 pr-2 text-right xs:pr-4">{sys}</div>
             <div className="w-1/6 py-3 pr-2 text-right xs:pr-4">{dia}</div>
             <div className="w-1/6 py-3 pr-2 text-right xs:pr-4">{pulse}</div>
-            <div className="w-3/6 py-3 pl-6 text-sm font-light text-grey-600 xs:pl-4">
+            <div className="text-gray-600 w-3/6 py-3 pl-6 text-sm font-light xs:pl-4">
               {formatDate(createdAt)}
             </div>
           </div>

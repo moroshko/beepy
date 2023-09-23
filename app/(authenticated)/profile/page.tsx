@@ -16,7 +16,7 @@ const ProfilePage = async () => {
   return (
     <div className="mx-auto max-w-md">
       <h1 className="text-xl font-medium">Profile</h1>
-      <p className="mb-6 mt-2 text-grey-500">{`You are logged in as ${userEmail}`}</p>
+      <p className="text-gray-500 mb-6 mt-2">{`You are logged in as ${userEmail}`}</p>
       {user === null ? (
         <p className="text-error">Failed to fetch user profile.</p>
       ) : (

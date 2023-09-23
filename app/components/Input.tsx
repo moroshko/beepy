@@ -13,6 +13,7 @@ type Props = {
   label: string;
   placeholder?: string;
   inputMode?: "numeric";
+  autoFocus?: boolean;
   error?: string;
   name: string;
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
@@ -25,6 +26,7 @@ const InputComponent = (props: Props, ref: Ref<ElementRef<"input">>) => {
     label,
     placeholder,
     inputMode,
+    autoFocus,
     error,
     name,
     onChange,
@@ -46,12 +48,13 @@ const InputComponent = (props: Props, ref: Ref<ElementRef<"input">>) => {
           "mt-1 w-full appearance-none rounded border px-3 py-2 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-primary-500",
           error
             ? "border-red-600 focus:ring-red-600"
-            : "border-grey-600 focus:ring-primary-500"
+            : "border-gray-600 focus:ring-primary-500"
         )}
         type={type}
         name={name}
         placeholder={placeholder}
         inputMode={inputMode}
+        autoFocus={autoFocus}
         {...(error && { "aria-describedby": errorId })}
         onChange={onChange}
         onBlur={onBlur}

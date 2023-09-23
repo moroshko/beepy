@@ -7,10 +7,10 @@ type Props = {
 
 const Avatar = ({ name, url }: Props) => {
   return (
-    <div className="h-7 w-7 overflow-hidden rounded-full border border-grey-200">
+    <div className="border-gray-200 h-7 w-7 overflow-hidden rounded-full border">
       {url === null ? (
         <svg
-          className="translate-y-[10%] scale-[1.2] bg-grey-100 text-grey-500"
+          className="bg-gray-100 text-gray-500 translate-y-[10%] scale-[1.2]"
           viewBox="0 0 20 20"
           width="100%"
           height="100%"

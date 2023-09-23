@@ -33,12 +33,25 @@ export const useSignUpEmail = () => {
         if (isClerkAPIResponseError(error)) {
           const errorCode = error.errors[0].code;
 
+          console.log({ errorCode });
+
           if (/invalid/.test(errorCode)) {
             throw new ApiError({
               formErrors: [
                 {
                   field: "email",
                   error: "Invalid email",
+                },
+              ],
+            });
+          }
+
+          if (/exists/.test(errorCode)) {
+            throw new ApiError({
+              formErrors: [
+                {
+                  field: "email",
+                  error: "Email address is taken",
                 },
               ],
             });

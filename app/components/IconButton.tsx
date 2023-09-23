@@ -31,7 +31,7 @@ const IconButtonComponent = (props: Props, ref: Ref<HTMLButtonElement>) => {
   return (
     <button
       id={id}
-      className="grid h-10 w-10 place-items-center rounded hover:bg-grey-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2"
+      className="hover:bg-gray-100 grid h-10 w-10 place-items-center rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2"
       type="button"
       aria-label={ariaLabel}
       aria-expanded={ariaExpanded}

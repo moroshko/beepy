@@ -45,7 +45,7 @@ const ProfileForm = ({ user }: Props) => {
   };
 
   return (
-    <div className="flex flex-col divide-y divide-grey-300">
+    <div className="divide-gray-300 flex flex-col divide-y">
       <div className="max-w-sm pb-8">
         <Form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
           <Input

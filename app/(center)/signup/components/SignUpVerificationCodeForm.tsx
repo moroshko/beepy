@@ -58,6 +58,7 @@ const SignUpVerificationCodeForm = ({ email }: Props) => {
         {...register("verificationCode", { required: "Required" })}
         label="Verification code"
         inputMode="numeric"
+        autoFocus={true}
         error={errors.verificationCode?.message}
       />
       <Button

@@ -19,12 +19,10 @@ type Props = {
 
 const RootLayout = async ({ children }: Props) => {
   return (
-    <html lang="en">
-      <body className={inter.className}>
+    <html lang="en" className={inter.className}>
+      <body className="[--header-height:56px]">
         <ClerkProvider>
-          <ReactQueryProvider>
-            <main>{children}</main>
-          </ReactQueryProvider>
+          <ReactQueryProvider>{children}</ReactQueryProvider>
         </ClerkProvider>
       </body>
     </html>

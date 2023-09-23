@@ -6,10 +6,10 @@ const LoginPage = () => {
     <div className="space-y-6">
       <h1 className="text-2xl font-semibold">Login</h1>
       <LoginForm />
-      <p className="text-sm text-grey-500">
+      <p className="text-gray-500 text-sm">
         {`Don’t have an account yet? `}
         <Link
-          className="whitespace-nowrap text-sm text-grey-500 underline hover:no-underline"
+          className="text-gray-500 whitespace-nowrap text-sm underline hover:no-underline"
           href="/signup"
         >
           Create new account
