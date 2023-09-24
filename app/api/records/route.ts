@@ -26,7 +26,7 @@ export async function GET() {
   const userId = await getUserId();
 
   if (userId === null) {
-    return new Response("Unauthorized", { status: 401 });
+    return NextResponse.json({ error: "Unauthorized" }, { status: 403 });
   }
 
   try {
@@ -45,7 +45,7 @@ export async function POST(request: Request) {
   const userId = await getUserId();
 
   if (userId === null) {
-    return new Response("Unauthorized", { status: 401 });
+    return NextResponse.json({ error: "Unauthorized" }, { status: 403 });
   }
 
   try {

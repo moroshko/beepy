@@ -28,7 +28,7 @@ export async function GET() {
   const { userId } = auth();
 
   if (userId === null) {
-    return new Response("Unauthorized", { status: 401 });
+    return NextResponse.json({ error: "Unauthorized" }, { status: 403 });
   }
 
   try {
@@ -54,7 +54,7 @@ export async function PUT(request: Request) {
   const { userId } = auth();
 
   if (userId === null) {
-    return new Response("Unauthorized", { status: 401 });
+    return NextResponse.json({ error: "Unauthorized" }, { status: 403 });
   }
 
   try {

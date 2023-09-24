@@ -10,7 +10,7 @@ export async function POST() {
   const { userId } = auth();
 
   if (userId === null) {
-    return new Response("Unauthorized", { status: 401 });
+    return NextResponse.json({ error: "Unauthorized" }, { status: 403 });
   }
 
   try {
@@ -28,7 +28,7 @@ export async function POST() {
         },
       });
 
-      return new Response(null, { status: 200 });
+      return NextResponse.json({}, { status: 200 });
     }
 
     return NextResponse.json(

@@ -1,58 +1,49 @@
-import cx from "clsx";
-import { ElementRef, forwardRef, ReactNode, Ref } from "react";
+import { Button as UIButton } from "@/components/ui/button";
+import { Loader2 } from "lucide-react";
+import { ComponentProps, forwardRef } from "react";
 
-type Props = {
-  variant?: "primary" | "danger";
-  type?: "button" | "submit";
-  fullWidth?: boolean;
-  disabled?: boolean;
+type Props = ComponentProps<typeof UIButton> & {
   loading?: boolean;
-  onClick?: () => void;
-  children: ReactNode;
 };
 
-const Button = forwardRef((props: Props, ref: Ref<ElementRef<"button">>) => {
-  const {
-    variant = "primary",
-    type = "button",
-    fullWidth = false,
-    disabled = false,
-    loading = false,
-    onClick,
-    children,
-  } = props;
+const Button = forwardRef<HTMLButtonElement, Props>(
+  (
+    {
+      type = "button",
+      asChild,
+      loading = false,
+      disabled = false,
+      children,
+      ...restProps
+    },
+    ref
+  ) => {
+    if (asChild) {
+      return (
+        <UIButton
+          asChild={asChild}
+          type={type}
+          disabled={disabled || loading}
+          {...restProps}
+          ref={ref}
+        >
+          {children}
+        </UIButton>
+      );
+    }
 
-  return (
-    <button
-      className={cx(
-        "relative min-w-[80px] rounded px-3 py-2 text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2",
-        variant === "primary" && "bg-primary-500",
-        variant === "primary" &&
-          !disabled &&
-          !loading &&
-          "hover:bg-primary-600",
-        variant === "danger" && "bg-red-500",
-        variant === "danger" && !disabled && !loading && "hover:bg-red-600",
-        fullWidth && "w-full",
-        disabled || loading ? "cursor-not-allowed opacity-50" : "cursor-pointer"
-      )}
-      disabled={disabled || loading}
-      type={type}
-      onClick={onClick}
-      ref={ref}
-    >
-      {loading && (
-        <span className="absolute inset-0 grid place-items-center">
-          <span
-            className="block h-6 w-6 animate-spin rounded-full border-4 border-white/50 border-t-white"
-            aria-hidden="true"
-          />
-        </span>
-      )}
-      <span className={cx(loading && "opacity-0")}>{children}</span>
-    </button>
-  );
-});
+    return (
+      <UIButton
+        type={type}
+        disabled={disabled || loading}
+        {...restProps}
+        ref={ref}
+      >
+        {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : children}
+      </UIButton>
+    );
+  }
+);
 
 Button.displayName = "Button";
 

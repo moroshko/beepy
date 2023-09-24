@@ -1,75 +1,42 @@
-import cx from "clsx";
-import {
-  ChangeEvent,
-  ElementRef,
-  FocusEvent,
-  Ref,
-  forwardRef,
-  useId,
-} from "react";
+import { Input as UIInput } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { ComponentProps, forwardRef, useId } from "react";
 
-type Props = {
-  type?: "text" | "email";
+type Props = Omit<ComponentProps<typeof UIInput>, "id"> & {
   label: string;
-  placeholder?: string;
-  inputMode?: "numeric";
-  autoFocus?: boolean;
   error?: string;
-  name: string;
-  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
-  onBlur?: (e: FocusEvent<HTMLInputElement, Element>) => void;
 };
 
-const InputComponent = (props: Props, ref: Ref<ElementRef<"input">>) => {
-  const {
-    type = "text",
-    label,
-    placeholder,
-    inputMode,
-    autoFocus,
-    error,
-    name,
-    onChange,
-    onBlur,
-  } = props;
-  const id = useId();
-  const inputId = `${id}-input`;
-  const errorId = `${id}-error`;
+const Input = forwardRef<HTMLInputElement, Props>(
+  ({ label, error, ...restProps }, ref) => {
+    const id = useId();
+    const inputId = `${id}-input`;
+    const errorId = `${id}-error`;
+    const hasError = error !== undefined;
 
-  return (
-    <div className="w-full text-left">
-      <label className="inline-block text-sm font-semibold" htmlFor={inputId}>
-        {label}
-      </label>
-      <input
-        id={inputId}
-        className={cx(
-          // appearance-none is needed for iOS. See: https://stackoverflow.com/a/15440636/247243
-          "mt-1 w-full appearance-none rounded border px-3 py-2 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-primary-500",
-          error
-            ? "border-red-600 focus:ring-red-600"
-            : "border-gray-600 focus:ring-primary-500"
+    return (
+      <div className="flex flex-col gap-2">
+        <Label className="self-start" htmlFor={inputId}>
+          {label}
+        </Label>
+        <UIInput
+          {...restProps}
+          id={inputId}
+          aria-invalid={hasError}
+          aria-describedby={hasError ? errorId : undefined}
+          spellCheck={false}
+          ref={ref}
+        />
+        {hasError && (
+          <p className="text-sm leading-none text-error" id={errorId}>
+            {error}
+          </p>
         )}
-        type={type}
-        name={name}
-        placeholder={placeholder}
-        inputMode={inputMode}
-        autoFocus={autoFocus}
-        {...(error && { "aria-describedby": errorId })}
-        onChange={onChange}
-        onBlur={onBlur}
-        spellCheck="false"
-        ref={ref}
-      />
-      {error && (
-        <p id={errorId} className="mt-1 text-sm text-error">
-          {error}
-        </p>
-      )}
-    </div>
-  );
-};
+      </div>
+    );
+  }
+);
 
-const Input = forwardRef(InputComponent);
+Input.displayName = "Input";
 
 export { Input };
