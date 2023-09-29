@@ -5,8 +5,6 @@ import { eq } from "drizzle-orm";
 import { NextResponse } from "next/server";
 import { getUser } from "./utils";
 
-export const runtime = "edge";
-
 export async function GET() {
   const { userId } = auth();
 

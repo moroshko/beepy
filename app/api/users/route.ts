@@ -4,8 +4,6 @@ import { users } from "@clerk/clerk-sdk-node";
 import { auth } from "@clerk/nextjs";
 import { NextResponse } from "next/server";
 
-export const runtime = "edge";
-
 export async function POST() {
   const { userId } = auth();
 
