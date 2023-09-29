@@ -45,21 +45,19 @@ const ProfileForm = ({ user }: Props) => {
   };
 
   return (
-    <div className="divide-gray-300 flex flex-col divide-y">
-      <div className="max-w-sm pb-8">
-        <Form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
-          <Input
-            label="Name"
-            {...register("name")}
-            error={errors.name?.message}
-          />
-          <div>
-            <Button type="submit" loading={updateUserMutation.isPending}>
-              Save
-            </Button>
-          </div>
-        </Form>
-      </div>
+    <div className="flex flex-col divide-y divide-gray-300">
+      <Form className="max-w-sm space-y-6" onSubmit={handleSubmit(onSubmit)}>
+        <Input
+          label="Name"
+          {...register("name")}
+          error={errors.name?.message}
+        />
+        <div>
+          <Button type="submit" loading={updateUserMutation.isPending}>
+            Save
+          </Button>
+        </div>
+      </Form>
       {/* <div className="pt-8">
         <Button variant="danger">Delete my profile</Button>
       </div> */}

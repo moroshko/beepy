@@ -1,4 +1,5 @@
 import { Button as UIButton } from "@/components/ui/button";
+import cx from "clsx";
 import { Loader2 } from "lucide-react";
 import { ComponentProps, forwardRef } from "react";
 
@@ -39,7 +40,12 @@ const Button = forwardRef<HTMLButtonElement, Props>(
         {...restProps}
         ref={ref}
       >
-        {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : children}
+        {loading && (
+          <span className="absolute inset-0 grid place-items-center">
+            <Loader2 className="h-4 w-4 animate-spin" />
+          </span>
+        )}
+        <span className={cx(loading && "opacity-0")}>{children}</span>
       </UIButton>
     );
   }

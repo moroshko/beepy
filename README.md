@@ -1,11 +1,6 @@
 ## TODO
 
-- Delete record confirmation
-- Link to profile in user menu
-- Better Sheet
-  - Add description for Edit record
-  - Close button position
-- Better mobile (full width)
+- success/error toasts
 - Check that when changing a user, the query cache is emptied
 - Avatar
 - Delete profile

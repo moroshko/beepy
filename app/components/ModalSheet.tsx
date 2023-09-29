@@ -9,6 +9,7 @@ import {
 import {
   Sheet,
   SheetContent,
+  SheetDescription,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
@@ -43,14 +44,14 @@ const ModalSheet = ({
       <Sheet open={isOpen} onOpenChange={setIsOpen}>
         <SheetTrigger asChild>{trigger}</SheetTrigger>
         <SheetContent
-          className="data-[state=closed]:duration-200 data-[state=open]:duration-200"
           side="top"
           onOpenAutoFocus={(event) => {
             event.preventDefault();
           }}
         >
           <SheetHeader>
-            <SheetTitle className="mb-4 text-left">{title}</SheetTitle>
+            <SheetTitle>{title}</SheetTitle>
+            {description && <SheetDescription>{description}</SheetDescription>}
           </SheetHeader>
           {children}
         </SheetContent>

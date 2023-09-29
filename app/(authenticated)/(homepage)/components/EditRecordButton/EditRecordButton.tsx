@@ -1,10 +1,8 @@
-import { Button } from "@/components/Button";
 import { ModalSheet } from "@/components/ModalSheet";
-import { useDeleteRecord } from "@/hooks/useDeleteRecord";
-import { useInvalidateRecords } from "@/hooks/useRecords";
 import { RecordItem } from "@/lib/types";
 import { formatDate } from "@/lib/utils/date";
 import { useState } from "react";
+import { DeleteRecordButton } from "./DeleteRecordButton/DeleteRecordButton";
 import { EditRecordForm } from "./EditRecordForm";
 
 type Props = {
@@ -14,26 +12,6 @@ type Props = {
 const EditRecordButton = ({ record }: Props) => {
   const { sys, dia, pulse, createdAt } = record;
   const [isOpen, setIsOpen] = useState(false);
-  const invalidateRecords = useInvalidateRecords();
-  const deleteRecordMutation = useDeleteRecord();
-  const onDeleteRecord = () => {
-    deleteRecordMutation.mutate(
-      {
-        recordId: record.id,
-      },
-      {
-        onSuccess: () => {
-          invalidateRecords();
-
-          setIsOpen(false);
-        },
-        onError: (error) => {
-          // TODO: show error toast
-          console.log(error);
-        },
-      }
-    );
-  };
 
   return (
     <ModalSheet
@@ -61,13 +39,12 @@ const EditRecordButton = ({ record }: Props) => {
           }}
         />
         <div>
-          <Button
-            className="-mb-2 -ml-4 text-error"
-            variant="link"
-            onClick={onDeleteRecord}
-          >
-            Delete record
-          </Button>
+          <DeleteRecordButton
+            record={record}
+            onSuccess={() => {
+              setIsOpen(false);
+            }}
+          />
         </div>
       </div>
     </ModalSheet>

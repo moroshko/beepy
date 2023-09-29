@@ -14,10 +14,12 @@ const Records = ({ initialRecords }: Props) => {
   const { records } = recordsInfo.data;
 
   return (
-    <div className="space-y-6">
-      <AddRecordButton />
+    <div className="w-screen space-y-6 xs:w-[420px]">
+      <div className="px-4 xs:px-0">
+        <AddRecordButton />
+      </div>
       {records.length > 0 && (
-        <div className="w-full divide-y divide-gray-200 overflow-hidden rounded border-gray-200 xs:w-[420px] xs:border">
+        <div className="divide-y divide-gray-200 overflow-hidden rounded border-gray-200 xs:border">
           <div className="flex text-sm font-medium uppercase text-gray-500">
             <div className="w-1/6 py-3 pr-2 text-right xs:pr-4">Sys</div>
             <div className="w-1/6 py-3 pr-2 text-right xs:pr-4">Dia</div>

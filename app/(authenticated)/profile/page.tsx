@@ -14,9 +14,9 @@ const ProfilePage = async () => {
   const user = await getUser(clerkUser.id);
 
   return (
-    <div className="mx-auto max-w-md">
+    <div className="mx-auto mt-4 max-w-md xs:mt-8">
       <h1 className="text-xl font-medium">Profile</h1>
-      <p className="text-gray-500 mb-6 mt-2">{`You are logged in as ${userEmail}`}</p>
+      <p className="mb-6 mt-2 text-gray-500">{`You are logged in as ${userEmail}`}</p>
       {user === null ? (
         <p className="text-error">Failed to fetch user profile.</p>
       ) : (

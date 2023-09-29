@@ -31,7 +31,7 @@ const MenuButton = () => {
         <SheetHeader>
           <SheetTitle className="text-left">Beepy</SheetTitle>
         </SheetHeader>
-        <ul className="mt-4 flex flex-col gap-4 text-base">
+        <ul className="flex flex-col gap-4 text-base">
           {navItems.map(({ text, href }) => {
             const isActive = href === pathname;
 

@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { useClerk, useUser } from "@clerk/nextjs";
 import { UserCircle } from "lucide-react";
+import Link from "next/link";
 
 const AccountMenu = () => {
   const { signOut } = useClerk();
@@ -26,10 +27,13 @@ const AccountMenu = () => {
           <>
             <DropdownMenuLabel className="space-y-0.5 font-normal">
               <div>You are logged in as:</div>
-              <div className="text-gray-500 text-xs">
+              <div className="text-xs text-gray-500">
                 {user.emailAddresses[0].emailAddress}
               </div>
             </DropdownMenuLabel>
+            <DropdownMenuItem asChild>
+              <Link href="/profile">Profile</Link>
+            </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem
               onClick={async () => {
