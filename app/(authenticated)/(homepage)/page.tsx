@@ -1,4 +1,4 @@
-import { getRecords } from "@/api/records/route";
+import { getRecords } from "@/api/records/utils";
 import { getUserIdOrRedirectToLogin } from "@/lib/utils/pages";
 import { Records } from "./components/Records";
 
