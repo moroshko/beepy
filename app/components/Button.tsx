@@ -4,6 +4,7 @@ import { Loader2 } from "lucide-react";
 import { ComponentProps, forwardRef } from "react";
 
 type Props = ComponentProps<typeof UIButton> & {
+  fullWidth?: boolean;
   loading?: boolean;
 };
 
@@ -12,6 +13,7 @@ const Button = forwardRef<HTMLButtonElement, Props>(
     {
       type = "button",
       asChild,
+      fullWidth = false,
       loading = false,
       disabled = false,
       children,
@@ -35,6 +37,7 @@ const Button = forwardRef<HTMLButtonElement, Props>(
 
     return (
       <UIButton
+        className={fullWidth ? "w-full" : undefined}
         type={type}
         disabled={disabled || loading}
         {...restProps}

@@ -1,4 +1,4 @@
-import { getUser } from "@/api/current-user/route";
+import { getUser } from "@/api/current-user/utils";
 import { currentUser } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
 import { ProfileForm } from "./components/ProfileForm";
