@@ -1,5 +1,6 @@
 ## TODO
 
+-
 - success/error toasts
 - Check that when changing a user, the query cache is emptied
 - Avatar
