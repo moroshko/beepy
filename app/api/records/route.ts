@@ -1,26 +1,9 @@
 import { db, getUserId } from "@/api/utils";
 import { recordsTable } from "@/db/schema";
-import { RecordItem } from "@/lib/types";
-import { desc, eq } from "drizzle-orm";
 import { NextResponse } from "next/server";
+import { getRecords } from "./utils";
 
 export const runtime = "edge";
-
-export const getRecords = async (userId: string): Promise<RecordItem[]> => {
-  const result = await db
-    .select()
-    .from(recordsTable)
-    .where(eq(recordsTable.userId, userId))
-    .orderBy(desc(recordsTable.createdAt));
-
-  return result.map((record) => ({
-    id: record.id,
-    createdAt: record.createdAt,
-    sys: record.sys,
-    dia: record.dia,
-    pulse: record.pulse,
-  }));
-};
 
 export async function GET() {
   const userId = await getUserId();
