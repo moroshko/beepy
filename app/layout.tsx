@@ -9,6 +9,11 @@ import { ReactQueryProvider } from "./components/ReactQueryProvider";
 export const metadata: Metadata = {
   title: "Beepy",
   description: "Easily track your blood pressure",
+  viewport: {
+    width: "device-width",
+    initialScale: 1,
+    maximumScale: 1,
+  },
 };
 
 const inter = Inter({ subsets: ["latin"] });
