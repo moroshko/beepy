@@ -2,7 +2,7 @@ import { currentUser } from "@clerk/nextjs";
 import { Pool } from "@neondatabase/serverless";
 import { drizzle } from "drizzle-orm/neon-serverless";
 
-console.log("====>", process.env.DATABASE_URL);
+console.log("====> utils", process.env.DATABASE_URL);
 
 const client = new Pool({ connectionString: process.env.DATABASE_URL });
 
