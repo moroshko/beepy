@@ -68,11 +68,6 @@ const EditRecordForm = ({ record, closeModal }: Props) => {
         maxLength={3}
         inputMode="numeric"
         autoFocus
-        onFocus={(event) => {
-          setTimeout(() => {
-            event.target.select();
-          });
-        }}
         onKeyDown={preventDefaultIfCodeNotAllowed}
         {...register("sys", {
           validate: (sys) => {

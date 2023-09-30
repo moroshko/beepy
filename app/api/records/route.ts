@@ -3,8 +3,6 @@ import { recordsTable } from "@/db/schema";
 import { NextResponse } from "next/server";
 import { getRecords } from "./utils";
 
-export const runtime = "edge";
-
 export async function GET() {
   const userId = await getUserId();
 

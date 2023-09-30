@@ -37,46 +37,45 @@ const ModalSheet = ({
   children,
 }: Props) => {
   const windowWidth = useWindowWidth();
-  const isMobile = windowWidth < 640;
+  const isMobile = windowWidth !== null && windowWidth < 640;
+
+  // On the server, and during client hydration, render the trigger.
+  if (windowWidth === null) {
+    return trigger;
+  }
 
   return isMobile ? (
-    <div className="sm:hidden">
-      <Sheet open={isOpen} onOpenChange={setIsOpen}>
-        <SheetTrigger asChild>{trigger}</SheetTrigger>
-        <SheetContent
-          side="top"
-          onOpenAutoFocus={(event) => {
-            event.preventDefault();
-          }}
-        >
-          <SheetHeader>
-            <SheetTitle>{title}</SheetTitle>
-            {description && <SheetDescription>{description}</SheetDescription>}
-          </SheetHeader>
-          {children}
-        </SheetContent>
-      </Sheet>
-    </div>
+    <Sheet open={isOpen} onOpenChange={setIsOpen}>
+      <SheetTrigger asChild>{trigger}</SheetTrigger>
+      <SheetContent
+        side="top"
+        onOpenAutoFocus={(event) => {
+          event.preventDefault();
+        }}
+      >
+        <SheetHeader>
+          <SheetTitle>{title}</SheetTitle>
+          {description && <SheetDescription>{description}</SheetDescription>}
+        </SheetHeader>
+        {children}
+      </SheetContent>
+    </Sheet>
   ) : (
-    <div className="hidden sm:block">
-      <Dialog open={isOpen} onOpenChange={setIsOpen}>
-        <DialogTrigger asChild>{trigger}</DialogTrigger>
-        <DialogContent
-          className={dialogClassName}
-          onOpenAutoFocus={(event) => {
-            event.preventDefault();
-          }}
-        >
-          <DialogHeader>
-            <DialogTitle>{title}</DialogTitle>
-            {description && (
-              <DialogDescription>{description}</DialogDescription>
-            )}
-          </DialogHeader>
-          {children}
-        </DialogContent>
-      </Dialog>
-    </div>
+    <Dialog open={isOpen} onOpenChange={setIsOpen}>
+      <DialogTrigger asChild>{trigger}</DialogTrigger>
+      <DialogContent
+        className={dialogClassName}
+        onOpenAutoFocus={(event) => {
+          event.preventDefault();
+        }}
+      >
+        <DialogHeader>
+          <DialogTitle>{title}</DialogTitle>
+          {description && <DialogDescription>{description}</DialogDescription>}
+        </DialogHeader>
+        {children}
+      </DialogContent>
+    </Dialog>
   );
 };
 

@@ -5,7 +5,7 @@ const getSnapshot = () => {
 };
 
 const getServerSnapshot = () => {
-  return 0; // Always return 0 for server-generated HTML
+  return null;
 };
 
 const subscribe = (callback: () => void) => {
