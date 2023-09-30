@@ -4,7 +4,6 @@ import { RecordItem } from "@/lib/types";
 import { desc, eq } from "drizzle-orm";
 
 export const getRecords = async (userId: string): Promise<RecordItem[]> => {
-  console.log("====> getRecords", process.env.DATABASE_URL);
   const result = await db
     .select()
     .from(recordsTable)
