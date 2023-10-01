@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+  -webkit-tap-highlight-color: transparent;
+}
 html {
   overscroll-behavior-y: none; /* needed on mobile */
 }

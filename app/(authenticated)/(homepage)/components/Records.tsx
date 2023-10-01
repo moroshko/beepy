@@ -14,8 +14,8 @@ const Records = ({ initialRecords }: Props) => {
   const { records } = recordsInfo.data;
 
   return (
-    <div className="w-screen space-y-6 xs:w-[420px]">
-      <div className="px-4 xs:px-0">
+    <div className="-mt-4 flex w-screen flex-col gap-6 xs:mt-0 xs:w-[420px]">
+      <div className="fixed bottom-4 w-full px-4 xs:static xs:px-0">
         <AddRecordButton />
       </div>
       {records.length > 0 && (
