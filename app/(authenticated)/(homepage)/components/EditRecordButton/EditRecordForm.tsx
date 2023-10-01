@@ -22,9 +22,10 @@ type FormInputs = {
 type Props = {
   record: RecordItem;
   closeModal: () => void;
+  onSuccess: (id: string) => void;
 };
 
-const EditRecordForm = ({ record, closeModal }: Props) => {
+const EditRecordForm = ({ record, closeModal, onSuccess }: Props) => {
   const { register, setFocus, handleSubmit } = useForm<FormInputs>({
     defaultValues: {
       sys: String(record.sys),
@@ -47,6 +48,8 @@ const EditRecordForm = ({ record, closeModal }: Props) => {
           invalidateRecords();
 
           closeModal();
+
+          onSuccess(record.id);
         },
         onError: (error) => {
           // TODO: show error toast

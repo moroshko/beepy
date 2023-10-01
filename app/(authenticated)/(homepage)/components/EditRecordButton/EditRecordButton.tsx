@@ -9,9 +9,10 @@ import { EditRecordForm } from "./EditRecordForm";
 type Props = {
   record: RecordItem;
   isHighlighted: boolean;
+  onSuccess: (id: string) => void;
 };
 
-const EditRecordButton = ({ record, isHighlighted }: Props) => {
+const EditRecordButton = ({ record, isHighlighted, onSuccess }: Props) => {
   const { sys, dia, pulse, createdAt } = record;
   const [isOpen, setIsOpen] = useState(false);
 
@@ -45,6 +46,7 @@ const EditRecordButton = ({ record, isHighlighted }: Props) => {
           closeModal={() => {
             setIsOpen(false);
           }}
+          onSuccess={onSuccess}
         />
         <div>
           <DeleteRecordButton

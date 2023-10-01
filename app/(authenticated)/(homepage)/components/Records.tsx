@@ -51,6 +51,13 @@ const Records = ({ initialRecords }: Props) => {
                 <EditRecordButton
                   record={record}
                   isHighlighted={record.id === highlightedRecordId}
+                  onSuccess={(id) => {
+                    setHighlightedRecordId(id);
+
+                    setTimeout(() => {
+                      setHighlightedRecordId(null);
+                    }, 5000);
+                  }}
                   key={record.id}
                 />
               );
