@@ -17,7 +17,7 @@ const Header = () => {
   const pathname = usePathname();
 
   return (
-    <header className="sticky top-0 flex h-[--header-height] items-center border-b bg-white">
+    <header className="z-top sticky top-0 flex h-[--header-height] items-center border-b bg-white">
       <div className="mx-auto flex w-[640px] items-center justify-between px-4">
         <div className="flex items-center gap-4">
           <div className="block sm:hidden">

@@ -1,15 +1,17 @@
 import { ModalSheet } from "@/components/ModalSheet";
 import { RecordItem } from "@/lib/types";
 import { formatDate } from "@/lib/utils/date";
+import cx from "clsx";
 import { useState } from "react";
 import { DeleteRecordButton } from "./DeleteRecordButton/DeleteRecordButton";
 import { EditRecordForm } from "./EditRecordForm";
 
 type Props = {
   record: RecordItem;
+  isHighlighted: boolean;
 };
 
-const EditRecordButton = ({ record }: Props) => {
+const EditRecordButton = ({ record, isHighlighted }: Props) => {
   const { sys, dia, pulse, createdAt } = record;
   const [isOpen, setIsOpen] = useState(false);
 
@@ -18,7 +20,13 @@ const EditRecordButton = ({ record }: Props) => {
       isOpen={isOpen}
       setIsOpen={setIsOpen}
       trigger={
-        <div className="flex cursor-pointer items-baseline tabular-nums hover:bg-gray-100">
+        <div
+          className={cx(
+            "flex cursor-pointer items-baseline tabular-nums",
+            !isHighlighted && "hover:bg-gray-100",
+            isHighlighted && "bg-yellow-200"
+          )}
+        >
           <div className="w-1/6 py-3 pr-2 text-right xs:pr-4">{sys}</div>
           <div className="w-1/6 py-3 pr-2 text-right xs:pr-4">{dia}</div>
           <div className="w-1/6 py-3 pr-2 text-right xs:pr-4">{pulse}</div>

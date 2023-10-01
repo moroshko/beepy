@@ -20,9 +20,10 @@ type FormInputs = {
 
 type Props = {
   closeModal: () => void;
+  onSuccess: (id: string) => void;
 };
 
-const AddRecordForm = ({ closeModal }: Props) => {
+const AddRecordForm = ({ closeModal, onSuccess }: Props) => {
   const { register, setFocus, handleSubmit } = useForm<FormInputs>({
     defaultValues: {
       sys: "",
@@ -40,10 +41,12 @@ const AddRecordForm = ({ closeModal }: Props) => {
         pulse: Number(pulse),
       },
       {
-        onSuccess: () => {
+        onSuccess: ({ id }) => {
           invalidateRecords();
 
           closeModal();
+
+          onSuccess(id);
         },
         onError: (error) => {
           // TODO: show error toast

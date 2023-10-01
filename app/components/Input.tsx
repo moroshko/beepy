@@ -15,7 +15,7 @@ const Input = forwardRef<HTMLInputElement, Props>(
     const hasError = error !== undefined;
 
     return (
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-2 text-left">
         <Label className="self-start" htmlFor={inputId}>
           {label}
         </Label>

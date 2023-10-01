@@ -1,5 +1,6 @@
 import { User } from "@/lib/types";
 import { ApiError } from "@/lib/utils/errors";
+import { handleApiResponse } from "@/lib/utils/response";
 import { useQuery } from "@tanstack/react-query";
 
 type SuccessResponse = {
@@ -12,7 +13,7 @@ export const useUser = () => {
     queryFn: async () => {
       const response = await fetch("/api/current-user");
 
-      return await response.json();
+      return handleApiResponse({ response });
     },
   });
 };

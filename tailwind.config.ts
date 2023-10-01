@@ -19,6 +19,9 @@ const config: Config = {
       screens: {
         xs: "460px",
       },
+      zIndex: {
+        top: "1",
+      },
       keyframes: {
         "accordion-down": {
           from: { height: "0" },

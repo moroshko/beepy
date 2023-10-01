@@ -7,7 +7,7 @@ const HomePage = async () => {
   const records = await getRecords(userId);
 
   return (
-    <div className="-mx-4 mt-4 flex justify-center xs:mx-0 xs:mt-8">
+    <div className="-mx-4 mt-4 flex justify-center xs:mx-0 xs:my-8">
       <Records initialRecords={records} />
     </div>
   );

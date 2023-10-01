@@ -1,5 +1,6 @@
 import { RecordItem } from "@/lib/types";
 import { ApiError } from "@/lib/utils/errors";
+import { handleApiResponse } from "@/lib/utils/response";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 
 type SuccessResponse = {
@@ -12,7 +13,7 @@ export const useRecords = (initialRecords: RecordItem[]) => {
     queryFn: async () => {
       const response = await fetch("/api/records");
 
-      return await response.json();
+      return handleApiResponse({ response });
     },
     initialData: {
       records: initialRecords,

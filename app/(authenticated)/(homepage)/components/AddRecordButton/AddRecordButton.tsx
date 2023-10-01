@@ -4,7 +4,11 @@ import { PlusCircle } from "lucide-react";
 import { useState } from "react";
 import { AddRecordForm } from "./AddRecordForm";
 
-const AddRecordButton = () => {
+type Props = {
+  onSuccess: (id: string) => void;
+};
+
+const AddRecordButton = ({ onSuccess }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -24,6 +28,7 @@ const AddRecordButton = () => {
         closeModal={() => {
           setIsOpen(false);
         }}
+        onSuccess={onSuccess}
       />
     </ModalSheet>
   );

@@ -1,10 +1,14 @@
 ## TODO
 
+- scrollbar on records
+- on new record added, highlight
+- 0 records state, first experience
 - success/error toasts
 - Check that when changing a user, the query cache is emptied
 - Avatar
 - Delete profile
 - Import existing data
+- Consolidate cx and cn
 
 ## Known Issues
 

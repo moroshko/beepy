@@ -1,4 +1,5 @@
 import { ApiError } from "@/lib/utils/errors";
+import { handleApiResponse } from "@/lib/utils/response";
 import { useMutation } from "@tanstack/react-query";
 
 type Params = {
@@ -26,7 +27,7 @@ export const useAddRecord = () => {
         body: JSON.stringify({ sys, dia, pulse }),
       });
 
-      return await response.json();
+      return handleApiResponse({ response });
     },
   });
 };
