@@ -9,7 +9,7 @@ import {
   isSysValid,
   preventDefaultIfCodeNotAllowed,
 } from "@/lib/utils/records";
-import { SyntheticEvent, useRef } from "react";
+import { SyntheticEvent } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 type FormInputs = {
@@ -30,7 +30,6 @@ const AddRecordForm = ({ closeModal }: Props) => {
       pulse: "",
     },
   });
-  const addButtonRef = useRef<HTMLButtonElement | null>(null);
   const invalidateRecords = useInvalidateRecords();
   const addRecordMutation = useAddRecord();
   const onSubmit: SubmitHandler<FormInputs> = ({ sys, dia, pulse }) => {
@@ -108,19 +107,11 @@ const AddRecordForm = ({ closeModal }: Props) => {
           validate: (pulse) => {
             return isPulseValid(pulse) ? undefined : "Invalid";
           },
-          onChange: (event: SyntheticEvent<HTMLInputElement>) => {
-            const newPulse = event.currentTarget.value;
-
-            if (isPulseValid(newPulse)) {
-              addButtonRef.current?.focus();
-            }
-          },
         })}
       />
       <Button
         className="w-20 shrink-0"
         type="submit"
-        ref={addButtonRef}
         loading={addRecordMutation.isPending}
       >
         Add
