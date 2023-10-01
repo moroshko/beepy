@@ -4,10 +4,5 @@
 
 * {
   -webkit-tap-highlight-color: transparent;
-}
-html {
-  overscroll-behavior-y: none; /* needed on mobile */
-}
-body {
-  overscroll-behavior-y: none; /* needed on desktop */
+  overscroll-behavior-y: none;
 }
