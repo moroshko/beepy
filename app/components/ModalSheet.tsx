@@ -49,6 +49,7 @@ const ModalSheet = ({
       <SheetTrigger asChild>{trigger}</SheetTrigger>
       <SheetContent
         side="bottom"
+        className="pb-10"
         onOpenAutoFocus={(event) => {
           event.preventDefault();
         }}
