@@ -63,6 +63,7 @@ const AddRecordForm = ({ closeModal }: Props) => {
         label="SYS"
         maxLength={3}
         inputMode="numeric"
+        enterKeyHint="next"
         autoFocus
         onKeyDown={preventDefaultIfCodeNotAllowed}
         {...register("sys", {
